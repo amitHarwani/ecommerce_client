@@ -1,5 +1,5 @@
 interface LinkProps {
-  onClick(): void;
+  onClick?(): void;
   text: string;
   className: string;
 }

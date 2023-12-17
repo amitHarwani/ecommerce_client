@@ -1,13 +1,13 @@
-import { useTranslation } from "react-i18next"
+
+import PageLayout from "./layouts/PageLayout"
 
 
 function App() {
 
-  const {t, i18n} = useTranslation();
-  console.log(i18n.language);
+  
   return (
     <>
-      
+      <PageLayout />
     </>
   )
 }

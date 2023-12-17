@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { DropdownItem, DropdownTypes } from "../../constants";
 import DownArrow from "../icons/DownArrow";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store";
 
 interface DropdownProps {
   type: DropdownTypes;
@@ -19,6 +20,7 @@ const Dropdown = (props: DropdownProps) => {
   } = props;
 
   const { t } = useTranslation();
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
   const [selectedItem, setSelectedItem] = useState(
     defaultSelectedItem ? defaultSelectedItem : null
@@ -56,28 +58,28 @@ const Dropdown = (props: DropdownProps) => {
     <div className="relative">
       <button
         onClick={toggleDropdownMenu}
-        className={`flex justify-between items-center ${typeStyles.mainButton}`}
+        className={`flex justify-between items-center ${typeStyles.mainButton} ${isRTL && 'flex-row-reverse'}`}
       >
         <span className={`text-sm ${typeStyles.textColor}`}>
           {selectedItem ? selectedItem.text : t("select")}
         </span>
 
         <DownArrow
-          className={`ml-1 h-5 w-5 ${typeStyles.textColor} ${
+          className={`h-5 w-5 ${isRTL ? 'mr-1' : 'ml-1'} ${typeStyles.textColor} ${
             isDropdownMenuShown && "rotate-180"
           }`}
         />
       </button>
       {isDropdownMenuShown && (
         <div
-          className={`absolute p-2 ${typeStyles.menuContainer} rounded-b-md w-full`}
+          className={`absolute p-2 ${typeStyles.menuContainer} rounded-b-md`}
         >
           {/* Selected Item Comes First */}
           {selectedItem && (
             <div key={selectedItem.id}>
               <button
                 onClick={() => itemChangeHandler(selectedItem)}
-                className={`text-sm ${typeStyles.textColor} font-bold`}
+                className={`text-sm ${typeStyles.textColor}`}
               >
                 {selectedItem.text}
               </button>

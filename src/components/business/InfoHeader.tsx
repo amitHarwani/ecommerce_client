@@ -1,28 +1,69 @@
-import { DropdownItem, DropdownTypes } from "../../constants";
+import { useMemo } from "react";
+import {
+  DEFAULT_LANGUAGE,
+  DropdownItem,
+  DropdownTypes,
+  LANGUAGE_DISPLAY_NAMES,
+  SUPPORTED_LANGUAGES,
+} from "../../constants";
 import Dropdown from "../basic/Dropdown";
 import Link from "../basic/Link";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { changeLanguage } from "../../store/LanguageSlice";
+import { useAppSelector } from "../../store";
 
-interface InfoHeaderProps {
-  infoText?: string;
-  linkText?: string;
-  onLinkClickHandler(): void;
-  languageList: Array<DropdownItem>;
-  defaultSelectedLanguage: DropdownItem;
-  languageChangeHandler(selectedLanguage: DropdownItem): void;
+interface LanguageDropdownItem extends DropdownItem {
+  id: string;
+  text: string;
 }
+
+interface InfoHeaderProps {}
+
 const InfoHeader = (props: InfoHeaderProps) => {
-  const {
-    infoText,
-    linkText,
-    onLinkClickHandler,
-    languageList,
-    defaultSelectedLanguage,
-    languageChangeHandler,
-  } = props;
+  const { t, i18n } = useTranslation();
+
+  const isRTL = useAppSelector((state) => state.language.isRTL);
+  const dispatch = useDispatch();
+
+  const infoText = t("newItemsMessage");
+  const linkText = "";
+
+  const languageConfig = useMemo(() => {
+    const result: Array<LanguageDropdownItem> = [];
+    const defaultSelection: LanguageDropdownItem = { id: "", text: "" };
+    let languageHeading: keyof typeof SUPPORTED_LANGUAGES;
+
+    for (languageHeading in SUPPORTED_LANGUAGES) {
+      const languageId = SUPPORTED_LANGUAGES[languageHeading];
+
+      result.push({
+        id: languageId,
+        text: LANGUAGE_DISPLAY_NAMES[languageHeading],
+      });
+
+      if (languageId === DEFAULT_LANGUAGE) {
+        defaultSelection.id = languageId;
+        defaultSelection.text = LANGUAGE_DISPLAY_NAMES[languageHeading];
+      }
+    }
+
+    return {
+      languageList: result,
+      defaultSelection,
+    };
+  }, []);
+
+  const languageChangeHandler = (selectedLanguage: LanguageDropdownItem) => {
+    i18n.changeLanguage(selectedLanguage.id);
+    dispatch(changeLanguage(selectedLanguage.id));
+  };
+
+  const onLinkClickHandler = () => {};
 
   return (
-    <div className="bg-black py-3 flex justify-center items-center relative">
-      <div className="ml-auto text-center">
+    <div className={`bg-black py-3 flex justify-center items-center relative ${isRTL && 'flex-row-reverse'}`}>
+      <div className={`text-center ${isRTL ? 'mr-auto' : 'ml-auto'}`}>
         {infoText && <span className="text-zinc-50 text-sm">{infoText}</span>}
         {linkText && (
           <Link
@@ -32,11 +73,11 @@ const InfoHeader = (props: InfoHeaderProps) => {
           />
         )}
       </div>
-      <div className="ml-auto mr-5">
+      <div className={`${isRTL ? 'mr-auto ml-5' : 'ml-auto mr-5'}`}>
         <Dropdown
-          itemsList={languageList}
+          itemsList={languageConfig.languageList}
           onChange={languageChangeHandler}
-          defaultSelectedItem={defaultSelectedLanguage}
+          defaultSelectedItem={languageConfig.defaultSelection}
           type={DropdownTypes.noBorderDarkBg}
         />
       </div>
