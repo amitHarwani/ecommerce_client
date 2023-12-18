@@ -1,4 +1,11 @@
 {
     "select": "Select",
-    "infoHeaderMessage": "Happy New Year !!"
+    "infoHeaderMessage": "Happy New Year !!",
+    "companyName": "exclusive",
+    "home": "home",
+    "contact": "contact",
+    "about": "about",
+    "login": "login"
+
+
 }

@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import {
-  DEFAULT_LANGUAGE,
   DropdownItem,
   DropdownTypes,
   LANGUAGE_DISPLAY_NAMES,
@@ -42,7 +41,7 @@ const InfoHeader = (props: InfoHeaderProps) => {
         text: LANGUAGE_DISPLAY_NAMES[languageHeading],
       });
 
-      if (languageId === DEFAULT_LANGUAGE) {
+      if (languageId === i18n.language) {
         defaultSelection.id = languageId;
         defaultSelection.text = LANGUAGE_DISPLAY_NAMES[languageHeading];
       }

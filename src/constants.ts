@@ -1,3 +1,4 @@
+
 /* DROPDOWN */
 export enum DropdownTypes {
   noBorderDarkBg,
@@ -33,4 +34,11 @@ export enum BREAKPOINTS {
   "lg" = "1024px",
   "xl" = "1280px",
   "2xl" = "1536px",
+}
+
+/* DRAWER OPTION */
+export type DrawerOption = {
+  id: string | number,
+  textKey: string,
+  icon?: React.ReactElement
 }

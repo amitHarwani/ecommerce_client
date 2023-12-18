@@ -1,4 +1,10 @@
 {
     "select": "يختار",
-    "infoHeaderMessage": "!! سنة جديدة سعيدة"
+    "infoHeaderMessage": "!! سنة جديدة سعيدة",
+    "companyName": "حصري",
+    "home": "بيت",
+    "contact": "اتصال",
+    "about": "عن",
+    "login": "تسجيل الدخول"
+
 }
