@@ -26,7 +26,7 @@ const InfoHeader = (props: InfoHeaderProps) => {
   const isRTL = useAppSelector((state) => state.language.isRTL);
   const dispatch = useDispatch();
 
-  const infoText = t("newItemsMessage");
+  const infoText = t("infoHeaderMessage");
   const linkText = "";
 
   const languageConfig = useMemo(() => {
@@ -62,7 +62,7 @@ const InfoHeader = (props: InfoHeaderProps) => {
   const onLinkClickHandler = () => {};
 
   return (
-    <div className={`bg-black py-3 flex justify-center items-center relative ${isRTL && 'flex-row-reverse'}`}>
+    <div className={`bg-black py-1 flex justify-center items-center relative ${isRTL && 'flex-row-reverse'}`}>
       <div className={`text-center ${isRTL ? 'mr-auto' : 'ml-auto'}`}>
         {infoText && <span className="text-zinc-50 text-sm">{infoText}</span>}
         {linkText && (

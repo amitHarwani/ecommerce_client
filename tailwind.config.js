@@ -1,7 +1,9 @@
 /** @type {import('tailwindcss').Config} */
+import {BREAKPOINTS} from "./src/constants";
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: BREAKPOINTS,
     extend: {
       fontFamily: {
         poppinsRegular: ["poppins-regular"],

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import LanguageSlice from "./LanguageSlice";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
+import BreakpointSlice from "./BreakpointSlice";
 
 const store = configureStore({
     reducer: {
-        language: LanguageSlice.reducer
+        language: LanguageSlice.reducer,
+        breakpoint: BreakpointSlice.reducer
     }
 })
 

@@ -1,15 +1,13 @@
-
-import PageLayout from "./layouts/PageLayout"
-
+import PageLayout from "./layouts/PageLayout";
 
 function App() {
+ 
 
-  
   return (
     <>
       <PageLayout />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
