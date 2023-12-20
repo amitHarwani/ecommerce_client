@@ -72,7 +72,7 @@ const Dropdown = (props: DropdownProps) => {
       </button>
       {isDropdownMenuShown && (
         <div
-          className={`absolute p-2 ${typeStyles.menuContainer} rounded-b-md`}
+          className={`absolute p-2 z-10 ${typeStyles.menuContainer} rounded-b-md`}
         >
           {/* Selected Item Comes First */}
           {selectedItem && (

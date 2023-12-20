@@ -5,6 +5,7 @@
     "home": "بيت",
     "contact": "اتصال",
     "about": "عن",
-    "login": "تسجيل الدخول"
+    "login": "تسجيل الدخول",
+    "searchProductsPlaceholder": "ما الذي تبحث عنه؟"
 
 }

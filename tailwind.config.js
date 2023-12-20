@@ -5,6 +5,10 @@ export default {
   theme: {
     screens: BREAKPOINTS,
     extend: {
+      colors: {
+        darkRed: "#DB4444",
+        yellow: "#00FF66"
+      },
       fontFamily: {
         poppinsRegular: ["poppins-regular"],
         poppinsBlack: ["poppins-black"],
@@ -12,7 +16,7 @@ export default {
         poppinsLight: ["poppins-light"],
         poppinsMedium: ["poppins-medium"],
         poppinsItalic: ["poppins-italic"],
-      }
+      },
     },
   },
   plugins: [],

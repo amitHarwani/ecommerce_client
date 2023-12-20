@@ -4,7 +4,7 @@ const useOutsideClick = (ref: RefObject<HTMLElement>) => {
   const [clickedOutside, setClickedOutside] = useState(0);
 
   const checkOutsideClick = useCallback(
-    (event: { target: Node | null; }) => {
+    (event: MouseEvent) => {
       if (ref?.current && !ref?.current?.contains(event?.target)) {
         setClickedOutside((prev) => ++prev);
       }

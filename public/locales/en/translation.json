@@ -5,7 +5,8 @@
     "home": "home",
     "contact": "contact",
     "about": "about",
-    "login": "login"
+    "login": "login",
+    "searchProductsPlaceholder": "What are you looking for?"
 
 
 }

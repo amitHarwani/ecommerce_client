@@ -1,21 +1,25 @@
 import { useTranslation } from "react-i18next";
-import { DrawerOption } from "../../constants";
+import { DrawerOption, NavigationOption } from "../../constants";
 import { useAppSelector } from "../../store";
 import CloseIcon from "../icons/CloseIcon";
+import NavItem from "./NavItem";
+import NavList from "./NavList";
 
 interface DrawerProps {
   headingText: string;
-  optionsList: Array<DrawerOption>;
-  onOptionClickHandler(option: DrawerOption): void;
+  navList?: Array<NavigationOption>;
+  optionsList?: Array<DrawerOption>;
   onDrawerCloseHandler(): void;
+  onOptionClickHandler?(option: DrawerOption): void;
   show: boolean;
 }
 const Drawer = (props: DrawerProps) => {
   const {
     headingText,
+    navList,
     optionsList,
-    onOptionClickHandler,
     onDrawerCloseHandler,
+    onOptionClickHandler,
     show = false,
   } = props;
 
@@ -23,9 +27,15 @@ const Drawer = (props: DrawerProps) => {
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  const onOptionSelected = (option: DrawerOption) => {
+    if (typeof onOptionClickHandler === "function") {
+      onOptionClickHandler(option);
+    }
+  };
+
   return (
     <aside
-      className={`flex flex-col fixed top-0 h-screen w-3/5 bg-gradient-to-b from-black via-stone-600 to-black p-4
+      className={`flex flex-col fixed top-0 h-screen z-10 w-3/5 bg-gradient-to-b from-black via-stone-600 to-black p-4
       transition-all duration-500
       ${
         isRTL
@@ -47,22 +57,26 @@ const Drawer = (props: DrawerProps) => {
         </button>
       </div>
 
-      <div className={`flex flex-col mt-6`}>
-        {optionsList.map((option) => (
-          <div className={`mb-4`} key={option.id}>
-            <button
-              className={`w-full flex ${isRTL && "flex-row-reverse"}`}
-              onClick={() => onOptionClickHandler(option)}
-            >
-              {option?.icon}
+      {navList?.length && <NavList navList={navList} className="mt-6" />}
 
-              <span className="text-zinc-50 capitalize">
-                {t(option.textKey)}
-              </span>
-            </button>
-          </div>
-        ))}
-      </div>
+      {optionsList?.length && (
+        <div className={`flex flex-col mt-6`}>
+          {optionsList.map((option) => (
+            <div className={`mb-4`} key={option.id}>
+              <button
+                className={`w-full flex ${isRTL && "flex-row-reverse"}`}
+                onClick={() => onOptionSelected(option)}
+              >
+                {option?.icon}
+
+                <span className="text-zinc-50 capitalize">
+                  {t(option.textKey)}
+                </span>
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </aside>
   );
 };

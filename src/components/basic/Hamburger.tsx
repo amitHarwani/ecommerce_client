@@ -1,19 +1,21 @@
 import { RefObject, createRef, useCallback, useEffect, useState } from "react";
-import { DrawerOption } from "../../constants";
+import { DrawerOption, NavigationOption } from "../../constants";
 import Drawer from "./Drawer";
 import HamburgerIcon from "../icons/HamburgerIcon";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import { useLocation } from "react-router-dom";
 
 interface HamburgerProps {
   headingText: string;
-  optionsList: Array<DrawerOption>;
-  onOptionClickHandler: (option: DrawerOption) => void;
+  navList?: Array<NavigationOption>;
+  optionsList?: Array<DrawerOption>
 }
 const Hamburger = (props: HamburgerProps) => {
-  const { headingText, optionsList, onOptionClickHandler } = props;
+  const { headingText, navList, optionsList } = props;
 
   const [isDrawerShown, setIsDrawerShown] = useState(false);
 
+  const location = useLocation();
   const toggleDrawer = useCallback(() => {
     setIsDrawerShown((prev) => !prev);
   }, [setIsDrawerShown]);
@@ -29,6 +31,11 @@ const Hamburger = (props: HamburgerProps) => {
     setIsDrawerShown(false);
   }, [clickedOutside]);
 
+  /* Hide drawer once route changes */
+  useEffect(() => {
+    setIsDrawerShown(false);
+  }, [location])
+  
   return (
     <div ref={hamburgerRef}>
       <button onClick={toggleDrawer}>
@@ -36,8 +43,8 @@ const Hamburger = (props: HamburgerProps) => {
       </button>
       <Drawer
         headingText={headingText}
+        navList={navList}
         optionsList={optionsList}
-        onOptionClickHandler={onOptionClickHandler}
         onDrawerCloseHandler={toggleDrawer}
         show={isDrawerShown}
       />

@@ -17,11 +17,4 @@ export const getCurrentBreakpoint = () => {
   return "";
 };
 
-/* To check the screen size */
-export const isCurrentBreakpoint = (breakpointWidth: string) => {
-  const breakpointWidthInInt = parseInt(breakpointWidth);
-  if (window.innerWidth >= breakpointWidthInInt) {
-    return true;
-  }
-  return false;
-};
+

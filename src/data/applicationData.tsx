@@ -1,20 +1,24 @@
-import { DrawerOption } from "../constants";
+import { NavigationOption } from "../constants";
 
-export const DRAWER_ITEMS: Array<DrawerOption> = [
+export const DRAWER_ITEMS: Array<NavigationOption> = [
     {
         id: 1,
-        textKey: 'home'
+        textKey: 'home',
+        navigateTo: '/'
     },
     {
         id: 2,
-        textKey: 'about'
+        textKey: 'about',
+        navigateTo: '/about'
     },
     {
         id: 3,
-        textKey: 'contact'
+        textKey: 'contact',
+        navigateTo: '/contact'
     },
     {
         id: 4,
-        textKey: 'login'
+        textKey: 'login',
+        navigateTo: '/login'
     }
 ]

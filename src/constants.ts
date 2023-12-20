@@ -9,6 +9,11 @@ export type DropdownItem = {
   text: string;
 };
 
+export interface LanguageDropdownItem extends DropdownItem {
+  id: string;
+  text: string;
+}
+
 /* LANGUAGE */
 export enum SUPPORTED_LANGUAGES {
   english = "en",
@@ -36,9 +41,25 @@ export enum BREAKPOINTS {
   "2xl" = "1536px",
 }
 
+
+/* DRAWER OPTION */
+export type NavigationOption = {
+  id: string | number,
+  textKey: string,
+  icon?: React.ReactElement,
+  navigateTo: string
+}
+
 /* DRAWER OPTION */
 export type DrawerOption = {
   id: string | number,
   textKey: string,
   icon?: React.ReactElement
+}
+
+/* BUTTON TYPES */
+export enum ButtonTypes {
+  noBackgroundAndBorder,
+  primaryButton,
+  secondaryButton
 }
