@@ -1,12 +1,13 @@
 import axios from "axios";
 import { asyncHandler } from "../utils/asyncHandler";
+import { LOCAL_STORAGE_KEYS } from "../constants";
 
 class ApiRequest {
   constructor(public url: string) {}
 
   private getAccessTokenHeader(): object {
     return {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEYS.accessToken)}`,
     };
   }
 

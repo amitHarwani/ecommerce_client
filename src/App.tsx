@@ -1,12 +1,7 @@
-
+import RoutePaths from "./RoutePaths";
 
 function App() {
-
-  return (
-    <>
-      
-    </>
-  )
+  return <RoutePaths />;
 }
 
-export default App
+export default App;
