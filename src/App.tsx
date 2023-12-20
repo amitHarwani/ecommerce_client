@@ -1,13 +1,7 @@
-import PageLayout from "./layouts/PageLayout";
+import RoutePaths from "./RoutePaths";
 
 function App() {
- 
-
-  return (
-    <>
-      <PageLayout />
-    </>
-  );
+  return <RoutePaths />;
 }
 
 export default App;

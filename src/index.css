@@ -33,4 +33,15 @@
 * {
     font-family: "poppins-regular";
 }
+
+*::-webkit-scrollbar {
+    width: 4px;
+}
+*::-webkit-scrollbar-track{
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb{
+    background-color: #a1a1aa;
+    border-radius: 12px;
+}
      

@@ -36,7 +36,7 @@ const Drawer = (props: DrawerProps) => {
 
   return (
     <aside
-      className={`flex flex-col fixed top-0 h-screen z-10 w-3/5 bg-gradient-to-b from-black via-stone-600 to-black p-4
+      className={`flex flex-col fixed top-0 h-screen z-20 w-3/5 bg-gradient-to-b from-black via-stone-600 to-black p-4
       transition-all duration-500
       ${
         isRTL

@@ -9,8 +9,9 @@ import CartIcon from "../../../icons/CartIcon";
 import { useAppSelector } from "../../../../store";
 import NavList from "../../../basic/NavList";
 import InfoHeaderContainer from "../../infoheader/container/InfoHeaderContainer";
+import { ForwardedRef, forwardRef } from "react";
 
-const Header = () => {
+const Header = forwardRef(function Header(_, ref: ForwardedRef<HTMLDivElement>) {
   const { t } = useTranslation();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
@@ -19,46 +20,58 @@ const Header = () => {
   /* Mobile & Tablet */
   if (!isLG) {
     return (
-      <div>
+      <header ref={ref} className="fixed top-0 w-full z-10 bg-white">
         <InfoHeaderContainer />
         <div
           className={`flex items-center justify-between px-2 pb-4 mt-4 border-b-2 border-b-neutral-100 ${
-            isRTL ? "flex-row-reverse" : ''
+            isRTL ? "flex-row-reverse" : ""
           }`}
         >
           <Hamburger
             headingText={t("companyName")}
             navList={isLG ? [] : DRAWER_ITEMS}
           />
-          <SearchInput placeholder={t('searchProductsPlaceholder')} className="flex-1 mx-8"  />
+          <SearchInput
+            placeholder={t("searchProductsPlaceholder")}
+            className="flex-1 mx-8"
+          />
           <Button onClickHandler={() => {}}>
             <CartIcon className="w-8 h-8 text-black" />
           </Button>
         </div>
-      </div>
+      </header>
     );
   }
 
   /* Desktop */
   return (
-    <div>
+    <header ref={ref} className="fixed top-0 w-full z-10 bg-white">
       <InfoHeaderContainer />
-      <div className={`flex justify-between items-center mt-4 px-10 pb-4 border-b-2 border-b-neutral-100 ${isRTL ? 'flex-row-reverse': ''}`}>
-        <span className={`font-bold capitalize text-2xl tracking-wider text-black`}>
+      <div
+        className={`flex justify-between items-center mt-4 px-10 pb-4 border-b-2 border-b-neutral-100 ${
+          isRTL ? "flex-row-reverse" : ""
+        }`}
+      >
+        <span
+          className={`font-bold capitalize text-2xl tracking-wider text-black`}
+        >
           {t("companyName")}
         </span>
 
-        <NavList navList={DRAWER_ITEMS} className="w-1/3" />    
+        <NavList navList={DRAWER_ITEMS} className="w-1/3" />
 
-        <div className={`flex w-2/6 ${isRTL ? 'flex-row-reverse' : ''}`}>
-          <SearchInput placeholder={t('searchProductsPlaceholder')} className={`w-full ${isRTL ? 'ml-2' : 'mr-2'}`} />
+        <div className={`flex w-2/6 ${isRTL ? "flex-row-reverse" : ""}`}>
+          <SearchInput
+            placeholder={t("searchProductsPlaceholder")}
+            className={`w-full ${isRTL ? "ml-2" : "mr-2"}`}
+          />
           <Button onClickHandler={() => {}}>
             <CartIcon className="w-8 h-8 text-black" />
           </Button>
         </div>
       </div>
-    </div>
+    </header>
   );
-};
+});
 
 export default Header;
