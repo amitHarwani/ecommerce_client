@@ -22,3 +22,5 @@ export const DRAWER_ITEMS: Array<NavigationOption> = [
         navigateTo: '/login'
     }
 ]
+
+export const BANNER_PROMOTION_END_DATE = "2024-01-31T00:00:00";

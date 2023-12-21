@@ -17,7 +17,7 @@ const Footer = () => {
           headingClassName="font-bold tracking-wider capitalize p-8"
           className="w-2/6"
         />
-        <FooterSection heading={t("support")} headingClassName="capitalize" className="w-4/6 p-8">
+        <FooterSection heading={t("support")} headingClassName="capitalize" className="p-8">
           <div className="flex flex-col text-zinc-50">
             <Text
               className="break-words text-base capitalize"

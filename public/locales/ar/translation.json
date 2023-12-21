@@ -11,7 +11,13 @@
     "companyEmail": "email@email.com",
     "companyPhone": "+00 000 0000",
     "copyrightMessage": "حقوق الطبع والنشر 2024. جميع الحقوق محفوظة ©",
-    "support": "يدعم"
+    "support": "يدعم",
+    "days": "أيام",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "دقائق",
+    "bannerPromotion": "!! تخفيضات الشتاء مباشرة الآن"
+
 
 
 }
