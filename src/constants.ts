@@ -1,4 +1,3 @@
-
 /* DROPDOWN */
 export enum DropdownTypes {
   noBorderDarkBg,
@@ -41,25 +40,36 @@ export enum BREAKPOINTS {
   "2xl" = "1536px",
 }
 
-
 /* DRAWER OPTION */
 export type NavigationOption = {
-  id: string | number,
-  textKey: string,
-  icon?: React.ReactElement,
-  navigateTo: string
-}
+  id: string | number;
+  textKey: string;
+  icon?: React.ReactElement;
+  navigateTo: string;
+};
 
 /* DRAWER OPTION */
 export type DrawerOption = {
-  id: string | number,
-  textKey: string,
-  icon?: React.ReactElement
-}
+  id: string | number;
+  textKey: string;
+  icon?: React.ReactElement;
+};
 
 /* BUTTON TYPES */
 export enum ButtonTypes {
   noBackgroundAndBorder,
   primaryButton,
-  secondaryButton
+  secondaryButton,
 }
+
+/* DATE TIME FORMATS */
+export enum DATE_TIME_FORMATS {
+  standardDateWithTime = "YYYY-MM-DDTHH:mm:ss",
+}
+
+export type DURATION = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};

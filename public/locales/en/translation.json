@@ -11,7 +11,12 @@
     "companyEmail": "email@email.com",
     "companyPhone": "+00 000 0000",
     "copyrightMessage": "© copyright right 2024. all right reserved",
-    "support": "support"
+    "support": "support",
+    "days": "days",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds",
+    "bannerPromotion": "Winter Sale Live Now !!"
 
 
 }
