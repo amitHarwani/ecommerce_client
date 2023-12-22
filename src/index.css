@@ -44,4 +44,8 @@
     background-color: #a1a1aa;
     border-radius: 12px;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
      

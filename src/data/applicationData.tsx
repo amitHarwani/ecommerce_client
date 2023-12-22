@@ -1,4 +1,4 @@
-import { NavigationOption } from "../constants";
+import { CategoryIcon, NavigationOption } from "../constants";
 
 export const DRAWER_ITEMS: Array<NavigationOption> = [
     {
@@ -24,3 +24,6 @@ export const DRAWER_ITEMS: Array<NavigationOption> = [
 ]
 
 export const BANNER_PROMOTION_END_DATE = "2024-01-31T00:00:00";
+
+export const CATEGORY_ICONS: CategoryIcon = {
+}

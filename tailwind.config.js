@@ -7,7 +7,8 @@ export default {
     extend: {
       colors: {
         darkRed: "#DB4444",
-        yellow: "#00FF66"
+        yellow: "#00FF66",
+        grey: "#cdcdcd"
       },
       fontFamily: {
         poppinsRegular: ["poppins-regular"],

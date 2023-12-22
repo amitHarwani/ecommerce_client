@@ -19,9 +19,9 @@ const Button = (props: ButtonProps) => {
   const buttonStyles = useMemo(() => {
     switch (buttonType) {
       case ButtonTypes.primaryButton:
-        return "bg-darkRed text-zinc-50 px-12 py-4 rounded";
+        return "bg-darkRed text-zinc-50 rounded";
       case ButtonTypes.secondaryButton:
-        return "bg-yellow text-black font-poppinsMedium px-12 py-4 rounded";
+        return "bg-yellow text-black font-poppinsMedium rounded";
       default:
         return "";
     }
