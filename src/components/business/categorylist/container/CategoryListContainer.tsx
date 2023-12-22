@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import CategoryList from "../presentation/CategoryList";
-import { category } from "../../../../services/category/CategoryTypes";
+import { Category } from "../../../../services/category/CategoryTypes";
 import CategoryService from "../../../../services/CategoryService";
 
 
 const CategoryListContainer = () => {
 
-    const [categories, setCategories] = useState<category[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    const [isError, setIsError] = useState(false);
 
     const fetchAllCategories = () => {
         CategoryService.getAllCategoriesAsync((data, isDone, error) => {
             if(!error){
                 setCategories((prev) => [...prev, ...data]);
+            }
+            else{
+                console.error("Error -- fetchAllCategories()", error)
+                setIsError(true);
             }
         })
     }
@@ -20,7 +26,7 @@ const CategoryListContainer = () => {
         fetchAllCategories();
     }, [])
     return (
-       <CategoryList categories={categories}  />
+       <CategoryList categories={categories} error={isError}  />
     )
 }
 

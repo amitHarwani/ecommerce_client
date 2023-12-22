@@ -1,16 +1,18 @@
 import { useTranslation } from "react-i18next";
 import CardContainer from "../../../basic/CardContainer";
 import { CARD_CONTAINER_OPTION } from "../../../../constants";
-import { category } from "../../../../services/category/CategoryTypes";
+import { Category } from "../../../../services/category/CategoryTypes";
 import CategoryCard from "../../../basic/CategoryCard";
 import { RefObject, createRef, useCallback, useEffect, useState } from "react";
 import { useAppSelector } from "../../../../store";
+import ErrorMessage from "../../../basic/ErrorMessage";
 
 interface CategoryList {
-  categories: category[];
+  categories: Category[];
+  error: boolean
 }
 const CategoryList = (props: CategoryList) => {
-  const { categories } = props;
+  const { categories, error } = props;
   const { t } = useTranslation();
 
 
@@ -25,6 +27,10 @@ const CategoryList = (props: CategoryList) => {
       extraOption={CARD_CONTAINER_OPTION.CAROUSEL}
       carouselScrollableElementRef = {categoryContainerRef}
     >
+     {
+      error ? 
+      <ErrorMessage message={t('pleaseTryAgainLater')} className="justify-center" />
+      :
       <div
         className="flex overflow-auto no-scrollbar mt-4"
         ref={categoryContainerRef}
@@ -35,7 +41,7 @@ const CategoryList = (props: CategoryList) => {
             <CategoryCard category={category} className="w-40 h-36" />
           </div>
         ))}
-      </div>
+      </div>}
     </CardContainer>
   );
 };

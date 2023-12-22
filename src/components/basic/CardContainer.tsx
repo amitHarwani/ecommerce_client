@@ -31,9 +31,9 @@ const CardContainer = (props: CardContainerProps) => {
     <div className="flex flex-col">
       <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
         <div className="flex flex-col">
-          <div className="text-darkRed flex items-center">
+          <div className={`text-darkRed flex items-center ${isRTL ? 'flex-row-reverse': ''}`}>
             <RectangleIcon className="w-4 h-10" rectClassName="w-4 h-10" />
-            <span className="font-semibold ml-2 capitalize">{heading}</span>
+            <span className={`font-semibold capitalize ${isRTL ? 'mr-2' : 'ml-2'}`}>{heading}</span>
           </div>
 
           {subHeading && (
@@ -67,10 +67,10 @@ const CardContainer = (props: CardContainerProps) => {
       {extraOption === CARD_CONTAINER_OPTION.BOTTOM_BUTTON &&
         extraOptionButtonText &&
         extraOptionButtonClickHandler && (
-          <div className="self-center">
+          <div className="self-center mt-8">
             <Button
               buttonType={ButtonTypes.primaryButton}
-              className="text-sm px-4 py-2"
+              className="text-sm px-4 py-2 capitalize"
               onClickHandler={extraOptionButtonClickHandler}
             >
               <span>{extraOptionButtonText}</span>

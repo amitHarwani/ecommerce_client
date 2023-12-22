@@ -1,10 +1,10 @@
 import { CATEGORY_ICONS } from "../../data/applicationData";
-import { category } from "../../services/category/CategoryTypes";
+import { Category } from "../../services/category/CategoryTypes";
 import GeneralCategoryIcon from "../icons/GeneralCategoryIcon";
 import Button from "./Button";
 
 interface CategoryProps {
-  category: category;
+  category: Category;
   className?: string;
 }
 const CategoryCard = (props: CategoryProps) => {
