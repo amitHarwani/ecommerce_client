@@ -73,3 +73,14 @@ export type DURATION = {
   minutes: number;
   seconds: number;
 };
+
+/* Category Icon Type */
+export type CategoryIcon = {[id: string]: React.ReactElement}
+
+/* Card Container */
+export enum CARD_CONTAINER_OPTION {
+  CAROUSEL,
+  RIGHT_BUTTON,
+  BOTTOM_BUTTON
+}
+

@@ -1,9 +1,10 @@
+import { AxiosError } from "axios";
 
 
 class ApiError {
 
     public error: boolean = true;
-    constructor(public errorData: object){   
+    constructor(public errorMessage: string, public errorData?: AxiosError, ){   
     }
 }
 

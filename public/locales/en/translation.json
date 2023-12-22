@@ -16,7 +16,9 @@
     "hours": "hours",
     "minutes": "minutes",
     "seconds": "seconds",
-    "bannerPromotion": "Winter Sale Live Now !!"
+    "bannerPromotion": "Winter Sale Live Now !!",
+    "categories": "categories",
+    "browseByCategory": "browse by category"
 
 
 }
