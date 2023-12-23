@@ -8,9 +8,10 @@ import ProductList from "../../../basic/ProductList";
 interface FeaturedProductListProps {
   products: Product[];
   error?: boolean;
+  viewAllClickHandler(): void;
 }
 const FeaturedProductList = (props: FeaturedProductListProps) => {
-  const { products, error = false } = props;
+  const { products, error = false, viewAllClickHandler } = props;
   const { t } = useTranslation();
   return (
     <CardContainer
@@ -18,7 +19,7 @@ const FeaturedProductList = (props: FeaturedProductListProps) => {
       subHeading={t("bestSellingProducts")}
       extraOption={CARD_CONTAINER_OPTION.RIGHT_BUTTON}
       extraOptionButtonText={t("viewAll")}
-      extraOptionButtonClickHandler={() => {}}
+      extraOptionButtonClickHandler={viewAllClickHandler}
     >
       {error ? (
         <ErrorMessage message={t("pleaseTryAgainLater")} className="justify-center"/>

@@ -9,10 +9,11 @@ import ErrorMessage from "../../../basic/ErrorMessage";
 
 interface CategoryList {
   categories: Category[];
-  error: boolean
+  error: boolean;
+  categoryClickHandler(category: Category) : void; 
 }
 const CategoryList = (props: CategoryList) => {
-  const { categories, error } = props;
+  const { categories, error,categoryClickHandler } = props;
   const { t } = useTranslation();
 
 
@@ -38,7 +39,7 @@ const CategoryList = (props: CategoryList) => {
       >
         {categories.map((category) => (
           <div key={category._id} className="mr-4 p-1">
-            <CategoryCard category={category} className="w-40 h-36" />
+            <CategoryCard category={category} className="w-40 h-36" categoryClickHandler={categoryClickHandler} />
           </div>
         ))}
       </div>}

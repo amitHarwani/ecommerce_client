@@ -13,6 +13,7 @@ interface CardContainerProps {
   carouselScrollableElementRef?: RefObject<HTMLDivElement>,
   extraOptionButtonText?: string;
   extraOptionButtonClickHandler?(): void;
+  isLoadingButton?: boolean
 }
 const CardContainer = (props: CardContainerProps) => {
   const {
@@ -23,6 +24,7 @@ const CardContainer = (props: CardContainerProps) => {
     carouselScrollableElementRef,
     extraOptionButtonText,
     extraOptionButtonClickHandler,
+    isLoadingButton = false
   } = props;
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
@@ -56,6 +58,7 @@ const CardContainer = (props: CardContainerProps) => {
                 buttonType={ButtonTypes.primaryButton}
                 className="text-sm px-4 py-2 capitalize"
                 onClickHandler={extraOptionButtonClickHandler}
+                isLoading={isLoadingButton}
               >
                 <span>{extraOptionButtonText}</span>
               </Button>
@@ -72,6 +75,7 @@ const CardContainer = (props: CardContainerProps) => {
               buttonType={ButtonTypes.primaryButton}
               className="text-sm px-4 py-2 capitalize"
               onClickHandler={extraOptionButtonClickHandler}
+              isLoading={isLoadingButton}
             >
               <span>{extraOptionButtonText}</span>
             </Button>
