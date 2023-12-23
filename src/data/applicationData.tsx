@@ -53,3 +53,6 @@ export const COMPANY_GURANTEE_LIST: COMPANY_GURANTEE[] = [
         descriptionKey: "guranteeDescription" 
     },
 ]
+
+export const EXPLORE_PRODUCTS_COUNT = 8;
+export const FEATURED_PRODUCTS_COUNT = 4;

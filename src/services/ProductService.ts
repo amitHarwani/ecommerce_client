@@ -9,7 +9,7 @@ class ProductService {
   defaultPageLimit: number = 50;
   BASE_URL: string = "/api/v1/ecommerce/products";
 
-  async getFeaturedProducts(): Promise<Product[] | ApiError> {
+  async getTopProducts(numberOfProducts: number): Promise<Product[] | ApiError> {
     const apiRequest = new ApiRequest(this.BASE_URL);
 
     const response = await apiRequest.getRequest<Products>({
@@ -20,7 +20,7 @@ class ProductService {
     if (response instanceof ApiResponse && response.success) {
       const products = response.data.products;
       products.sort(() => Math.random() - 0.5);
-      const featuredProducts = products.slice(0, 8);
+      const featuredProducts = products.slice(0, numberOfProducts);
       return featuredProducts;
     } else if (response instanceof ApiResponse) {
       return new ApiError(response.message);
@@ -29,7 +29,7 @@ class ProductService {
     }
   }
 
-  async getBestSellingProducts(): Promise<Product[] | ApiError> {
+  async getTopOnSaleProducts(numberOfProducts: number): Promise<Product[] | ApiError> {
     const apiRequest = new ApiRequest(this.BASE_URL);
 
     const response = await apiRequest.getRequest<Products>({
@@ -42,7 +42,7 @@ class ProductService {
       products.sort(() => Math.random() - 0.5);
       const bestSellingProducts: Product[] = []
 
-      for(let counter = 0; counter < 4;counter++){
+      for(let counter = 0; counter < numberOfProducts;counter++){
 
         const discountPercent =  generateRandomNumber(10, 20)
         products[counter].previousPrice = Math.round((100 *products[counter].price) / (100 - discountPercent));

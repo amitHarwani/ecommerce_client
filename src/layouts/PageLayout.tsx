@@ -40,9 +40,9 @@ const PageLayout = () => {
   }, [headerContainerRef]);
 
   const scrollToTop = () => {
-    window.scrollTo({top: 0, behavior: 'smooth'})
-  }
-  
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div>
@@ -51,9 +51,15 @@ const PageLayout = () => {
           <Outlet />
         </main>
       </div>
-        <ArrowButton type={ARROW_BUTTONS.UP} onClickHandler={scrollToTop} isDisabled={false} 
-        className={`mb-4 ${isRTL ? 'mr-auto ml-4' : 'ml-auto mr-4'}`}/>
+      <div className="flex flex-col">
+        <ArrowButton
+          type={ARROW_BUTTONS.UP}
+          onClickHandler={scrollToTop}
+          isDisabled={false}
+          className={`mb-4 ${isRTL ? "mr-auto ml-4" : "ml-auto mr-4"}`}
+        />
         <FooterContainer />
+      </div>
     </div>
   );
 };

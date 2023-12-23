@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { COMPANY_GURANTEE } from "../../constants";
+import RoundedIcon from "./RoundedImage";
 
 
 
@@ -9,11 +10,7 @@ const CompanyGurantee = (props: COMPANY_GURANTEE) => {
     const {t} = useTranslation();
     return (
         <div className="flex flex-col items-center">
-            <div className="rounded-full bg-grey p-2">
-                <div className="rounded-full bg-black p-2">
-                {icon}
-                </div>
-            </div>
+            <RoundedIcon icon={icon} />
             <span className="uppercase text-xl font-semibold text-black mt-4">{t(headingKey)}</span>
             <span className="capitalize text-sm text-black mt-2">{t(descriptionKey)}</span>
         </div>
