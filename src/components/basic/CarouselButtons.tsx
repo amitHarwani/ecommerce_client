@@ -1,6 +1,8 @@
 import { RefObject, useCallback, useEffect, useState } from "react";
 import LeftArrow from "../icons/LeftArrow";
 import { useAppSelector } from "../../store";
+import ArrowButton from "./ArrowButton";
+import { ARROW_BUTTONS } from "../../constants";
 
 interface CarouselButtons {
   scrollableElementRef: RefObject<HTMLDivElement>;
@@ -62,20 +64,17 @@ const CarouselButtons = (props: CarouselButtons) => {
   }, [scrollableElementRef, onElementScroll]);
   return (
     <div className={`flex justify-between`}>
-      <button
-        className="rounded-full bg-neutral-100 p-2 active:bg-darkRed active:text-zinc-50 active:disabled:bg-neutral-100 active:disabled:text-black"
-        onClick={onBackClickHandler}
-        disabled={isRTL ? isNextButtonDisabled : isBackButtonDisabled}
-      >
-        <LeftArrow className="w-4 h-4" />
-      </button>
-      <button
-        className="rounded-full bg-neutral-100 p-2 ml-1 active:bg-darkRed active:text-zinc-50 active:disabled:bg-neutral-100 active:disabled:text-black"
-        onClick={onNextClickHandler}
-        disabled={isRTL ? isBackButtonDisabled : isNextButtonDisabled}
-      >
-        <LeftArrow className="w-4 h-4 rotate-180" />
-      </button>
+      <ArrowButton
+        type={ARROW_BUTTONS.LEFT}
+        onClickHandler={onBackClickHandler}
+        isDisabled={isRTL ? isNextButtonDisabled : isBackButtonDisabled}
+      />
+      <ArrowButton
+        type={ARROW_BUTTONS.RIGHT}
+        onClickHandler={onNextClickHandler}
+        isDisabled={isRTL ? isBackButtonDisabled : isNextButtonDisabled}
+        className="ml-1"
+      />
     </div>
   );
 };

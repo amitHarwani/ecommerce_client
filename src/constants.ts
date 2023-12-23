@@ -75,12 +75,27 @@ export type DURATION = {
 };
 
 /* Category Icon Type */
-export type CategoryIcon = {[id: string]: React.ReactElement}
+export type CategoryIcon = { [id: string]: React.ReactElement };
 
 /* Card Container */
 export enum CARD_CONTAINER_OPTION {
   CAROUSEL,
   RIGHT_BUTTON,
-  BOTTOM_BUTTON
+  BOTTOM_BUTTON,
 }
 
+/* Company Gurantee */
+export type COMPANY_GURANTEE = {
+  id: string | number,
+  icon: React.ReactElement;
+  headingKey: string;
+  descriptionKey: string;
+};
+
+/* Arrow Button Types */
+export enum ARROW_BUTTONS {
+  UP,
+  RIGHT,
+  DOWN, 
+  LEFT
+}
