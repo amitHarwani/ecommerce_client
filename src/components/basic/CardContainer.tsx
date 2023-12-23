@@ -54,7 +54,7 @@ const CardContainer = (props: CardContainerProps) => {
             extraOptionButtonClickHandler && (
               <Button
                 buttonType={ButtonTypes.primaryButton}
-                className="text-sm px-4 py-2"
+                className="text-sm px-4 py-2 capitalize"
                 onClickHandler={extraOptionButtonClickHandler}
               >
                 <span>{extraOptionButtonText}</span>
