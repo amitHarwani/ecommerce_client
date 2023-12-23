@@ -99,3 +99,12 @@ export enum ARROW_BUTTONS {
   DOWN, 
   LEFT
 }
+/* Query param strings */
+export enum QUERY_PARAMS {
+  category = "category"
+}
+
+/* Paths */
+export enum ROUTE_PATHS {
+  products = "products"
+}

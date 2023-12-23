@@ -36,7 +36,8 @@ export class Products {
         public hasPrevPage: boolean,
         public hasNextPage: boolean,
         public prevPage: number,
-        public nextPage: number
+        public nextPage: number,
+        public category?: {_id: string, name: string}
     ){
 
     }

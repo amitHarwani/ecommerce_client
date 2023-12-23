@@ -8,9 +8,10 @@ import ProductList from "../../../basic/ProductList";
 interface ExploreProductListProps {
   products: Product[];
   error?: boolean;
+  viewAllClickHandler(): void;
 }
 const ExploreProductList = (props: ExploreProductListProps) => {
-  const { products, error = false } = props;
+  const { products, error = false, viewAllClickHandler } = props;
   const { t } = useTranslation();
   return (
     <CardContainer
@@ -18,7 +19,7 @@ const ExploreProductList = (props: ExploreProductListProps) => {
       subHeading={t("exploreOurProducts")}
       extraOption={CARD_CONTAINER_OPTION.BOTTOM_BUTTON}
       extraOptionButtonText={t("viewAllProducts")}
-      extraOptionButtonClickHandler={() => {}}
+      extraOptionButtonClickHandler={viewAllClickHandler}
     >
       {error ? (
         <ErrorMessage message={t("pleaseTryAgainLater")} className="justify-center"/>

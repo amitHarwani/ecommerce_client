@@ -1,11 +1,13 @@
 import { ReactElement, useMemo } from "react";
 import { ButtonTypes } from "../../constants";
+import LoadingSpinner from "../icons/LoadingSpinner";
 
 interface ButtonProps {
   buttonType?: ButtonTypes;
   children: ReactElement;
   className?: string;
   onClickHandler(): void;
+  isLoading?: boolean;
 }
 const Button = (props: ButtonProps) => {
   const {
@@ -13,6 +15,7 @@ const Button = (props: ButtonProps) => {
     children,
     className,
     onClickHandler,
+    isLoading = false,
   } = props;
 
   // Styles based on type
@@ -32,7 +35,7 @@ const Button = (props: ButtonProps) => {
       className={`transition transform hover:scale-105 active:scale-95 ${buttonStyles} ${className}`}
       onClick={onClickHandler}
     >
-      {children}
+      {!isLoading ? children : <LoadingSpinner className={'w-8 h-8 text-gray-200 fill-black'} />}
     </button>
   );
 };

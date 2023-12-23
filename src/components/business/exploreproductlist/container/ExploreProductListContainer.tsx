@@ -3,8 +3,11 @@ import ExploreProductList from "../presentation/ExploreProductList";
 import { Product } from "../../../../services/product/ProductTypes";
 import ProductService from "../../../../services/ProductService";
 import { EXPLORE_PRODUCTS_COUNT } from "../../../../data/applicationData";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_PATHS } from "../../../../constants";
 
 const ExploreProductListContainer = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [isError, setIsError] = useState(false);
   const fetchFirstProductPage = async () => {
@@ -18,10 +21,14 @@ const ExploreProductListContainer = () => {
     }
   };
 
+  const viewAllClickHandler = () => {
+    navigate(ROUTE_PATHS.products);
+  }
+  
   useEffect(() => {
     fetchFirstProductPage();
   }, []);
-  return <ExploreProductList products={products} error={isError} />;
+  return <ExploreProductList products={products} error={isError} viewAllClickHandler={viewAllClickHandler} />;
 };
 
 export default ExploreProductListContainer;

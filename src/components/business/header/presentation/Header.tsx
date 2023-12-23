@@ -11,7 +11,13 @@ import NavList from "../../../basic/NavList";
 import InfoHeaderContainer from "../../infoheader/container/InfoHeaderContainer";
 import { ForwardedRef, forwardRef } from "react";
 
-const Header = forwardRef(function Header(_, ref: ForwardedRef<HTMLDivElement>) {
+interface HeaderProps {
+  logoClickHandler(): void;
+}
+const Header = forwardRef(function Header(props, ref: ForwardedRef<HTMLDivElement>) {
+
+  const {logoClickHandler} = props;
+
   const { t } = useTranslation();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
@@ -52,11 +58,11 @@ const Header = forwardRef(function Header(_, ref: ForwardedRef<HTMLDivElement>) 
           isRTL ? "flex-row-reverse" : ""
         }`}
       >
-        <span
-          className={`font-bold capitalize text-2xl tracking-wider text-black`}
+        <button
+          className={`font-bold capitalize text-2xl tracking-wider text-black`} onClick={logoClickHandler}
         >
           {t("companyName")}
-        </span>
+        </button>
 
         <NavList navList={DRAWER_ITEMS} className="w-1/3" />
 
