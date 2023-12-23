@@ -23,7 +23,10 @@
     "addToCart": "add to cart",
     "ourProducts": "our products",
     "exploreOurProducts": "explore our products",
-    "viewAllProducts": "view all products"
+    "viewAllProducts": "view all products",
+    "thisMonth": "this month",
+    "bestSellingProducts": "best selling products",
+    "viewAll": "view all"
 
 
 }

@@ -1,6 +1,7 @@
 import BannerContainer from "../../../components/business/banner/container/BannerContainer";
 import CategoryListContainer from "../../../components/business/categorylist/container/CategoryListContainer";
 import ExploreProductListContainer from "../../../components/business/exploreproductlist/container/ExploreProductListContainer";
+import FeaturedProductListContainer from "../../../components/business/featuredproductlist/container/FeaturedProductListContainer";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,9 @@ const HomePage = () => {
       <BannerContainer />
       <div className="mt-20">
         <CategoryListContainer />
+      </div>
+      <div className="mt-20">
+        <FeaturedProductListContainer />
       </div>
       <div className="mt-20">
         <ExploreProductListContainer />
