@@ -27,3 +27,5 @@ export const BANNER_PROMOTION_END_DATE = "2024-01-31T00:00:00";
 
 export const CATEGORY_ICONS: CategoryIcon = {
 }
+
+export const DEFAULT_CURRENCY = "AED"

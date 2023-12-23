@@ -1,16 +1,16 @@
 import ApiError from "./ApiError";
 import ApiRequest from "./ApiRequest";
 import ApiResponse from "./ApiResponse";
-import { categories, category } from "./category/CategoryTypes";
+import { Categories, Category } from "./category/CategoryTypes";
 
 class CategoryService {
   defaultPageNumber: number = 1;
-  defaultPageLimit: number = 5;
+  defaultPageLimit: number = 50;
   BASE_URL: string = "/api/v1/ecommerce/categories";
 
   /* Get All Categories Asynchronously: As the requests keep fulfilling response will be sent as callback */
   async getAllCategoriesAsync(
-    callback: (data: category[], isDone: boolean, errorMessage?: ApiError) => void
+    callback: (data: Category[], isDone: boolean, errorMessage?: ApiError) => void
   ) {
     /* API Request */
     const apiRequest = new ApiRequest(this.BASE_URL);
@@ -19,7 +19,7 @@ class CategoryService {
     let pageNumberCounter = this.defaultPageNumber;
 
     /* First Request to know the total pages */
-    const firstResponse = await apiRequest.getRequest<categories>({
+    const firstResponse = await apiRequest.getRequest<Categories>({
       page: pageNumberCounter,
       limit: this.defaultPageLimit,
     });
@@ -45,7 +45,7 @@ class CategoryService {
       /* Remaining requests made in parallel */
       for (let counter = pageNumberCounter; counter <= totalPages; counter++) {
         apiRequest
-          .getRequest<categories>({
+          .getRequest<Categories>({
             page: counter,
             limit: this.defaultPageLimit,
           })

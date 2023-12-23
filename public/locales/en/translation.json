@@ -18,7 +18,12 @@
     "seconds": "seconds",
     "bannerPromotion": "Winter Sale Live Now !!",
     "categories": "categories",
-    "browseByCategory": "browse by category"
+    "browseByCategory": "browse by category",
+    "pleaseTryAgainLater": "failed to load, please try again later",
+    "addToCart": "add to cart",
+    "ourProducts": "our products",
+    "exploreOurProducts": "explore our products",
+    "viewAllProducts": "view all products"
 
 
 }
