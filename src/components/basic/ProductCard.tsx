@@ -14,10 +14,10 @@ const ProductCard = (props: ProductCardProps) => {
 
 
   return (
-    <Button className={`flex flex-col ${className}`} onClickHandler={() => {}}>
+    <div className={`flex flex-col transition transform hover:scale-105 active:scale-95 cursor-pointer ${className}`} onClick={() => {}}>
       <>
-      <div className={`flex flex-col items-center bg-neutral-100 rounded-xl relative ${imageContainerClassName}`}>
-        <Image src={product.mainImage.url} alt={product.name} backupImageSrc={"images/defaultproduct.png"} className="h-full rounded-xl" />
+      <div className={`flex flex-col items-center bg-neutral-100 rounded relative ${imageContainerClassName}`}>
+        <Image src={product.mainImage.url} alt={product.name} backupImageSrc={"images/defaultproduct.png"} className="h-full rounded" />
       
       </div>
 
@@ -37,7 +37,7 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
       </div>
       </>
-    </Button>
+    </div>
   );
 };
 

@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import CardContainer from "../../../basic/CardContainer";
 import { CARD_CONTAINER_OPTION } from "../../../../constants";
 import { Product } from "../../../../services/product/ProductTypes";
-import ProductCard from "../../../basic/ProductCard";
 import ErrorMessage from "../../../basic/ErrorMessage";
+import ProductList from "../../../basic/ProductList";
 
 interface ExploreProductListProps {
   products: Product[];
@@ -23,17 +23,7 @@ const ExploreProductList = (props: ExploreProductListProps) => {
       {error ? (
         <ErrorMessage message={t("pleaseTryAgainLater")} className="justify-center"/>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 lg:gap-x-0 gap-y-4 mt-4">
-          {products.map((product) => (
-            <div key={product._id} className="">
-              <ProductCard
-                product={product}
-                className="max-w-xs "
-                imageContainerClassName="h-56 lg:h-80"
-              />
-            </div>
-          ))}
-        </div>
+        <ProductList products={products} className="mt-4" />
       )}
     </CardContainer>
   );
