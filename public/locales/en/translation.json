@@ -26,7 +26,13 @@
     "viewAllProducts": "view all products",
     "thisMonth": "this month",
     "bestSellingProducts": "best selling products",
-    "viewAll": "view all"
+    "viewAll": "view all",
+    "freeAndFastDelivery": "free and fast delivery",
+    "freeDeliveryFor": "free delivery for all orders over AED 200",
+    "247customerService": "24/7 customer service",
+    "247customerServiceDescription": "friendly 24/7 customer support",
+    "guranteeHeading": "money back gurantee",
+    "guranteeDescription": "we return money within 30 days"
 
 
 }
