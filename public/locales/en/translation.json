@@ -37,7 +37,12 @@
     "inStock": "in stock",
     "outOfStock": "out of stock",
     "removeFromCart": "remove from cart",
-    "relatedItems": "related items"
+    "relatedItems": "related items",
+    "enterYourDetailsBelow": "enter your details below",
+    "email": "email",
+    "password": "password",
+    "forgetPassword": "forget password",
+    "dontHaveAnAccountSignUp": "don't have an account ? signup"
 
 
 }

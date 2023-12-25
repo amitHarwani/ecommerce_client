@@ -2,7 +2,7 @@ import { Product } from "../../services/product/ProductTypes";
 import Image from "./Image";
 import { DEFAULT_CURRENCY } from "../../data/applicationData";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { QUERY_PARAMS, ROUTE_PATHS } from "../../constants";
+import { PUBLIC_IMAGE_PATHS, QUERY_PARAMS, ROUTE_PATHS } from "../../constants";
 
 interface ProductCardProps {
   product: Product;
@@ -34,7 +34,7 @@ const ProductCard = (props: ProductCardProps) => {
           <Image
             src={product.mainImage.url}
             alt={product.name}
-            backupImageSrc={"images/defaultproduct.png"}
+            backupImageSrc={PUBLIC_IMAGE_PATHS.defaultProductImage}
             className="h-full w-full rounded"
           />
         </div>

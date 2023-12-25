@@ -37,7 +37,13 @@
     "inStock": "في الأوراق المالية",
     "outOfStock": "إنتهى من المخزن",
     "removeFromCart": "إزالة من العربة",
-    "relatedItems": "الأصناف المتعلقة"
+    "relatedItems": "الأصناف المتعلقة",
+    "enterYourDetailsBelow": "أدخل التفاصيل الخاصة بك أدناه",
+    "email": "بريد إلكتروني",
+    "password": "كلمة المرور",
+    "forgetPassword": "نسيت كلمة المرور",
+    "dontHaveAnAccountSignUp": "ليس لديك حساب؟ قم بالتسجيل"
+
 
 
 

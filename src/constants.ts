@@ -62,6 +62,12 @@ export enum ButtonTypes {
   secondaryButton,
 }
 
+/* LINK TYPES */
+export enum LinkTypes {
+  default,
+  red
+}
+
 /* DATE TIME FORMATS */
 export enum DATE_TIME_FORMATS {
   standardDateWithTime = "YYYY-MM-DDTHH:mm:ss",
@@ -108,5 +114,11 @@ export enum QUERY_PARAMS {
 /* Paths */
 export enum ROUTE_PATHS {
   products = "/products",
-  product = "/product"
+  product = "/product",
+  login = "/login"
+}
+
+export enum PUBLIC_IMAGE_PATHS {
+  loginSideImage = "/images/loginsideimage.png",
+  defaultProductImage = "/images/defaultproduct.png"
 }

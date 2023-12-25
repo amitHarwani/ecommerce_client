@@ -1,5 +1,4 @@
 import { RefObject, useCallback, useEffect, useState } from "react";
-import LeftArrow from "../icons/LeftArrow";
 import { useAppSelector } from "../../store";
 import ArrowButton from "./ArrowButton";
 import { ARROW_BUTTONS } from "../../constants";

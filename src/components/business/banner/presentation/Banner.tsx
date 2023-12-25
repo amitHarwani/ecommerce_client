@@ -1,4 +1,3 @@
-import Text from "../../../basic/Text";
 import Timer from "../../../basic/Timer";
 
 interface BannerProps {

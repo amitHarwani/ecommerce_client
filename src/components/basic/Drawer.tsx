@@ -2,9 +2,7 @@ import { useTranslation } from "react-i18next";
 import { DrawerOption, NavigationOption } from "../../constants";
 import { useAppSelector } from "../../store";
 import CloseIcon from "../icons/CloseIcon";
-import NavItem from "./NavItem";
 import NavList from "./NavList";
-import { RefObject, createRef } from "react";
 
 interface DrawerProps {
   headingText: string;
