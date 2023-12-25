@@ -113,6 +113,29 @@ class ProductService {
       return response;
     }
   }
+
+  async getRelatedProducts(categoryId: string, numberOfProducts: number): Promise<Product[] | ApiError>{
+    const apiRequest = new ApiRequest(`${this.CATEGORY_WISE_URL}/${categoryId}`);
+
+    const response = await apiRequest.getRequest<Products>();
+
+    if(response instanceof ApiResponse && response.success){
+      const products = response.data.products;
+
+      //Shuffle
+      products.sort(() => Math.random() - 0.5);
+
+      const relatedProducts = products.splice(0, numberOfProducts);
+
+      return relatedProducts;
+    }
+    else if(response instanceof ApiResponse){
+      return new ApiError(response.message);
+    }
+    else{
+      return response
+    }
+  }
 }
 
 export default new ProductService();

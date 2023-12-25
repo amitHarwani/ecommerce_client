@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ImageClass } from "../../services/product/ProductTypes";
-import Button from "./Button";
 import Image from "./Image";
 import { useAppSelector } from "../../store";
 
@@ -34,7 +33,7 @@ const ProductImagesView = (props: ProductImagesViewProps) => {
 
   return (
     <div className={`flex flex-col ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'} ${className}`}>
-      <div className="bg-neutral-100 rounded p-4 flex justify-center items-center lg:order-1 lg:flex-1">
+      <div className="bg-neutral-100 rounded --add-later-p-4 flex justify-center items-center lg:order-1 lg:flex-1">
         <Image
           src={topImage.url}
           alt={productName}
@@ -45,7 +44,8 @@ const ProductImagesView = (props: ProductImagesViewProps) => {
       <div className="flex gap-x-1 lg:gap-x-0 lg:flex-col lg:h-full lg:gap-y-4 lg:justify-center">
         {otherImages.map((otherImage) => (
           <button
-            className="bg-neutral-100 rounded p-2 lg:h-[22.8%]"
+            key={otherImage._id}
+            className="bg-neutral-100 rounded --add-later-p-2 lg:h-[22.8%]"
             onClick={() => {
               changeTopImage(otherImage);
             }}

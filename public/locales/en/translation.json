@@ -36,7 +36,8 @@
     "loadMore": "load more",
     "inStock": "in stock",
     "outOfStock": "out of stock",
-    "removeFromCart": "remove from cart"
+    "removeFromCart": "remove from cart",
+    "relatedItems": "related items"
 
 
 }

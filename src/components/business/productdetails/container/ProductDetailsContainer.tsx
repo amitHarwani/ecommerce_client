@@ -3,12 +3,14 @@ import ProductDetails from "../presentation/ProductDetails";
 
 
 interface ProductDetailsContainerProps {
-    product: Product
+    product: Product,
+    addToCart(product: Product, quantity: number): void;
+    removeFromCart(product: Product): void;
 }
 const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
-    const {product} = props;
+    const {product, addToCart, removeFromCart} = props;
     return (
-        <ProductDetails product={product} />
+        <ProductDetails product={product} addToCart={addToCart} removeFromCart={removeFromCart} />
     )
 }
 
