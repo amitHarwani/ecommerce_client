@@ -24,7 +24,7 @@ const Button = (props: ButtonProps) => {
       case ButtonTypes.primaryButton:
         return "bg-darkRed text-zinc-50 rounded";
       case ButtonTypes.secondaryButton:
-        return "bg-yellow text-black font-poppinsMedium rounded";
+        return "bg-white text-black font-poppinsMedium rounded border border-grey";
       default:
         return "";
     }
@@ -32,7 +32,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <button
-      className={`transition transform hover:scale-105 active:scale-95 ${buttonStyles} ${className}`}
+      className={`transition transform lg:hover:scale-105 active:scale-95 lg:active:scale-95 ${buttonStyles} ${className}`}
       onClick={onClickHandler}
     >
       {!isLoading ? children : <LoadingSpinner className={'w-8 h-8 text-gray-200 fill-black'} />}

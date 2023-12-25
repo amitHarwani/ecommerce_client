@@ -101,10 +101,12 @@ export enum ARROW_BUTTONS {
 }
 /* Query param strings */
 export enum QUERY_PARAMS {
-  category = "category"
+  category = "category",
+  productId = "productId"
 }
 
 /* Paths */
 export enum ROUTE_PATHS {
-  products = "products"
+  products = "/products",
+  product = "/product"
 }

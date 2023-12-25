@@ -96,6 +96,23 @@ class ProductService {
       return response;
     }
   }
+
+  async getProduct(productId: string): Promise<Product | ApiError> {
+
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/${productId}`);
+
+    const response = await apiRequest.getRequest<Product>();
+
+    if(response instanceof ApiResponse && response.success){
+      return response.data;
+    }
+    else if(response instanceof ApiResponse){
+      return new ApiError(response.message);
+    }
+    else{
+      return response;
+    }
+  }
 }
 
 export default new ProductService();
