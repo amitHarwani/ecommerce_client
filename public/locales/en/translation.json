@@ -33,7 +33,11 @@
     "247customerServiceDescription": "friendly 24/7 customer support",
     "guranteeHeading": "money back gurantee",
     "guranteeDescription": "we return money within 30 days",
-    "loadMore": "load more"
+    "loadMore": "load more",
+    "inStock": "in stock",
+    "outOfStock": "out of stock",
+    "removeFromCart": "remove from cart",
+    "relatedItems": "related items"
 
 
 }

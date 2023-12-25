@@ -96,6 +96,46 @@ class ProductService {
       return response;
     }
   }
+
+  async getProduct(productId: string): Promise<Product | ApiError> {
+
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/${productId}`);
+
+    const response = await apiRequest.getRequest<Product>();
+
+    if(response instanceof ApiResponse && response.success){
+      return response.data;
+    }
+    else if(response instanceof ApiResponse){
+      return new ApiError(response.message);
+    }
+    else{
+      return response;
+    }
+  }
+
+  async getRelatedProducts(categoryId: string, numberOfProducts: number): Promise<Product[] | ApiError>{
+    const apiRequest = new ApiRequest(`${this.CATEGORY_WISE_URL}/${categoryId}`);
+
+    const response = await apiRequest.getRequest<Products>();
+
+    if(response instanceof ApiResponse && response.success){
+      const products = response.data.products;
+
+      //Shuffle
+      products.sort(() => Math.random() - 0.5);
+
+      const relatedProducts = products.splice(0, numberOfProducts);
+
+      return relatedProducts;
+    }
+    else if(response instanceof ApiResponse){
+      return new ApiError(response.message);
+    }
+    else{
+      return response
+    }
+  }
 }
 
 export default new ProductService();
