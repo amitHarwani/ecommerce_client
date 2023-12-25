@@ -21,6 +21,7 @@ const ExploreProductListContainer = () => {
     }
   };
 
+  /* navigate to /products */
   const viewAllClickHandler = () => {
     navigate(ROUTE_PATHS.products);
   }

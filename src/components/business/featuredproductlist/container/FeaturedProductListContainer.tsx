@@ -23,6 +23,7 @@ const FeaturedProductListContainer = () => {
     }
   };
 
+  /* navigate to /products */
   const viewAllClickHandler = () => {
     navigate(ROUTE_PATHS.products);
   }

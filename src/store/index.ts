@@ -9,7 +9,7 @@ const store = configureStore({
         breakpoint: BreakpointSlice.reducer
     }
 })
-
+/* useAppSelector for typescript */
 export type ReduxRootState = ReturnType<typeof store.getState>
 export const useAppSelector: TypedUseSelectorHook<ReduxRootState> = useSelector;
 

@@ -4,6 +4,7 @@ import HomePageContainer from "./pages/home/container/HomePageContainer";
 import ProductsPageContainer from "./pages/products/container/ProductsPageContainer";
 import { ROUTE_PATHS } from "./constants";
 
+/* All Routes */
 const RoutePaths = () => {
   return (
     <BrowserRouter>

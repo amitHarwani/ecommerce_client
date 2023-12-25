@@ -23,6 +23,7 @@ const CategoryListContainer = () => {
     });
   };
 
+  /* navigate to /products?category=<categoryId> */
   const categoryClickHandler = (category: Category) => {
     navigate({
       pathname: ROUTE_PATHS.products,
