@@ -1,5 +1,5 @@
 import Image from "../../../components/basic/Image";
-import LoginContainer from "../../../components/business/login/container/LoginContainer";
+import LoginContainer from "../../../components/widgets/login/container/LoginContainer";
 import { BREAKPOINTS, PUBLIC_IMAGE_PATHS } from "../../../constants";
 import useBreakpointCheck from "../../../hooks/useBreakpointCheck";
 

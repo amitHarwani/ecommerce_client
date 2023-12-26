@@ -108,7 +108,8 @@ export enum ARROW_BUTTONS {
 /* Query param strings */
 export enum QUERY_PARAMS {
   category = "category",
-  productId = "productId"
+  productId = "productId",
+  categoryId = "categoryId"
 }
 
 /* Paths */

@@ -3,8 +3,8 @@ import { RefObject, createRef, useCallback, useEffect, useState } from "react";
 import { getCurrentBreakpoint } from "../utils/breakpointsHelper";
 import { updateBreakpoint } from "../store/BreakpointSlice";
 
-import HeaderContainer from "../components/business/header/container/HeaderContainer";
-import FooterContainer from "../components/business/footer/container/FooterContainer";
+import HeaderContainer from "../components/widgets/header/container/HeaderContainer";
+import FooterContainer from "../components/widgets/footer/container/FooterContainer";
 import { Outlet } from "react-router-dom";
 import ArrowButton from "../components/basic/ArrowButton";
 import { ARROW_BUTTONS } from "../constants";
