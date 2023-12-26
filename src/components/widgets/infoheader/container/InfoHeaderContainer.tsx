@@ -19,7 +19,7 @@ const InfoHeaderContainer = () => {
 
   const languageConfig = useMemo(() => {
     const result: Array<LanguageDropdownItem> = [];
-    const defaultSelection: LanguageDropdownItem = { id: "", text: "" };
+    const defaultSelection: LanguageDropdownItem = { id: "", textKey: "" };
     let languageHeading: keyof typeof SUPPORTED_LANGUAGES;
 
     for (languageHeading in SUPPORTED_LANGUAGES) {
@@ -27,12 +27,12 @@ const InfoHeaderContainer = () => {
 
       result.push({
         id: languageId,
-        text: LANGUAGE_DISPLAY_NAMES[languageHeading],
+        textKey: languageId,
       });
 
       if (languageId === i18n.language) {
         defaultSelection.id = languageId;
-        defaultSelection.text = LANGUAGE_DISPLAY_NAMES[languageHeading];
+        defaultSelection.textKey = languageId;
       }
     }
 

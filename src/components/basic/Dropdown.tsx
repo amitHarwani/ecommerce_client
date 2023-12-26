@@ -61,10 +61,10 @@ const Dropdown = (props: DropdownProps) => {
 
   /* Hiding Dropdown if a click is made outside */
   useEffect(() => {
-    if(clickedOutside){
-      setIsDropdownMenuShown(false)
+    if (clickedOutside) {
+      setIsDropdownMenuShown(false);
     }
-  }, [clickedOutside])
+  }, [clickedOutside]);
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -74,12 +74,14 @@ const Dropdown = (props: DropdownProps) => {
           typeStyles.mainButton
         } ${isRTL && "flex-row-reverse"}`}
       >
-        <span className={`text-sm ${typeStyles.textColor}`}>
-          {selectedItem ? selectedItem.text : t("select")}
+        <span className={`text-sm capitalize ${typeStyles.textColor}`}>
+          {selectedItem ? t(selectedItem.textKey) : t("select")}
         </span>
 
         <DownArrow
-          className={`h-5 w-5 ${isRTL ? "mr-1" : "ml-1"} ${typeStyles.textColor} ${isDropdownMenuShown && "rotate-180"}`}
+          className={`h-5 w-5 ${isRTL ? "mr-1" : "ml-1"} ${
+            typeStyles.textColor
+          } ${isDropdownMenuShown && "rotate-180"}`}
         />
       </button>
       {isDropdownMenuShown && (
@@ -91,9 +93,9 @@ const Dropdown = (props: DropdownProps) => {
             <div key={selectedItem.id}>
               <button
                 onClick={() => itemChangeHandler(selectedItem)}
-                className={`text-sm ${typeStyles.textColor}`}
+                className={`text-sm capitalize ${typeStyles.textColor}`}
               >
-                {selectedItem.text}
+                {t(selectedItem.textKey)}
               </button>
             </div>
           )}
@@ -103,9 +105,9 @@ const Dropdown = (props: DropdownProps) => {
                 <div key={item.id}>
                   <button
                     onClick={() => itemChangeHandler(item)}
-                    className={`text-sm ${typeStyles.textColor}`}
+                    className={`text-sm capitalize ${typeStyles.textColor}`}
                   >
-                    {item.text}
+                    {t(item.textKey)}
                   </button>
                 </div>
               )

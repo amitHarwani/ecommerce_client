@@ -1,4 +1,6 @@
 {
+    "en": "english",
+    "ar": "عربي",
     "select": "يختار",
     "infoHeaderMessage": "!! سنة جديدة سعيدة",
     "companyName": "حصري",
@@ -42,7 +44,13 @@
     "email": "بريد إلكتروني",
     "password": "كلمة المرور",
     "forgetPassword": "نسيت كلمة المرور",
-    "dontHaveAnAccountSignUp": "ليس لديك حساب؟ قم بالتسجيل"
+    "dontHaveAnAccountSignUp": "ليس لديك حساب؟ قم بالتسجيل",
+    "emailIsRequired": "البريد الالكتروني مطلوب",
+    "passwordIsRequired": "كلمة المرور مطلوبة",
+    "invalidEmailAddress": "عنوان البريد الإلكتروني غير صالح",
+    "myAccount": "حسابي",
+    "manageAccount": "إدارة الحساب",
+    "logout": "تسجيل خروج"
 
 
 

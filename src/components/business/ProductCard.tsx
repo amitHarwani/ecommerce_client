@@ -1,8 +1,9 @@
 import { Product } from "../../services/product/ProductTypes";
 import Image from "../basic/Image";
 import { DEFAULT_CURRENCY } from "../../data/applicationData";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams } from "react-router-dom";
 import { PUBLIC_IMAGE_PATHS, QUERY_PARAMS, ROUTE_PATHS } from "../../constants";
+import useCustomNavigate from "../../hooks/useCustomNavigate";
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +13,7 @@ interface ProductCardProps {
 const ProductCard = (props: ProductCardProps) => {
   const { product, className, imageContainerClassName } = props;
 
-  const navigate = useNavigate();
+  const navigate = useCustomNavigate();
 
   /* navigate to /product/:productId */
   const productClickHandler = () => {

@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import ApiError from "../services/ApiError";
+import ApiError, { ApiErrorResponse } from "../services/ApiError";
 import ApiResponse from "../services/ApiResponse";
 
 export const asyncHandler = async <T>(
@@ -16,7 +16,7 @@ export const asyncHandler = async <T>(
         responseData.success
       );
     })
-    .catch((error: AxiosError) => {
-      return new ApiError(error.message, error);
+    .catch((error: AxiosError<ApiErrorResponse>) => {
+      return new ApiError(error.message, error, error.response?.data);
     });
 };

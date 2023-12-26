@@ -1,4 +1,6 @@
 {
+    "en": "english",
+    "ar": "عربي",
     "select": "Select",
     "infoHeaderMessage": "Happy New Year !!",
     "companyName": "exclusive",
@@ -42,7 +44,13 @@
     "email": "email",
     "password": "password",
     "forgetPassword": "forget password",
-    "dontHaveAnAccountSignUp": "don't have an account ? signup"
+    "dontHaveAnAccountSignUp": "don't have an account ? signup",
+    "emailIsRequired": "email is required",
+    "passwordIsRequired": "password is required",
+    "invalidEmailAddress": "invalid email address",
+    "myAccount": "my account",
+    "manageAccount": "manage account",
+    "logout": "Logout"
 
 
 }

@@ -3,12 +3,12 @@ import { Product } from "../../../../services/product/ProductTypes";
 import ProductService from "../../../../services/ProductService";
 import FeaturedProductList from "../presentation/FeaturedProductList";
 import { FEATURED_PRODUCTS_COUNT } from "../../../../data/applicationData";
-import { useNavigate } from "react-router-dom";
 import { ROUTE_PATHS } from "../../../../constants";
+import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 
 const FeaturedProductListContainer = () => {
   
-  const navigate = useNavigate();
+  const navigate = useCustomNavigate();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [isError, setIsError] = useState(false);

@@ -3,11 +3,11 @@ import ExploreProductList from "../presentation/ExploreProductList";
 import { Product } from "../../../../services/product/ProductTypes";
 import ProductService from "../../../../services/ProductService";
 import { EXPLORE_PRODUCTS_COUNT } from "../../../../data/applicationData";
-import { useNavigate } from "react-router-dom";
 import { ROUTE_PATHS } from "../../../../constants";
+import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 
 const ExploreProductListContainer = () => {
-  const navigate = useNavigate();
+  const navigate = useCustomNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [isError, setIsError] = useState(false);
   const fetchFirstProductPage = async () => {

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import CategoryList from "../presentation/CategoryList";
 import { Category } from "../../../../services/category/CategoryTypes";
 import CategoryService from "../../../../services/CategoryService";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { createSearchParams } from "react-router-dom";
 import { QUERY_PARAMS, ROUTE_PATHS } from "../../../../constants";
+import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 
 const CategoryListContainer = () => {
-  const navigate = useNavigate();
+  const navigate = useCustomNavigate();
 
   const [categories, setCategories] = useState<Category[]>([]);
 

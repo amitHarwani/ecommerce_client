@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { BREAKPOINTS } from "../../../../constants";
+import { BREAKPOINTS, NavigationOption } from "../../../../constants";
 import { DRAWER_ITEMS } from "../../../../data/applicationData";
 import useBreakpointCheck from "../../../../hooks/useBreakpointCheck";
 import Hamburger from "../../../basic/Hamburger";
@@ -13,10 +13,11 @@ import { ForwardedRef, forwardRef } from "react";
 
 interface HeaderProps {
   logoClickHandler(): void;
+  navItemList: NavigationOption[];
 }
-const Header = forwardRef(function Header(props, ref: ForwardedRef<HTMLDivElement>) {
+const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<HTMLDivElement>) {
 
-  const {logoClickHandler} = props;
+  const {logoClickHandler, navItemList} = props;
 
   const { t } = useTranslation();
 
@@ -35,7 +36,7 @@ const Header = forwardRef(function Header(props, ref: ForwardedRef<HTMLDivElemen
         >
           <Hamburger
             headingText={t("companyName")}
-            navList={isLG ? [] : DRAWER_ITEMS}
+            navList={isLG ? [] : navItemList}
           />
           <SearchInput
             placeholder={t("searchProductsPlaceholder")}
@@ -64,7 +65,7 @@ const Header = forwardRef(function Header(props, ref: ForwardedRef<HTMLDivElemen
           {t("companyName")}
         </button>
 
-        <NavList navList={DRAWER_ITEMS} className="w-1/3" />
+        <NavList navList={navItemList} className="w-1/3" />
 
         <div className={`flex w-2/6 ${isRTL ? "flex-row-reverse" : ""}`}>
           <SearchInput

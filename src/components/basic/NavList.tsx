@@ -18,9 +18,13 @@ const NavList = (props: NavListProps) => {
         ${isRTL ? "lg:flex-row-reverse" : ""} 
         ${className} `}
     >
-      {navList.map((navItem) => (
-        <NavItem navItem={navItem} key={navItem.id} />
-      ))}
+      {navList.map((navItem) =>
+        navItem?.customComponent ? (
+          <div key={navItem.id}>{navItem.customComponent}</div>
+        ) : (
+          <NavItem navItem={navItem} key={navItem.id} />
+        )
+      )}
     </div>
   );
 };
