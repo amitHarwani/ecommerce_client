@@ -1,4 +1,6 @@
 {
+    "en": "english",
+    "ar": "عربي",
     "select": "Select",
     "infoHeaderMessage": "Happy New Year !!",
     "companyName": "exclusive",
@@ -37,7 +39,18 @@
     "inStock": "in stock",
     "outOfStock": "out of stock",
     "removeFromCart": "remove from cart",
-    "relatedItems": "related items"
+    "relatedItems": "related items",
+    "enterYourDetailsBelow": "enter your details below",
+    "email": "email",
+    "password": "password",
+    "forgetPassword": "forget password",
+    "dontHaveAnAccountSignUp": "don't have an account ? signup",
+    "emailIsRequired": "email is required",
+    "passwordIsRequired": "password is required",
+    "invalidEmailAddress": "invalid email address",
+    "myAccount": "my account",
+    "manageAccount": "manage account",
+    "logout": "Logout"
 
 
 }

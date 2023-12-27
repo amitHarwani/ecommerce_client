@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   onClickHandler(): void;
   isLoading?: boolean;
+  type?: "button" | "submit" | "reset" | undefined
 }
 const Button = (props: ButtonProps) => {
   const {
@@ -16,6 +17,7 @@ const Button = (props: ButtonProps) => {
     className,
     onClickHandler,
     isLoading = false,
+    type="button"
   } = props;
 
   // Styles based on type
@@ -32,6 +34,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <button
+      type={type}
       className={`transition transform lg:hover:scale-105 active:scale-95 lg:active:scale-95 ${buttonStyles} ${className}`}
       onClick={onClickHandler}
     >

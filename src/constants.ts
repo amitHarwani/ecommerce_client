@@ -5,13 +5,20 @@ export enum DropdownTypes {
 
 export type DropdownItem = {
   id: string | number;
-  text: string;
+  textKey: string;
 };
 
 export interface LanguageDropdownItem extends DropdownItem {
   id: string;
-  text: string;
+  textKey: string;
 }
+
+/* SELECTION MENU */
+export type SelectionMenuItem = {
+  id: string | number;
+  textKey: string;
+  icon?: React.ReactElement
+};
 
 /* LANGUAGE */
 export enum SUPPORTED_LANGUAGES {
@@ -46,6 +53,7 @@ export type NavigationOption = {
   textKey: string;
   icon?: React.ReactElement;
   navigateTo: string;
+  customComponent?: React.ReactElement
 };
 
 /* DRAWER OPTION */
@@ -60,6 +68,12 @@ export enum ButtonTypes {
   noBackgroundAndBorder,
   primaryButton,
   secondaryButton,
+}
+
+/* LINK TYPES */
+export enum LinkTypes {
+  default,
+  red
 }
 
 /* DATE TIME FORMATS */
@@ -102,11 +116,38 @@ export enum ARROW_BUTTONS {
 /* Query param strings */
 export enum QUERY_PARAMS {
   category = "category",
-  productId = "productId"
+  productId = "productId",
+  categoryId = "categoryId"
 }
 
 /* Paths */
 export enum ROUTE_PATHS {
   products = "/products",
-  product = "/product"
+  product = "/product",
+  login = "/login"
 }
+
+export enum PUBLIC_IMAGE_PATHS {
+  loginSideImage = "/images/loginsideimage.png",
+  defaultProductImage = "/images/defaultproduct.png"
+}
+
+export const REGEX_PATTERNS = {
+  emailPattern : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+}
+
+export enum LOGIN_TYPES  {
+  emailPassword = "EMAIL_PASSWORD",
+  github = "GITHUB",
+  google = "GOOGLE"
+}
+
+export enum USER_ROLES {
+  admin = "ADMIN",
+  user = "USER"
+}
+
+export type LoginFormFields = {
+  email: string;
+  password: string;
+};
