@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { BREAKPOINTS, NavigationOption } from "../../../../constants";
-import { DRAWER_ITEMS } from "../../../../data/applicationData";
 import useBreakpointCheck from "../../../../hooks/useBreakpointCheck";
 import Hamburger from "../../../basic/Hamburger";
 import SearchInput from "../../../basic/SearchInput";
@@ -14,10 +13,11 @@ import { ForwardedRef, forwardRef } from "react";
 interface HeaderProps {
   logoClickHandler(): void;
   navItemList: NavigationOption[];
+  itemsInCart: number
 }
 const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<HTMLDivElement>) {
 
-  const {logoClickHandler, navItemList} = props;
+  const {logoClickHandler, navItemList, itemsInCart = 0} = props;
 
   const { t } = useTranslation();
 
@@ -43,7 +43,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
             className="flex-1 mx-8"
           />
           <Button onClickHandler={() => {}}>
-            <CartIcon className="w-8 h-8 text-black" />
+            <CartIcon className="w-8 h-8 text-black" quantity={itemsInCart} />
           </Button>
         </div>
       </header>
@@ -73,7 +73,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
             className={`w-full ${isRTL ? "ml-2" : "mr-2"}`}
           />
           <Button onClickHandler={() => {}}>
-            <CartIcon className="w-8 h-8 text-black" />
+            <CartIcon className="w-8 h-8 text-black" quantity={itemsInCart} />
           </Button>
         </div>
       </div>

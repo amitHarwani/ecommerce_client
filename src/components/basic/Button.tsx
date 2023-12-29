@@ -8,7 +8,7 @@ interface ButtonProps {
   className?: string;
   onClickHandler(): void;
   isLoading?: boolean;
-  type?: "button" | "submit" | "reset" | undefined
+  type?: "button" | "submit" | "reset" | undefined;
 }
 const Button = (props: ButtonProps) => {
   const {

@@ -50,7 +50,21 @@
     "invalidEmailAddress": "عنوان البريد الإلكتروني غير صالح",
     "myAccount": "حسابي",
     "manageAccount": "إدارة الحساب",
-    "logout": "تسجيل خروج"
+    "logout": "تسجيل خروج",
+    "confirmation": "تأكيد",
+    "yes": "نعم",
+    "no": "لا",
+    "areYouSureYouWantToLogout": "هل أنت متأكد أنك تريد تسجيل الخروج ؟",
+    "ok": "نعم",
+    "signup": "اشتراك",
+    "username": "اسم المستخدم",
+    "usernameIsRequired": "اسم المستخدم مطلوب",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "passwordsDontMatch": "كلمات المرور غير متطابقة",
+    "alreadyHaveAnAccountLogin": "لديك حساب الآن؟ تسجيل الدخول هنا",
+    "signupSuccessful": "الاشتراك بنجاح",
+    "proceedToLogin": "انتقل إلى تسجيل الدخول"
+
 
 
 

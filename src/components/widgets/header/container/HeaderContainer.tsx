@@ -4,10 +4,11 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import AuthService from "../../../../services/AuthService";
 import ApiError from "../../../../services/ApiError";
 import { useDispatch } from "react-redux";
-import { logIn, logOut } from "../../../../store/AuthSlice";
+import { logIn, logOut, updateUserCart } from "../../../../store/AuthSlice";
 import { NavigationOption } from "../../../../constants";
 import { getNavigationItemList } from "../../../../data/applicationData";
 import { useAppSelector } from "../../../../store";
+import CartService from "../../../../services/CartService";
 
 const HeaderContainer = React.forwardRef(function HeaderContainer(
   _,
@@ -16,7 +17,8 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
   const navigate = useCustomNavigate();
   const dispatch = useDispatch();
 
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const userCart = useAppSelector(state => state.auth.userCart);
 
   const [navigationList, setNavigationList] = useState<NavigationOption[]>([]);
 
@@ -24,23 +26,45 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     navigate("/");
   };
 
-  const fetchUser = useCallback( async () => {
-    const response = await AuthService.getCurrentUser();
-    if(response instanceof ApiError){
-      //Error
-      dispatch(logOut());
-      setNavigationList(getNavigationItemList(false));
+  const fetchUserCart = useCallback(async () => {
+    const response = await CartService.getUserCart();
+    if (!(response instanceof ApiError)) {
+      dispatch(updateUserCart(response));
     }
     else{
-      dispatch(logIn(response));
-      setNavigationList(getNavigationItemList(true));
+      dispatch(logOut());
     }
-  }, [dispatch])
+  }, [dispatch]);
+
+  const fetchUser = useCallback(async () => {
+    const response = await AuthService.getCurrentUser();
+    if (!(response instanceof ApiError)) {
+      dispatch(logIn(response));
+    }
+    else{
+      dispatch(logOut());
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     fetchUser();
-  }, [fetchUser, isLoggedIn])
+  }, [fetchUser]);
 
-  return <Header ref={ref} logoClickHandler={logoClickHandler} navItemList={navigationList} />;
+  useEffect(() => {
+    fetchUserCart();
+  }, [fetchUserCart]);
+
+  useEffect(() => {
+    setNavigationList(getNavigationItemList(isLoggedIn));
+  }, [isLoggedIn]);
+
+  return (
+    <Header
+      ref={ref}
+      logoClickHandler={logoClickHandler}
+      navItemList={navigationList}
+      itemsInCart={userCart ? userCart.items.length : 0}
+    />
+  );
 });
 export default HeaderContainer;
