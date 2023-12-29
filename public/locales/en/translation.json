@@ -50,7 +50,21 @@
     "invalidEmailAddress": "invalid email address",
     "myAccount": "my account",
     "manageAccount": "manage account",
-    "logout": "Logout"
+    "logout": "Logout",
+    "confirmation": "confirmation",
+    "yes": "yes",
+    "no": "no",
+    "areYouSureYouWantToLogout": "are you sure you want to logout ?",
+    "ok" : "ok",
+    "signup": "signup",
+    "username": "username",
+    "usernameIsRequired": "username is required",
+    "confirmPassword": "confirm password",
+    "passwordsDontMatch": "passwords dont match",
+    "alreadyHaveAnAccountLogin": "already have an account ?, login here",
+    "signupSuccessful": "sign up successful",
+    "proceedToLogin": "proceed to login"
+
 
 
 }

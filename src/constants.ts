@@ -124,7 +124,8 @@ export enum QUERY_PARAMS {
 export enum ROUTE_PATHS {
   products = "/products",
   product = "/product",
-  login = "/login"
+  login = "/login",
+  signup = "/signup"
 }
 
 export enum PUBLIC_IMAGE_PATHS {
@@ -151,3 +152,10 @@ export type LoginFormFields = {
   email: string;
   password: string;
 };
+
+export type SignupFormFields = {
+  email: string,
+  password: string,
+  username: string,
+  confirmPassword: string
+}

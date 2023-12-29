@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LoginFormFields } from "../../../../constants";
+import { LoginFormFields, ROUTE_PATHS } from "../../../../constants";
 import Login from "../presentation/Login";
 import AuthService from "../../../../services/AuthService";
 import ApiError from "../../../../services/ApiError";
@@ -15,7 +15,6 @@ const LoginContainer = () => {
   const dispatch = useDispatch();
 
   const location = useLocation();
-  console.log("Location",location);
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -41,7 +40,9 @@ const LoginContainer = () => {
     }
   };
 
-  const signupClickHandler = () => {};
+  const signupClickHandler = () => {
+    navigate(ROUTE_PATHS.signup)
+  };
 
   const forgotPasswordClickHandler = () => {};
   return (

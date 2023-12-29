@@ -1,23 +1,28 @@
 import { useMemo } from "react";
-import { To, useLocation, useNavigate } from "react-router-dom"
-
+import { To, useLocation, useNavigate } from "react-router-dom";
 
 /* Stores previous pathname in state */
 const useCustomNavigate = () => {
+  const { pathname, search } = useLocation();
 
-    const {pathname, search} = useLocation();
+  const currentPath = useMemo(() => {
+    return `${pathname}${search}`;
+  }, [pathname, search]);
 
-    const currentPath = useMemo(() => {
-        return `${pathname}${search}`
-    }, [pathname, search])
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    const customNavigate = (navigateParams: To) => {
-        navigate(navigateParams, {state: {previousRoute: currentPath}})
+  const customNavigate = (
+    navigateParams: To,
+    resetPreviousRouteState?: boolean
+  ) => {
+    if (resetPreviousRouteState) {
+      navigate(navigateParams, { state: { previousRoute: null } });
+    } else {
+      navigate(navigateParams, { state: { previousRoute: currentPath } });
     }
+  };
 
-    return customNavigate;
-}
+  return customNavigate;
+};
 
 export default useCustomNavigate;
