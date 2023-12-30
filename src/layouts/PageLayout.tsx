@@ -9,6 +9,7 @@ import { Outlet } from "react-router-dom";
 import ArrowButton from "../components/basic/ArrowButton";
 import { ARROW_BUTTONS } from "../constants";
 import { useAppSelector } from "../store";
+import ToastMessage from "../components/basic/ToastMessage";
 
 const PageLayout = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const PageLayout = () => {
 
   return (
     <div className="flex flex-col min-h-screen justify-between">
+      <ToastMessage />
       <div>
         <HeaderContainer ref={headerContainerRef} />
         <main style={{ marginTop: headerHeight }}>

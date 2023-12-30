@@ -63,7 +63,9 @@
     "passwordsDontMatch": "passwords dont match",
     "alreadyHaveAnAccountLogin": "already have an account ?, login here",
     "signupSuccessful": "sign up successful",
-    "proceedToLogin": "proceed to login"
+    "proceedToLogin": "proceed to login",
+    "updateQuantity": "update quantity",
+    "cartUpdatedSuccessfully": "cart updated successfully"
 
 
 

@@ -1,18 +1,23 @@
 import { configureStore } from "@reduxjs/toolkit";
 import LanguageSlice from "./LanguageSlice";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import BreakpointSlice from "./BreakpointSlice";
 import AuthSlice from "./AuthSlice";
+import ToastMessageSlice from "./ToastMessageSlice";
 
 const store = configureStore({
     reducer: {
         language: LanguageSlice.reducer,
         breakpoint: BreakpointSlice.reducer,
-        auth: AuthSlice.reducer
+        auth: AuthSlice.reducer,
+        toastMessage: ToastMessageSlice.reducer
     }
 })
 /* useAppSelector for typescript */
 export type ReduxRootState = ReturnType<typeof store.getState>
 export const useAppSelector: TypedUseSelectorHook<ReduxRootState> = useSelector;
+
+export type ReduxDispatch = typeof store.dispatch;
+export const useAppDispatch = useDispatch<ReduxDispatch>
 
 export default store;

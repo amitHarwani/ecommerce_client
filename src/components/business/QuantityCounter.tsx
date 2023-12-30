@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddIcon from "../icons/AddIcon";
 import SubtractIcon from "../icons/SubtractIcon";
 
 interface QuantityCounterProps {
   defaultQuantity: number;
   onQuantityChanged(quantity: number): void;
+  maxLimit?: number;
   className?: string;
 }
 const QuantityCounter = (props: QuantityCounterProps) => {
-  const { defaultQuantity, onQuantityChanged, className = '' } = props;
+  const { defaultQuantity, onQuantityChanged, className = '', maxLimit = Infinity } = props;
 
   const [quantity, setQuantity] = useState(defaultQuantity);
+
+  useEffect(() => {
+    setQuantity(defaultQuantity);
+  }, [defaultQuantity])
 
   const addQuantity = () => {
     setQuantity((prev) => {
@@ -44,6 +49,7 @@ const QuantityCounter = (props: QuantityCounterProps) => {
       <button
         className="w-1/4 bg-darkRed border-2 border-darkRed flex justify-center items-center rounded-r"
         onClick={addQuantity}
+        disabled={quantity >=  maxLimit}
       >
         <AddIcon className="w-4 h-4 text-white" />
       </button>

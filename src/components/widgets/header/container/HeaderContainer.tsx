@@ -3,19 +3,17 @@ import Header from "../presentation/Header";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import AuthService from "../../../../services/AuthService";
 import ApiError from "../../../../services/ApiError";
-import { useDispatch } from "react-redux";
-import { logIn, logOut, updateUserCart } from "../../../../store/AuthSlice";
+import { getUserCartThunk, logIn, logOut } from "../../../../store/AuthSlice";
 import { NavigationOption } from "../../../../constants";
 import { getNavigationItemList } from "../../../../data/applicationData";
-import { useAppSelector } from "../../../../store";
-import CartService from "../../../../services/CartService";
+import { useAppDispatch, useAppSelector } from "../../../../store";
 
 const HeaderContainer = React.forwardRef(function HeaderContainer(
   _,
   ref: ForwardedRef<HTMLDivElement>
 ) {
   const navigate = useCustomNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const userCart = useAppSelector(state => state.auth.userCart);
@@ -26,15 +24,6 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     navigate("/");
   };
 
-  const fetchUserCart = useCallback(async () => {
-    const response = await CartService.getUserCart();
-    if (!(response instanceof ApiError)) {
-      dispatch(updateUserCart(response));
-    }
-    else{
-      dispatch(logOut());
-    }
-  }, [dispatch]);
 
   const fetchUser = useCallback(async () => {
     const response = await AuthService.getCurrentUser();
@@ -46,13 +35,15 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     }
   }, [dispatch]);
 
+  /* Fetch Current User: To determine login status */
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
+  /* Fetch Users' Cart, when isLoggedIn flag changes in redux */
   useEffect(() => {
-    fetchUserCart();
-  }, [fetchUserCart]);
+    dispatch(getUserCartThunk());
+  }, [dispatch, isLoggedIn]);
 
   useEffect(() => {
     setNavigationList(getNavigationItemList(isLoggedIn));

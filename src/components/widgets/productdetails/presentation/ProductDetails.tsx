@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DEFAULT_CURRENCY } from "../../../../data/applicationData";
 import { Product } from "../../../../services/product/ProductTypes";
 import ProductImagesView from "../../../business/ProductImagesView";
@@ -12,17 +12,30 @@ import ErrorMessage from "../../../basic/ErrorMessage";
 interface ProductDetailsProps {
   product?: Product;
   isError?: boolean;
+  addToCartButtonShown?: boolean;
+  updateQuantityButtonShown?: boolean;
+  removeFromCartButtonShown?: boolean;
   addToCart(product: Product, quantity: number): void;
   removeFromCart(product: Product): void;
+  quantityInCart: number;
 }
 const ProductDetails = (props: ProductDetailsProps) => {
-  const { product, isError = false, addToCart, removeFromCart } = props;
+  const {
+    product,
+    isError = false,
+    addToCartButtonShown = true,
+    updateQuantityButtonShown = false,
+    removeFromCartButtonShown = false,
+    addToCart,
+    removeFromCart,
+    quantityInCart,
+  } = props;
 
   const { t } = useTranslation();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(quantityInCart ? quantityInCart : 1);
 
   const isInStock = useMemo(() => {
     if (product) {
@@ -32,6 +45,19 @@ const ProductDetails = (props: ProductDetailsProps) => {
       return false;
     }
   }, [product]);
+
+  const onQuantityChanged = (newQuantity: number): void => {
+    setQuantity(newQuantity);
+  };
+
+  useEffect(() => {
+    if (quantityInCart) {
+      setQuantity(quantityInCart);
+    }
+    else{
+      setQuantity(1);
+    }
+  }, [quantityInCart]);
 
   return (
     <>
@@ -79,29 +105,36 @@ const ProductDetails = (props: ProductDetailsProps) => {
             >
               <QuantityCounter
                 defaultQuantity={quantity}
-                onQuantityChanged={(newQuantity) => {
-                  setQuantity(newQuantity);
-                }}
+                onQuantityChanged={onQuantityChanged}
                 className="flex-1"
+                maxLimit={product.stock}
               />
-              <Button
-                buttonType={ButtonTypes.primaryButton}
-                className="flex-1 px-4 py-3 lg:p-0"
-                onClickHandler={() => {
-                  addToCart(product, quantity);
-                }}
-              >
-                <span className="uppercase">{t("addToCart")}</span>
-              </Button>
-              <Button
-                buttonType={ButtonTypes.secondaryButton}
-                className="flex-1 px-4 py-3 lg:p-0"
-                onClickHandler={() => {
-                  removeFromCart(product);
-                }}
-              >
-                <span className="uppercase">{t("removeFromCart")}</span>
-              </Button>
+              {addToCartButtonShown && (
+                <Button
+                  buttonType={ButtonTypes.primaryButton}
+                  className="flex-1 px-4 py-3 lg:p-0"
+                  onClickHandler={() => {
+                    addToCart(product, quantity);
+                  }}
+                >
+                  <span className="uppercase">
+                    {updateQuantityButtonShown
+                      ? t("updateQuantity")
+                      : t("addToCart")}
+                  </span>
+                </Button>
+              )}
+              {removeFromCartButtonShown && (
+                <Button
+                  buttonType={ButtonTypes.secondaryButton}
+                  className="flex-1 px-4 py-3 lg:p-0"
+                  onClickHandler={() => {
+                    removeFromCart(product);
+                  }}
+                >
+                  <span className="uppercase">{t("removeFromCart")}</span>
+                </Button>
+              )}
             </div>
           </div>
         </div>

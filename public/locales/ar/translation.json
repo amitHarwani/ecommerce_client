@@ -63,7 +63,11 @@
     "passwordsDontMatch": "كلمات المرور غير متطابقة",
     "alreadyHaveAnAccountLogin": "لديك حساب الآن؟ تسجيل الدخول هنا",
     "signupSuccessful": "الاشتراك بنجاح",
-    "proceedToLogin": "انتقل إلى تسجيل الدخول"
+    "proceedToLogin": "انتقل إلى تسجيل الدخول",
+    "updateQuantity": "تحديث الكمية",
+    "cartUpdatedSuccessfully": "تم تحديث سلة التسوق بنجاح"
+
+
 
 
 
