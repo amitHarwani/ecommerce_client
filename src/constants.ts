@@ -159,3 +159,8 @@ export type SignupFormFields = {
   username: string,
   confirmPassword: string
 }
+
+export enum TOAST_MESSAGE_TYPES {
+  success = "SUCCESS",
+  error = "ERROR"
+}

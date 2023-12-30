@@ -10,7 +10,7 @@ interface RelatedItemsListContainerProps {
   categoryId: string;
 }
 const RelatedItemsListContainer = (props: RelatedItemsListContainerProps) => {
-  const { categoryId } = props;
+  const { categoryId, productId } = props;
 
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
@@ -30,9 +30,11 @@ const RelatedItemsListContainer = (props: RelatedItemsListContainerProps) => {
     } else {
       setIsRelatedItemsError(false);
 
-      setRelatedProducts(response);
+      /* Excluding the current product */
+      const excludingCurrentProduct = response.filter((product) => product._id !== productId);
+      setRelatedProducts(excludingCurrentProduct);
     }
-  }, [categoryId]);
+  }, [categoryId, productId]);
 
   useEffect(() => {
     fetchRelatedProducts();

@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import ProductDetailPage from "../presentation/ProductDetailPage";
 import { QUERY_PARAMS } from "../../../constants";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 const ProductDetailPageContainer = () => {
   const [searchParams] = useSearchParams();
@@ -13,6 +13,12 @@ const ProductDetailPageContainer = () => {
   const categoryId = useMemo(() => {
     return searchParams.get(QUERY_PARAMS.categoryId);
   }, [searchParams]);
+
+  /* Scroll to top when search params change */
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'})
+  }, [searchParams])
+
   return (
     <>
       <ProductDetailPage
