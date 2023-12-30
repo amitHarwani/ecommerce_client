@@ -20,7 +20,6 @@ const QuantityCounter = (props: QuantityCounterProps) => {
   const addQuantity = () => {
     setQuantity((prev) => {
       prev++;
-      onQuantityChanged(prev);
       return prev;
     });
   };
@@ -28,12 +27,15 @@ const QuantityCounter = (props: QuantityCounterProps) => {
     setQuantity((prev) => {
       if (prev !== 1) {
         prev--;
-        onQuantityChanged(prev);
         return prev;
       }
       return prev;
     });
   };
+
+  useEffect(() => {
+    onQuantityChanged(quantity);
+  }, [quantity, onQuantityChanged])
 
   return (
     <div className={`flex ${className}`}>

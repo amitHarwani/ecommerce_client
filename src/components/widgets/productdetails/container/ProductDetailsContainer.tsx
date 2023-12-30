@@ -10,7 +10,7 @@ import CartService from "../../../../services/CartService";
 import { useDispatch } from "react-redux";
 import { updateUserCart } from "../../../../store/AuthSlice";
 import { useTranslation } from "react-i18next";
-import { postMessageAction } from "../../../../store/ToastMessageSlice";
+import { postMessageAction, removeMessage } from "../../../../store/ToastMessageSlice";
 
 interface ProductDetailsContainerProps {
   productId: string;
@@ -27,6 +27,8 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   const userCart = useAppSelector((state) => state.auth.userCart);
 
   const [productDetails, setProductDetails] = useState<Product>();
+
+  /* If the product is in cart and the quantity in cart */
   const [productInCart, setProductInCart] = useState({
     isProductExistsInCart: false,
     currentQuantity: 0,
@@ -34,6 +36,9 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
 
   /* Error while fetching product details */
   const [isProductDetailsError, setIsProductDetailsError] = useState(false);
+
+  const [isAddOrUpdateCartInProgress, setIsAddOrUpdateCartInProgress] = useState(false);
+  const [isRemoverFromCartInProgress, setIsRemoveFromCartInProgress] = useState(false);
 
   const fetchProductDetails = useCallback(async () => {
     if (productId) {
@@ -54,11 +59,17 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   const addToCart = async (product: Product, quantity: number) => {
     if (!isLoggedIn) {
       navigate(ROUTE_PATHS.login);
+      return;
     }
+    dispatch(removeMessage());
+    setIsAddOrUpdateCartInProgress(true);
+
     const response = await CartService.addOrUpdateItemInCart(
       product._id,
       quantity
     );
+
+    setIsAddOrUpdateCartInProgress(false);
 
     if (!(response instanceof ApiError)) {
       dispatch(updateUserCart(response));
@@ -82,9 +93,16 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   const removeFromCart = async (product: Product) => {
     if (!isLoggedIn) {
       navigate(ROUTE_PATHS.login);
+      return;
     }
+    
+    dispatch(removeMessage());
+    setIsRemoveFromCartInProgress(true);
 
     const response = await CartService.removeItemFromCart(product._id);
+
+    setIsRemoveFromCartInProgress(false);
+
     if (!(response instanceof ApiError)) {
       dispatch(updateUserCart(response));
       dispatch(
@@ -135,6 +153,8 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
       removeFromCartButtonShown={productInCart.isProductExistsInCart}
       updateQuantityButtonShown={productInCart.isProductExistsInCart}
       quantityInCart={productInCart.currentQuantity}
+      isAddOrUpdateCartInProgress={isAddOrUpdateCartInProgress}
+      isRemoverFromCartInProgress={isRemoverFromCartInProgress}
     />
   );
 };
