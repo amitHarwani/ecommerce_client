@@ -65,7 +65,9 @@
     "signupSuccessful": "الاشتراك بنجاح",
     "proceedToLogin": "انتقل إلى تسجيل الدخول",
     "updateQuantity": "تحديث الكمية",
-    "cartUpdatedSuccessfully": "تم تحديث سلة التسوق بنجاح"
+    "cartUpdatedSuccessfully": "تم تحديث سلة التسوق بنجاح",
+    "maxQuantityReached": "تم الوصول إلى الحد الأقصى، لا يمكن إضافة المزيد من الوحدات"
+
 
 
 

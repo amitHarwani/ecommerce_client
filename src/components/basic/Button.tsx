@@ -9,6 +9,7 @@ interface ButtonProps {
   onClickHandler(): void;
   isLoading?: boolean;
   type?: "button" | "submit" | "reset" | undefined;
+  isDisabled?: boolean;
 }
 const Button = (props: ButtonProps) => {
   const {
@@ -17,7 +18,8 @@ const Button = (props: ButtonProps) => {
     className,
     onClickHandler,
     isLoading = false,
-    type="button"
+    type = "button",
+    isDisabled = false,
   } = props;
 
   // Styles based on type
@@ -35,10 +37,17 @@ const Button = (props: ButtonProps) => {
   return (
     <button
       type={type}
-      className={`transition transform lg:hover:scale-105 active:scale-95 lg:active:scale-95 ${buttonStyles} ${className}`}
+      className={`transition transform lg:hover:scale-105 active:scale-95 lg:active:scale-95 
+      disabled:lg:hover:scale-100 disabled:active:scale-100 disabled:lg:active:scale-100
+       ${buttonStyles} ${className}`}
       onClick={onClickHandler}
+      disabled={isDisabled}
     >
-      {!isLoading ? children : <LoadingSpinner className={'w-8 h-8 text-gray-200 fill-black'} />}
+      {!isLoading ? (
+        children
+      ) : (
+        <LoadingSpinner className={"w-8 h-8 text-gray-200 fill-black"} />
+      )}
     </button>
   );
 };

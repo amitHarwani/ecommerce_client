@@ -65,7 +65,8 @@
     "signupSuccessful": "sign up successful",
     "proceedToLogin": "proceed to login",
     "updateQuantity": "update quantity",
-    "cartUpdatedSuccessfully": "cart updated successfully"
+    "cartUpdatedSuccessfully": "cart updated successfully",
+    "maxQuantityReached": "max limit reached, cannot add any more units"
 
 
 

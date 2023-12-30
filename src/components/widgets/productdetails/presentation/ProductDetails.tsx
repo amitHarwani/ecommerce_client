@@ -12,20 +12,22 @@ import ErrorMessage from "../../../basic/ErrorMessage";
 interface ProductDetailsProps {
   product?: Product;
   isError?: boolean;
-  addToCartButtonShown?: boolean;
   updateQuantityButtonShown?: boolean;
   removeFromCartButtonShown?: boolean;
   addToCart(product: Product, quantity: number): void;
   removeFromCart(product: Product): void;
   quantityInCart: number;
+  isAddOrUpdateCartInProgress?: boolean;
+  isRemoverFromCartInProgress?: boolean;
 }
 const ProductDetails = (props: ProductDetailsProps) => {
   const {
     product,
     isError = false,
-    addToCartButtonShown = true,
     updateQuantityButtonShown = false,
     removeFromCartButtonShown = false,
+    isAddOrUpdateCartInProgress = false,
+    isRemoverFromCartInProgress = false,
     addToCart,
     removeFromCart,
     quantityInCart,
@@ -46,6 +48,13 @@ const ProductDetails = (props: ProductDetailsProps) => {
     }
   }, [product]);
 
+  const isMaxQuantityReached = useMemo(() => {
+    if (product && quantity >= product.stock) {
+      return true;
+    }
+    return false;
+  }, [quantity, product]);
+
   const onQuantityChanged = (newQuantity: number): void => {
     setQuantity(newQuantity);
   };
@@ -53,8 +62,7 @@ const ProductDetails = (props: ProductDetailsProps) => {
   useEffect(() => {
     if (quantityInCart) {
       setQuantity(quantityInCart);
-    }
-    else{
+    } else {
       setQuantity(1);
     }
   }, [quantityInCart]);
@@ -98,36 +106,39 @@ const ProductDetails = (props: ProductDetailsProps) => {
 
               <span className="text-sm mt-4">{product.description}</span>
             </div>
+            {isMaxQuantityReached && (
+                <ErrorMessage message={t("maxQuantityReached")} className="mt-4 text-sm" errorIconClassName="w-5 h-5"/>
+              )}
             <div
               className={`flex flex-col gap-y-6 lg:gap-x-2 mt-16 ${
                 isRTL ? "lg:flex-row-reverse" : "lg:flex-row"
               }`}
             >
               <QuantityCounter
-                defaultQuantity={quantity}
+                defaultQuantity={quantityInCart ? quantityInCart : 1}
                 onQuantityChanged={onQuantityChanged}
                 className="flex-1"
                 maxLimit={product.stock}
               />
-              {addToCartButtonShown && (
-                <Button
-                  buttonType={ButtonTypes.primaryButton}
-                  className="flex-1 px-4 py-3 lg:p-0"
-                  onClickHandler={() => {
-                    addToCart(product, quantity);
-                  }}
-                >
-                  <span className="uppercase">
-                    {updateQuantityButtonShown
-                      ? t("updateQuantity")
-                      : t("addToCart")}
-                  </span>
-                </Button>
-              )}
+              <Button
+                buttonType={ButtonTypes.primaryButton}
+                className="flex-1 px-4 py-3 lg:p-0 flex justify-center items-center"
+                isLoading={isAddOrUpdateCartInProgress}
+                onClickHandler={() => {
+                  addToCart(product, quantity);
+                }}
+              >
+                <span className="uppercase">
+                  {updateQuantityButtonShown
+                    ? t("updateQuantity")
+                    : t("addToCart")}
+                </span>
+              </Button>
               {removeFromCartButtonShown && (
                 <Button
                   buttonType={ButtonTypes.secondaryButton}
-                  className="flex-1 px-4 py-3 lg:p-0"
+                  className="flex-1 px-4 py-3 lg:p-0 flex justify-center items-center"
+                  isLoading={isRemoverFromCartInProgress}
                   onClickHandler={() => {
                     removeFromCart(product);
                   }}
