@@ -4,13 +4,15 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import BreakpointSlice from "./BreakpointSlice";
 import AuthSlice from "./AuthSlice";
 import ToastMessageSlice from "./ToastMessageSlice";
+import CartSlice from "./CartSlice";
 
 const store = configureStore({
     reducer: {
         language: LanguageSlice.reducer,
         breakpoint: BreakpointSlice.reducer,
         auth: AuthSlice.reducer,
-        toastMessage: ToastMessageSlice.reducer
+        toastMessage: ToastMessageSlice.reducer,
+        cart: CartSlice.reducer
     }
 })
 /* useAppSelector for typescript */

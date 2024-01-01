@@ -3,10 +3,11 @@ import Header from "../presentation/Header";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import AuthService from "../../../../services/AuthService";
 import ApiError from "../../../../services/ApiError";
-import { getUserCartThunk, logIn, logOut } from "../../../../store/AuthSlice";
+import { logIn, logOut } from "../../../../store/AuthSlice";
 import { NavigationOption } from "../../../../constants";
 import { getNavigationItemList } from "../../../../data/applicationData";
 import { useAppDispatch, useAppSelector } from "../../../../store";
+import { getUserCartThunk } from "../../../../store/CartSlice";
 
 const HeaderContainer = React.forwardRef(function HeaderContainer(
   _,
@@ -16,7 +17,7 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
   const dispatch = useAppDispatch();
 
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-  const userCart = useAppSelector(state => state.auth.userCart);
+  const userCart = useAppSelector((state) => state.cart.userCart);
 
   const [navigationList, setNavigationList] = useState<NavigationOption[]>([]);
 
@@ -24,13 +25,11 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     navigate("/");
   };
 
-
   const fetchUser = useCallback(async () => {
     const response = await AuthService.getCurrentUser();
     if (!(response instanceof ApiError)) {
       dispatch(logIn(response));
-    }
-    else{
+    } else {
       dispatch(logOut());
     }
   }, [dispatch]);
@@ -42,7 +41,9 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
 
   /* Fetch Users' Cart, when isLoggedIn flag changes in redux */
   useEffect(() => {
-    dispatch(getUserCartThunk());
+    if (isLoggedIn) {
+      dispatch(getUserCartThunk());
+    }
   }, [dispatch, isLoggedIn]);
 
   useEffect(() => {

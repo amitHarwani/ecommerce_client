@@ -14,7 +14,7 @@ const CategoryListContainer = () => {
   const [isError, setIsError] = useState(false);
 
   const fetchAllCategories = () => {
-    CategoryService.getAllCategoriesAsync((data, isDone, error) => {
+    CategoryService.getAllCategoriesAsync((data, _, error) => {
       if (!error) {
         setCategories((prev) => [...prev, ...data]);
       } else {

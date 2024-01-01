@@ -5,12 +5,10 @@ import ProductService from "../../../../services/ProductService";
 import ApiError from "../../../../services/ApiError";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
-import { ROUTE_PATHS, TOAST_MESSAGE_TYPES } from "../../../../constants";
-import CartService from "../../../../services/CartService";
-import { useDispatch } from "react-redux";
-import { updateUserCart } from "../../../../store/AuthSlice";
+import { ROUTE_PATHS } from "../../../../constants";
 import { useTranslation } from "react-i18next";
-import { postMessageAction, removeMessage } from "../../../../store/ToastMessageSlice";
+import { addOrUpdateToCartThunk, removeFromCartThunk } from "../../../../store/CartSlice";
+import { CartItem } from "../../../../services/cart/CartTypes";
 
 interface ProductDetailsContainerProps {
   productId: string;
@@ -21,10 +19,9 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   const dispatch = useAppDispatch();
   const navigate = useCustomNavigate();
 
-  const { t } = useTranslation();
 
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-  const userCart = useAppSelector((state) => state.auth.userCart);
+  const userCart = useAppSelector((state) => state.cart.userCart);
 
   const [productDetails, setProductDetails] = useState<Product>();
 
@@ -37,8 +34,10 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   /* Error while fetching product details */
   const [isProductDetailsError, setIsProductDetailsError] = useState(false);
 
-  const [isAddOrUpdateCartInProgress, setIsAddOrUpdateCartInProgress] = useState(false);
-  const [isRemoverFromCartInProgress, setIsRemoveFromCartInProgress] = useState(false);
+  const isAddOrUpdateCartInProgress = useAppSelector(state => state.cart.isAddOrUpdateToCartInProgress);
+  const isRemoverFromCartInProgress = useAppSelector(state => state.cart.isRemoveFromCartInProgress);
+
+
 
   const fetchProductDetails = useCallback(async () => {
     if (productId) {
@@ -61,33 +60,8 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
       navigate(ROUTE_PATHS.login);
       return;
     }
-    dispatch(removeMessage());
-    setIsAddOrUpdateCartInProgress(true);
+    dispatch(addOrUpdateToCartThunk({productId: product._id, quantity}));
 
-    const response = await CartService.addOrUpdateItemInCart(
-      product._id,
-      quantity
-    );
-
-    setIsAddOrUpdateCartInProgress(false);
-
-    if (!(response instanceof ApiError)) {
-      dispatch(updateUserCart(response));
-      dispatch(
-        postMessageAction({
-          type: TOAST_MESSAGE_TYPES.success,
-          message: t("cartUpdatedSuccessfully"),
-        })
-      );
-    } else {
-      // Error
-      dispatch(
-        postMessageAction({
-          type: TOAST_MESSAGE_TYPES.error,
-          message: response.errorResponse?.message || response.errorMessage,
-        })
-      );
-    }
   };
 
   const removeFromCart = async (product: Product) => {
@@ -95,36 +69,13 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
       navigate(ROUTE_PATHS.login);
       return;
     }
-    
-    dispatch(removeMessage());
-    setIsRemoveFromCartInProgress(true);
+    dispatch(removeFromCartThunk({productId: product._id})); 
 
-    const response = await CartService.removeItemFromCart(product._id);
-
-    setIsRemoveFromCartInProgress(false);
-
-    if (!(response instanceof ApiError)) {
-      dispatch(updateUserCart(response));
-      dispatch(
-        postMessageAction({
-          type: TOAST_MESSAGE_TYPES.success,
-          message: t("cartUpdatedSuccessfully"),
-        })
-      );
-    } else {
-      // Error
-      dispatch(
-        postMessageAction({
-          type: TOAST_MESSAGE_TYPES.error,
-          message: response.errorResponse?.message || response.errorMessage,
-        })
-      );
-    }
   };
 
   const checkProductInCart = useCallback(() => {
     const product = userCart?.items.find(
-      (item) => item.product._id === productId
+      (item: CartItem) => item.product._id === productId
     );
     if (product) {
       setProductInCart({

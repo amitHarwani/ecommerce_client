@@ -1,5 +1,4 @@
 import { ButtonTypes } from "../../constants";
-import LoadingSpinner from "../icons/LoadingSpinner";
 import Button from "./Button";
 
 interface ModalProps {

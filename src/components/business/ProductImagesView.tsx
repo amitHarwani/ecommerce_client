@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageClass } from "../../services/product/ProductTypes";
 import Image from "../basic/Image";
 import { useAppSelector } from "../../store";
@@ -31,6 +31,13 @@ const ProductImagesView = (props: ProductImagesViewProps) => {
     });
   };
 
+  useEffect(() => {
+    setTopImage(mainImage)
+  }, [mainImage])
+
+  useEffect(() => {
+    setOtherImages(subImages);
+  }, [subImages])
   return (
     <div className={`flex flex-col ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'} ${className}`}>
       <div className="bg-neutral-100 rounded --add-later-p-4 flex justify-center items-center lg:order-1 lg:flex-1">

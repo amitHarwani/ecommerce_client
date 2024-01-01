@@ -5,29 +5,29 @@
 /* Fonts */
 @font-face {
     font-family: "poppins-black";
-    src: url("./fonts/poppins/Poppins-Black.ttf");
+    src: url("/fonts/poppins/Poppins-Black.ttf");
 }
 
 @font-face {
     font-family: "poppins-bold";
-    src: url("./fonts/poppins/Poppins-Bold.ttf");
+    src: url("/fonts/poppins/Poppins-Bold.ttf");
 }
 @font-face {
     font-family: "poppins-light";
-    src: url("./fonts/poppins/Poppins-Light.ttf");
+    src: url("/fonts/poppins/Poppins-Light.ttf");
 }
 @font-face {
     font-family: "poppins-medium";
-    src: url("./fonts/poppins/Poppins-Medium.ttf");
+    src: url("/fonts/poppins/Poppins-Medium.ttf");
 }
 
 @font-face {
     font-family: "poppins-regular";
-    src: url("./fonts/poppins/Poppins-Regular.ttf");
+    src: url("/fonts/poppins/Poppins-Regular.ttf");
 }
 @font-face {
     font-family: "poppins-italic";
-    src: url("./fonts/poppins/Poppins-Italic.ttf");
+    src: url("/fonts/poppins/Poppins-Italic.ttf");
 }
     
 * {
