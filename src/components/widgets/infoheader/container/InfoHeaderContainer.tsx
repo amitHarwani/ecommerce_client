@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import InfoHeader from "../presentation/InfoHeader";
 import {
-  LANGUAGE_DISPLAY_NAMES,
   LanguageDropdownItem,
   SUPPORTED_LANGUAGES,
 } from "../../../../constants";

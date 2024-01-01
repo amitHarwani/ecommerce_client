@@ -3,7 +3,7 @@ import CardContainer from "../../../business/CardContainer";
 import { CARD_CONTAINER_OPTION } from "../../../../constants";
 import { Category } from "../../../../services/category/CategoryTypes";
 import CategoryCard from "../../../business/CategoryCard";
-import { RefObject, createRef, useCallback, useEffect, useState } from "react";
+import { RefObject, createRef } from "react";
 import { useAppSelector } from "../../../../store";
 import ErrorMessage from "../../../basic/ErrorMessage";
 

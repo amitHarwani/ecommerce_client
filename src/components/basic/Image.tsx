@@ -11,7 +11,7 @@ const Image = (props: ImageProps) => {
     const {src, alt, backupImageSrc, className = ''} = props
 
     const imgLoadErrorHandler = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-        const target = event.target;
+        const target = event.currentTarget;
         target.onerror = null;
         target.src = backupImageSrc;
     }   
