@@ -4,6 +4,7 @@ import { DEFAULT_CURRENCY } from "../../data/applicationData";
 import { createSearchParams } from "react-router-dom";
 import { PUBLIC_IMAGE_PATHS, QUERY_PARAMS, ROUTE_PATHS } from "../../constants";
 import useCustomNavigate from "../../hooks/useCustomNavigate";
+import { formatAmount } from "../../utils/commonHelper";
 
 interface ProductCardProps {
   product: Product;
@@ -46,13 +47,13 @@ const ProductCard = (props: ProductCardProps) => {
           </div>
           <div className={`flex`}>
             <span className="text-darkRed font-poppinsMedium">
-              {product.currency || DEFAULT_CURRENCY} {product.price}
+              {formatAmount(product.price, product.currency || DEFAULT_CURRENCY)}
             </span>
             {product.previousPrice && (
               <span
                 className={`font-poppinsMedium text-neutral-500 line-through ml-2`}
               >
-                {product.previousPrice}
+              {formatAmount(product.previousPrice, product.currency || DEFAULT_CURRENCY)}
               </span>
             )}
           </div>

@@ -12,7 +12,6 @@ const ForLoggedInUsers = () => {
 
   const navigate = useCustomNavigate();
 
-  console.log("For Logged In Users", isLoggedIn, isLoginCheckDone);
 
   useEffect(() => {
     if (isLoginCheckDone && !isLoggedIn) {
