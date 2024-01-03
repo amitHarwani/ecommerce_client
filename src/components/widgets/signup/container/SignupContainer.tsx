@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ROUTE_PATHS, SignupFormFields, USER_ROLES } from "../../../../constants";
+import { ROUTE_PATHS, SignupFormFields } from "../../../../constants";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import Signup from "../presentation/Signup";
 import AuthService from "../../../../services/AuthService";

@@ -1,8 +1,7 @@
-import { USER_ROLES } from "../constants";
 import ApiError from "./ApiError";
 import ApiRequest from "./ApiRequest";
 import ApiResponse from "./ApiResponse";
-import { LoginResp, User } from "./auth/AuthTypes";
+import { LoginResp, USER_ROLES, User } from "./auth/AuthTypes";
 
 class AuthService {
   USER_BASE_URL = "/api/v1/users";

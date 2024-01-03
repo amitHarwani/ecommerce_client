@@ -1,3 +1,5 @@
+import React from "react";
+
 /* DROPDOWN */
 export enum DropdownTypes {
   noBorderDarkBg,
@@ -25,10 +27,7 @@ export enum SUPPORTED_LANGUAGES {
   english = "en",
   arabic = "ar",
 }
-export enum LANGUAGE_DISPLAY_NAMES {
-  english = "English",
-  arabic = "عربي",
-}
+
 export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES.english;
 
 /* LOCAL STORAGE */
@@ -125,34 +124,30 @@ export enum ROUTE_PATHS {
   products = "/products",
   product = "/product",
   login = "/login",
-  signup = "/signup"
+  signup = "/signup",
+  cart = "/cart"
 }
 
+
+/* IMAGES IN PUBLIC FOLDER */
 export enum PUBLIC_IMAGE_PATHS {
   loginSideImage = "/images/loginsideimage.png",
   defaultProductImage = "/images/defaultproduct.png"
 }
 
+/* REGEX PATTERNS */
 export const REGEX_PATTERNS = {
   emailPattern : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
 }
 
-export enum LOGIN_TYPES  {
-  emailPassword = "EMAIL_PASSWORD",
-  github = "GITHUB",
-  google = "GOOGLE"
-}
 
-export enum USER_ROLES {
-  admin = "ADMIN",
-  user = "USER"
-}
-
+/* LOGIN FORM FIELDS */
 export type LoginFormFields = {
   email: string;
   password: string;
 };
 
+/* SIGN UP FORM FIELDS */
 export type SignupFormFields = {
   email: string,
   password: string,
@@ -160,6 +155,7 @@ export type SignupFormFields = {
   confirmPassword: string
 }
 
+/* TYPES OF TOAST MESSAGES */
 export enum TOAST_MESSAGE_TYPES {
   success = "SUCCESS",
   error = "ERROR"

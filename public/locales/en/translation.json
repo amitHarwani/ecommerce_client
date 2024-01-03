@@ -66,7 +66,12 @@
     "proceedToLogin": "proceed to login",
     "updateQuantity": "update quantity",
     "cartUpdatedSuccessfully": "cart updated successfully",
-    "maxQuantityReached": "max limit reached, cannot add any more units"
+    "maxQuantityReached": "max limit reached, cannot add any more units",
+    "subtotal": "subtotal",
+    "discount": "discount",
+    "total": "total",
+    "proceedToCheckout": "proceed to checkout",
+    "summary": "summary"
 
 
 

@@ -3,11 +3,11 @@ import Header from "../presentation/Header";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import AuthService from "../../../../services/AuthService";
 import ApiError from "../../../../services/ApiError";
-import { logIn, logOut } from "../../../../store/AuthSlice";
-import { NavigationOption } from "../../../../constants";
+import { logIn, logOut, updateLoginCheckDone } from "../../../../store/AuthSlice";
+import { NavigationOption, ROUTE_PATHS } from "../../../../constants";
 import { getNavigationItemList } from "../../../../data/applicationData";
 import { useAppDispatch, useAppSelector } from "../../../../store";
-import { getUserCartThunk } from "../../../../store/CartSlice";
+import { getUserCartThunk, resetCartSlice } from "../../../../store/CartSlice";
 
 const HeaderContainer = React.forwardRef(function HeaderContainer(
   _,
@@ -25,6 +25,10 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     navigate("/");
   };
 
+  const cartClickHandler = () => {
+    navigate(ROUTE_PATHS.cart);
+  }
+
   const fetchUser = useCallback(async () => {
     const response = await AuthService.getCurrentUser();
     if (!(response instanceof ApiError)) {
@@ -32,6 +36,7 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     } else {
       dispatch(logOut());
     }
+    dispatch(updateLoginCheckDone(true))
   }, [dispatch]);
 
   /* Fetch Current User: To determine login status */
@@ -43,6 +48,10 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(getUserCartThunk());
+    }
+    else{
+      /* Reset Cart Slice as user is logged out */
+      dispatch(resetCartSlice());
     }
   }, [dispatch, isLoggedIn]);
 
@@ -56,6 +65,7 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
       logoClickHandler={logoClickHandler}
       navItemList={navigationList}
       itemsInCart={userCart ? userCart.items.length : 0}
+      cartClickHandler={cartClickHandler}
     />
   );
 });
