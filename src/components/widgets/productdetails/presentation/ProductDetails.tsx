@@ -8,6 +8,7 @@ import Button from "../../../basic/Button";
 import { ButtonTypes } from "../../../../constants";
 import { useAppSelector } from "../../../../store";
 import ErrorMessage from "../../../basic/ErrorMessage";
+import { formatAmount } from "../../../../utils/commonHelper";
 
 interface ProductDetailsProps {
   product?: Product;
@@ -101,14 +102,21 @@ const ProductDetails = (props: ProductDetailsProps) => {
               </span>
 
               <span className="mt-2 text-2xl tracking-wider">
-                {product.currency || DEFAULT_CURRENCY} {product.price}
+                {formatAmount(
+                  product.price,
+                  product.currency || DEFAULT_CURRENCY
+                )}
               </span>
 
               <span className="text-sm mt-4">{product.description}</span>
             </div>
             {isMaxQuantityReached && (
-                <ErrorMessage message={t("maxQuantityReached")} className="mt-4 text-sm" errorIconClassName="w-5 h-5"/>
-              )}
+              <ErrorMessage
+                message={t("maxQuantityReached")}
+                className="mt-4 text-sm"
+                errorIconClassName="w-5 h-5"
+              />
+            )}
             <div
               className={`flex flex-col gap-y-6 lg:gap-x-2 mt-16 ${
                 isRTL ? "lg:flex-row-reverse" : "lg:flex-row"

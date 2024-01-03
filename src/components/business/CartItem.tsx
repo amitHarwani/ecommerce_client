@@ -8,16 +8,19 @@ import { DEFAULT_CURRENCY } from "../../data/applicationData";
 import DeleteIcon from "../icons/DeleteIcon";
 import { Product } from "../../services/product/ProductTypes";
 import { useAppSelector } from "../../store";
+import { useTranslation } from "react-i18next";
+import { formatAmount } from "../../utils/commonHelper";
+import Text from "../basic/Text";
 
 interface CartItemProps {
   cartItem: CartItemClass;
   onQuantityChanged(product: Product, quantity: number): void;
-  removeFromCart(product: Product): void
+  removeFromCart(product: Product): void;
 }
 const CartItem = (props: CartItemProps) => {
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
-  const isRTL = useAppSelector(state => state.language.isRTL);
-
+  const { t } = useTranslation();
   const { cartItem, onQuantityChanged, removeFromCart } = props;
 
   const product = useMemo(() => {
@@ -28,15 +31,25 @@ const CartItem = (props: CartItemProps) => {
     return cartItem.product.price * cartItem.quantity;
   }, [cartItem]);
 
+  const isInStock = useMemo(() => {
+    if (cartItem.quantity >= cartItem.product.stock) {
+      return false;
+    }
+    return true;
+  }, [cartItem]);
 
   const quantityChangeHandler = (quantity: number) => {
-    if(quantity !== cartItem.quantity){
+    if (quantity !== cartItem.quantity) {
       onQuantityChanged(product, quantity);
     }
-  }
-  
+  };
+
   return (
-    <div className={`flex shadow-md rounded p-4 items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+    <div
+      className={`flex shadow-md rounded p-4 items-center justify-between ${
+        isRTL ? "flex-row-reverse" : ""
+      }`}
+    >
       <Image
         src={product.mainImage.url}
         alt={product.name}
@@ -44,11 +57,20 @@ const CartItem = (props: CartItemProps) => {
         className="rounded h-24"
       />
       <div className="flex flex-col w-2/4 lg:w-1/5">
-        <span className="capitalize font-poppinsMedium text-lg">{product.name}</span>
-        <span>{`${
-          product.currency || DEFAULT_CURRENCY
-        } ${subTotal}`}</span>
-        <div className={`flex mt-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <Text className="capitalize font-poppinsMedium text-lg">
+          {product.name}
+        </Text>
+        <Text>
+          {formatAmount(subTotal, product.currency || DEFAULT_CURRENCY)}
+        </Text>
+
+        {!isInStock && (
+          <Text className={`capitalize mt-2 font-poppinsMedium text-darkRed`}>
+            {t("outOfStock")}
+          </Text>
+        )}
+
+        <div className={`flex mt-2 ${isRTL ? "flex-row-reverse" : ""}`}>
           <QuantityCounter
             onQuantityChanged={quantityChangeHandler}
             defaultQuantity={cartItem.quantity}
@@ -56,7 +78,10 @@ const CartItem = (props: CartItemProps) => {
             className="flex-1"
             textClassName="text-base font-poppinsMedium"
           />
-          <Button onClickHandler={() => removeFromCart(product)} className={`${isRTL ? 'mr-2' : 'ml-2'}`}>
+          <Button
+            onClickHandler={() => removeFromCart(product)}
+            className={`${isRTL ? "mr-2" : "ml-2"}`}
+          >
             <DeleteIcon className="w-6 h-6 fill-darkRed" />
           </Button>
         </div>
