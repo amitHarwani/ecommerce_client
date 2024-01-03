@@ -8,7 +8,7 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import { ROUTE_PATHS } from "../../../../constants";
 import { useTranslation } from "react-i18next";
 import { addOrUpdateToCartThunk, removeFromCartThunk } from "../../../../store/CartSlice";
-import { CartItem } from "../../../../services/cart/CartTypes";
+import { CartItemClass } from "../../../../services/cart/CartTypes";
 
 interface ProductDetailsContainerProps {
   productId: string;
@@ -75,7 +75,7 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
 
   const checkProductInCart = useCallback(() => {
     const product = userCart?.items.find(
-      (item: CartItem) => item.product._id === productId
+      (item: CartItemClass) => item.product._id === productId
     );
     if (product) {
       setProductInCart({

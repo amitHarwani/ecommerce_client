@@ -13,11 +13,12 @@ import { ForwardedRef, forwardRef } from "react";
 interface HeaderProps {
   logoClickHandler(): void;
   navItemList: NavigationOption[];
-  itemsInCart: number
+  itemsInCart: number;
+  cartClickHandler(): void;
 }
 const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<HTMLDivElement>) {
 
-  const {logoClickHandler, navItemList, itemsInCart = 0} = props;
+  const {logoClickHandler, navItemList, itemsInCart = 0, cartClickHandler} = props;
 
   const { t } = useTranslation();
 
@@ -42,7 +43,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
             placeholder={t("searchProductsPlaceholder")}
             className="flex-1 mx-8"
           />
-          <Button onClickHandler={() => {}}>
+          <Button onClickHandler={cartClickHandler}>
             <CartIcon className="w-8 h-8 text-black" quantity={itemsInCart} />
           </Button>
         </div>
@@ -72,7 +73,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
             placeholder={t("searchProductsPlaceholder")}
             className={`w-full ${isRTL ? "ml-2" : "mr-2"}`}
           />
-          <Button onClickHandler={() => {}}>
+          <Button onClickHandler={cartClickHandler}>
             <CartIcon className="w-8 h-8 text-black" quantity={itemsInCart} />
           </Button>
         </div>

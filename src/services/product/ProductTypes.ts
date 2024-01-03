@@ -1,3 +1,5 @@
+import { DEFAULT_CURRENCY } from "../../data/applicationData";
+
 export class ImageClass {
   constructor(
     public url: string,
@@ -20,7 +22,7 @@ export class Product {
     public createdAt: string,
     public updatedAt: string,
     public previousPrice?: number,
-    public currency: string = "AED"
+    public currency: string = DEFAULT_CURRENCY
 
   ) {}
 }
