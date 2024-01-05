@@ -7,12 +7,19 @@ import {
 } from "../../../../store/CartSlice";
 import Cart from "../presentation/Cart";
 import FullPageLoadingSpinner from "../../../basic/FullPageLoadingSpinner";
+import useCustomNavigate from "../../../../hooks/useCustomNavigate";
+import { ROUTE_PATHS } from "../../../../constants";
 
 const CartContainer = () => {
+
+  const navigate = useCustomNavigate();
+
   const userCart = useAppSelector((state) => state.cart.userCart);
+
   const isAddOrUpdateToCartInProgress = useAppSelector(
     (state) => state.cart.isAddOrUpdateToCartInProgress
   );
+
   const isRemoveFromCartInProgress = useAppSelector(
     (state) => state.cart.isRemoveFromCartInProgress
   );
@@ -36,7 +43,9 @@ const CartContainer = () => {
     dispatch(removeFromCartThunk({ productId: product._id }));
   };
 
-  const checkoutClickHandler = () => {};
+  const checkoutClickHandler = () => {
+    navigate(ROUTE_PATHS.checkout, false, {isFromCartPage: true});
+  };
   return (
     <>
       {isLoading && <FullPageLoadingSpinner />}

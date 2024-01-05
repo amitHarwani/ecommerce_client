@@ -13,12 +13,13 @@ const useCustomNavigate = () => {
 
   const customNavigate = (
     navigateParams: To,
-    resetPreviousRouteState?: boolean
+    resetPreviousRouteState?: boolean,
+    extraState?: object
   ) => {
     if (resetPreviousRouteState) {
-      navigate(navigateParams, { state: { previousRoute: null } });
+      navigate(navigateParams, { state: { previousRoute: null, ...extraState } });
     } else {
-      navigate(navigateParams, { state: { previousRoute: currentPath } });
+      navigate(navigateParams, { state: { previousRoute: currentPath, ...extraState } });
     }
   };
 

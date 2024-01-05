@@ -3,11 +3,13 @@ import React from "react";
 /* DROPDOWN */
 export enum DropdownTypes {
   noBorderDarkBg,
+  borderedLightBg
 }
 
 export type DropdownItem = {
-  id: string | number;
-  textKey: string;
+  id?: string | number;
+  textKey?: string;
+  text?: string;
 };
 
 export interface LanguageDropdownItem extends DropdownItem {
@@ -125,7 +127,8 @@ export enum ROUTE_PATHS {
   product = "/product",
   login = "/login",
   signup = "/signup",
-  cart = "/cart"
+  cart = "/cart",
+  checkout = "/checkout"
 }
 
 
@@ -137,7 +140,8 @@ export enum PUBLIC_IMAGE_PATHS {
 
 /* REGEX PATTERNS */
 export const REGEX_PATTERNS = {
-  emailPattern : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+  emailPattern : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+  numberPattern: /^[0-9]*$/
 }
 
 
@@ -159,4 +163,23 @@ export type SignupFormFields = {
 export enum TOAST_MESSAGE_TYPES {
   success = "SUCCESS",
   error = "ERROR"
+}
+
+/* ADDRESS FORM KEYS */
+export enum ADDRESS_FORM_KEYS  {
+  country,
+  state,
+  city, 
+  addressLine1,
+  addressLine2,
+  pincode
+}
+
+export type AddressFormFields = {
+  country: DropdownItem,
+  city: DropdownItem,
+  state: DropdownItem,
+  addressLine1: string,
+  addressLine2: string,
+  pincode: string
 }

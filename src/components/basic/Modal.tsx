@@ -27,7 +27,7 @@ const Modal = (props: ModalProps) => {
     isPrimaryButtonLoading = false
   } = props;
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 flex justify-center items-center z-20">
       <dialog
         className={`rounded-xl p-2 shadow-md flex flex-col justify-between ${className}`}
       >

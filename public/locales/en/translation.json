@@ -71,7 +71,24 @@
     "discount": "discount",
     "total": "total",
     "proceedToCheckout": "proceed to checkout",
-    "summary": "summary"
+    "summary": "summary",
+    "selectCountry": "select country",
+    "selectState": "select state",
+    "selectCity": "select city",
+    "enterAddress1": "enter address line 1",
+    "enterAddress2": "enter address line 2",
+    "enterPincode": "enter pincode",
+    "addAddress": "add address",
+    "add": "add",
+    "cancel": "cancel",
+    "addressIsRequired": "address is required",
+    "countryIsRequired": "country is required",
+    "stateIsRequired": "state is required",
+    "cityIsRequired": "city is required",
+    "pincodeIsRequired": "pincode is required",
+    "invalidPincode": "invalid pincode",
+    "addressAddedSuccessfully": "address added successfully",
+    "addressUpdatedSuccessfully": "address updated successfully"
 
 
 
