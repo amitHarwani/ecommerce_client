@@ -7,6 +7,7 @@ import MyAccountOptionContainer from "../components/widgets/myaccountoption/cont
 import {
   COMPANY_GURANTEE,
   CategoryIcon,
+  DropdownItem,
   NavigationOption,
   SelectionMenuItem,
 } from "../constants";
@@ -68,6 +69,9 @@ export const CATEGORY_ICONS: CategoryIcon = {};
 
 export const DEFAULT_CURRENCY = "AED";
 
+export const DEFAULT_COUNTRY = "United Arab Emirates";
+
+export const COUNTRIES_DROPDOWN_LIST: DropdownItem[] = [{id: 1, text: DEFAULT_COUNTRY}]
 export const COMPANY_GURANTEE_LIST: COMPANY_GURANTEE[] = [
   {
     id: 1,

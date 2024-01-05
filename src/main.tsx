@@ -5,13 +5,20 @@ import "./i18n.ts";
 import { Provider } from "react-redux";
 import store from "./store/index.ts";
 import axios from "axios";
-if(import.meta.env.MODE === "production"){
-  axios.defaults.baseURL = import.meta.env.VITE_SERVER_URI
+
+if (import.meta.env.MODE === "production") {
+  axios.defaults.baseURL = import.meta.env.VITE_SERVER_URI;
 }
+
+/* Axios Instance For Country API */
+export const axiosCountryApi = axios.create({
+  baseURL: import.meta.env.VITE_COUNTRY_API,
+});
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-    <Provider store={store}>
-        <App />
-    </Provider>
+  <Provider store={store}>
+    <App />
+  </Provider>
   // </React.StrictMode>
 );

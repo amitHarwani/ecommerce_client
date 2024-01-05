@@ -71,7 +71,31 @@
     "discount": "تخفيض",
     "total": "المجموع",
     "proceedToCheckout": "الشروع في الخروج",
-    "summary": "ملخص"
+    "summary": "ملخص",
+    "selectCountry": "حدد الدولة",
+    "selectState": "اختر ولايه",
+    "selectCity": "اختر مدينة",
+    "enterAddress1": "أدخل سطر العنوان 1",
+    "enterAddress2": "أدخل سطر العنوان 2",
+    "enterPincode": "أدخل الرمز السري",
+    "addAddress": "اضف عنوان",
+    "add": "يضيف",
+    "cancel": "يلغي",
+    "addressIsRequired": "العنوان مطلوب",
+    "countryIsRequired": "الدولة مطلوبة",
+    "stateIsRequired": "الدولة مطلوبة",
+    "cityIsRequired": "المدينة مطلوبة",
+    "pincodeIsRequired": "مطلوب الرمز السري",
+    "invalidPincode": "الرمز السري غير صالح",
+    "addressAddedSuccessfully": "تمت إضافة العنوان بنجاح",
+    "addressUpdatedSuccessfully": "تم تحديث العنوان بنجاح"
+
+
+
+
+
+
+
 
 
 
