@@ -13,3 +13,18 @@ export class AddressClass {
     public updatedAt: string
   ) {}
 }
+
+export class AddressListClass {
+  constructor(
+    public addresses: Array<AddressClass>,
+    public hasNextPage: boolean,
+    public hasPrevPage: boolean,
+    public limit: number,
+    public nextPage: number,
+    public page: number,
+    public prevPage: number,
+    public serialNumberStartFrom: number,
+    public totalAddresses: number,
+    public totalPages: number
+  ){}
+}

@@ -88,7 +88,22 @@
     "pincodeIsRequired": "مطلوب الرمز السري",
     "invalidPincode": "الرمز السري غير صالح",
     "addressAddedSuccessfully": "تمت إضافة العنوان بنجاح",
-    "addressUpdatedSuccessfully": "تم تحديث العنوان بنجاح"
+    "addressUpdatedSuccessfully": "تم تحديث العنوان بنجاح",
+    "selectAddress": "حدد العنوان",
+    "use": "يستخدم",
+    "code": "شفرة",
+    "toGet": "تحصل",
+    "off": "عن",
+    "minimumPurchaseOf": "دقيقة شراء",
+    "enterCouponCode": "أدخل رمز القسيمة",
+    "applyCode": "تطبيق الكود",
+    "removeCouponCode": "إزالة رمز القسيمة",
+    "codeIsRequired": "الرمز مطلوب",
+    "couponCodeAppliedSuccessfully": "تم تطبيق رمز القسيمة بنجاح",
+    "couponCodeRemovedSuccessfully": "تمت إزالة رمز القسيمة بنجاح"
+
+
+
 
 
 

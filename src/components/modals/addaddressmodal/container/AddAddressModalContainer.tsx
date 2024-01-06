@@ -37,6 +37,7 @@ type DropdownListState = {
 };
 interface AddAddressModalContainerProps {
   hideModal(): void;
+  onAddressAddedOrUpdatedCallback?(): void;
 }
 
 function dropdownListsReducer(
@@ -129,7 +130,7 @@ function dropdownListsReducer(
   }
 }
 const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
-  const { hideModal = () => {} } = props;
+  const { hideModal = () => {}, onAddressAddedOrUpdatedCallback } = props;
 
   const {t} = useTranslation();
 
@@ -201,7 +202,6 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
     key: ADDRESS_FORM_KEYS,
     value: DropdownItem | undefined
   ) => {
-    console.log("Dropdown Change Handler", key, value);
     switch (key) {
       case ADDRESS_FORM_KEYS.country: {
         // Fetch States
@@ -241,6 +241,9 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
     );
     setUpdateInProgress(false);
     if (!(response instanceof ApiError)) {
+      if(onAddressAddedOrUpdatedCallback){
+        onAddressAddedOrUpdatedCallback();
+      }
       // Success
       setIsSuccessModalShown(true);
     } else {
