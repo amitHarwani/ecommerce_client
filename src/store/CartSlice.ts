@@ -112,6 +112,9 @@ const CartSlice = createSlice({
     updateRemoveFromCartInProgress(state, { payload }) {
       state.isRemoveFromCartInProgress = payload;
     },
+    updateUserCart(state, {payload}){
+      state.userCart = payload
+    },
     resetCartSlice() {
       return initialState;
     },
@@ -140,5 +143,6 @@ export const {
   updateAddToCartInProgress,
   updateRemoveFromCartInProgress,
   resetCartSlice,
+  updateUserCart
 } = CartSlice.actions;
 export default CartSlice;

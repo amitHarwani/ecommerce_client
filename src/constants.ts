@@ -1,4 +1,5 @@
 import React from "react";
+import { AddressClass } from "./services/address/AddressTypes";
 
 /* DROPDOWN */
 export enum DropdownTypes {
@@ -182,4 +183,20 @@ export type AddressFormFields = {
   addressLine1: string,
   addressLine2: string,
   pincode: string
+}
+
+export type CheckoutFormFields = {
+  address: AddressClass
+}
+
+export type CheckoutApplyCouponCodeFields = {
+  couponCode: string
+}
+
+export type RADIO_BUTTON_TYPE<T> = {
+  label?: string;
+  customElement?: React.ReactElement;
+  customElementData?: T
+  isDefaultSelected: boolean;
+  id: string;
 }

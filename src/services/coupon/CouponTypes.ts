@@ -2,7 +2,7 @@ export enum COUPON_TYPES {
     FLAT = "FLAT"
 }
 
-export class Coupon {
+export class CouponClass {
     constructor(
         public _id: string,
         public __v: number,
@@ -22,3 +22,17 @@ export class Coupon {
     }
 }
 
+export class CouponListClass {
+    constructor(
+        public coupons: Array<CouponClass>,
+        public hasNextPage: boolean,
+        public hasPrevPage: boolean,
+        public limit: number,
+        public nextPage: number,
+        public prevPage: number,
+        public serialNumberStartFrom: number,
+        public page: number,
+        public totalCoupons: number,
+        public totalPages: number
+    ){}
+}

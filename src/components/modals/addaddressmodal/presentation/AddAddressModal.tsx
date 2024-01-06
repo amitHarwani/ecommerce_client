@@ -55,10 +55,9 @@ const AddAddressModal = (props: AddAddressModalProps) => {
     formState: { errors },
   } = useForm<AddressFormFields>();
 
-  console.log("Errors", errors);
   useEffect(() => {
     const subscription = watch((value, { name }) => {
-      console.log("Watch", name, value);
+
       if (name === "country" || name === "city" || name === "state") {
         dropdownChangeHandlers(ADDRESS_FORM_KEYS[name], value[name]);
       }

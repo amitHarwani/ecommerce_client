@@ -1,4 +1,4 @@
-import { Coupon } from "../coupon/CouponTypes";
+import { CouponClass } from "../coupon/CouponTypes";
 import { Product } from "../product/ProductTypes";
 
 export class CartItemClass {
@@ -14,7 +14,7 @@ export class UserCart {
     constructor(
       public _id: string,
       public cartTotal: number,
-      public coupon: Coupon,
+      public coupon: CouponClass,
       public discountedTotal: number,
       public items: CartItemClass[]
     ) {}

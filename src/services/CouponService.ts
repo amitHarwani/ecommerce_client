@@ -1,56 +1,30 @@
 import ApiError from "./ApiError";
 import ApiRequest from "./ApiRequest";
 import ApiResponse from "./ApiResponse";
-import { AddressClass, AddressListClass } from "./address/AddressTypes";
+import { UserCart } from "./cart/CartTypes";
+import { CouponClass, CouponListClass } from "./coupon/CouponTypes";
 
-class AddressService {
-  BASE_URL = "/api/v1/ecommerce/addresses";
+class CouponService {
+  BASE_URL = "/api/v1/ecommerce/coupons";
   defaultPageLimit = 50;
   defaultPageNumber = 1;
-  async createAddress(
-    country: string,
-    state: string,
-    city: string,
-    addressLine1: string,
-    addressLine2: string = "",
-    pincode: string = ""
-  ): Promise<boolean | ApiError> {
-    const apiRequest = new ApiRequest(this.BASE_URL);
 
-    const response = await apiRequest.postRequest<AddressClass>({
-      addressLine1,
-      addressLine2,
-      country,
-      state,
-      city,
-      pincode,
-    });
-
-    if (response instanceof ApiResponse && response.success) {
-      return true;
-    } else if (response instanceof ApiResponse) {
-      return new ApiError(response.message);
-    } else {
-      return response;
-    }
-  }
-
-  /* Get All Addresses Asynchronously: As the requests keep fulfilling response will be sent as callback */
-  async getAllAddressesAsync(
+  /* Get All Coupons Available to User Asynchronously: As the requests keep fulfilling response will be sent as callback */
+  async getAllCouponsAvailableToUserAsync(
     callback: (
-      data: AddressClass[],
+      data: CouponClass[],
       isDone: boolean,
       errorMessage?: ApiError
     ) => void
   ) {
     /* API Request */
-    const apiRequest = new ApiRequest(this.BASE_URL);
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/customer/available`);
 
     /* Initializing Page Number Counter */
     let pageNumberCounter = this.defaultPageNumber;
 
     /* First Request to know the total pages */
-    const firstResponse = await apiRequest.getRequest<AddressListClass>({
+    const firstResponse = await apiRequest.getRequest<CouponListClass>({
       page: pageNumberCounter,
       limit: this.defaultPageLimit,
     });
@@ -68,15 +42,15 @@ class AddressService {
 
       /* If first request is the last request: return */
       if (!requestsPending) {
-        return callback(firstResponse.data.addresses, true);
+        return callback(firstResponse.data.coupons, true);
       } else {
-        callback(firstResponse.data.addresses, false);
+        callback(firstResponse.data.coupons, false);
       }
 
       /* Remaining requests made in parallel */
       for (let counter = pageNumberCounter; counter <= totalPages; counter++) {
         apiRequest
-          .getRequest<AddressListClass>({
+          .getRequest<CouponListClass>({
             page: counter,
             limit: this.defaultPageLimit,
           })
@@ -91,10 +65,10 @@ class AddressService {
                 : callback([], true, new ApiError(res.message));
             } else if (!requestsPending) {
               /* All Requests are done */
-              return callback(res.data.addresses, true);
+              return callback(res.data.coupons, true);
             } else {
               /* Sending the data of an in between request */
-              callback(res.data.addresses, false);
+              callback(res.data.coupons, false);
             }
           });
       }
@@ -105,6 +79,32 @@ class AddressService {
         : callback([], true, new ApiError(firstResponse.message));
     }
   }
+
+  async applyCouponCode(couponCode: string): Promise<UserCart | ApiError> {
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/c/apply`);
+    const response = await apiRequest.postRequest<UserCart>({ couponCode });
+
+    if (response instanceof ApiResponse && response.success) {
+      return response.data;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    } else {
+      return response;
+    }
+  }
+
+  async removeCouponCode(couponCode: string): Promise<UserCart | ApiError> {
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/c/remove`);
+    const response = await apiRequest.postRequest<UserCart>({ couponCode });
+
+    if (response instanceof ApiResponse && response.success) {
+      return response.data;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    } else {
+      return response;
+    }
+  }
 }
 
-export default new AddressService();
+export default new CouponService();
