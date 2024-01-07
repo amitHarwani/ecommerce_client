@@ -100,7 +100,17 @@
     "removeCouponCode": "إزالة رمز القسيمة",
     "codeIsRequired": "الرمز مطلوب",
     "couponCodeAppliedSuccessfully": "تم تطبيق رمز القسيمة بنجاح",
-    "couponCodeRemovedSuccessfully": "تمت إزالة رمز القسيمة بنجاح"
+    "couponCodeRemovedSuccessfully": "تمت إزالة رمز القسيمة بنجاح",
+    "update": "تحديث",
+    "updateAddress": "عنوان التحديث",
+    "areYouSureYouWantToDeleteTheAddress": "هل أنت متأكد أنك تريد حذف العنوان",
+    "deleteAddress": "حذف العنوان",
+    "addressDeletedSuccessfully": "تم حذف العنوان بنجاح"
+
+
+
+
+
 
 
 

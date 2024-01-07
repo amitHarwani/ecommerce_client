@@ -7,10 +7,10 @@ import {
   DropdownTypes,
   REGEX_PATTERNS,
 } from "../../../../constants";
-import Dropdown from "../../../basic/Dropdown";
+import Dropdown, { DropdownActions, DropdownRefs } from "../../../basic/Dropdown";
 import Modal from "../../../basic/Modal";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { RefObject, createRef, useEffect, useMemo, useRef, useState } from "react";
 import Input from "../../../basic/Input";
 import FullPageLoadingSpinner from "../../../basic/FullPageLoadingSpinner";
 import Button from "../../../basic/Button";
@@ -18,6 +18,14 @@ import ErrorMessage from "../../../basic/ErrorMessage";
 import { useAppSelector } from "../../../../store";
 
 interface AddAddressModalProps {
+  initiallySelectedAddress?: {
+    selectedCountry: DropdownItem;
+    selectedCity: DropdownItem;
+    selectedState: DropdownItem;
+    addressLine1: string;
+    addressLine2: string;
+    pincode: string
+  };
   countriesList: Array<DropdownItem>;
   statesList: Array<DropdownItem>;
   citiesList: Array<DropdownItem>;
@@ -33,6 +41,7 @@ interface AddAddressModalProps {
 }
 const AddAddressModal = (props: AddAddressModalProps) => {
   const {
+    initiallySelectedAddress,
     countriesList = [],
     statesList = [],
     citiesList = [],
@@ -45,7 +54,8 @@ const AddAddressModal = (props: AddAddressModalProps) => {
   } = props;
 
   const { t } = useTranslation();
-  const isRTL = useAppSelector(state => state.language.isRTL);
+
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
   const {
     handleSubmit,
@@ -53,25 +63,60 @@ const AddAddressModal = (props: AddAddressModalProps) => {
     register,
     watch,
     formState: { errors },
+    setValue,
   } = useForm<AddressFormFields>();
+
+  /* To check for initial country, city and state initialization */
+  const isInitializing = useRef(false);
+
+  /* Refs to get access to dropdown actions  */
+  const countryActionRef = useRef<DropdownActions>({forceSetSelectedItem(_) {},});
+  const stateActionRef = useRef<DropdownActions>({forceSetSelectedItem(_) {},});
+  const cityActionRef = useRef<DropdownActions>({forceSetSelectedItem(_) {},});
+  
 
   useEffect(() => {
     const subscription = watch((value, { name }) => {
 
-      if (name === "country" || name === "city" || name === "state") {
+      /* Call dropdownChangeHandler if initializing is not in progress (To avoid multiple API calls) */
+      if ((name === "country" || name === "city" || name === "state") && !isInitializing.current) {
         dropdownChangeHandlers(ADDRESS_FORM_KEYS[name], value[name]);
       }
     });
     return () => {
       subscription.unsubscribe();
     };
-  }, [watch, dropdownChangeHandlers]);
+  }, [watch, dropdownChangeHandlers, isInitializing]);
+
+  useEffect(() => {
+    if (initiallySelectedAddress) {
+      /* Initializing in progress */
+      isInitializing.current = true;
+
+      /* Set Dropdown values */
+      setValue("country", initiallySelectedAddress.selectedCountry);
+      setValue("state", initiallySelectedAddress.selectedState);
+      setValue("city", initiallySelectedAddress.selectedCity);
+      
+      setValue("addressLine1", initiallySelectedAddress.addressLine1);
+      setValue("addressLine2", initiallySelectedAddress.addressLine2);
+      setValue("pincode", initiallySelectedAddress.pincode);
+
+      /* Set selected items on dropdown component */
+      countryActionRef.current?.forceSetSelectedItem(initiallySelectedAddress.selectedCountry);
+      stateActionRef.current?.forceSetSelectedItem(initiallySelectedAddress.selectedState);
+      cityActionRef.current.forceSetSelectedItem(initiallySelectedAddress.selectedCity);
+
+      /* Initializing complete */
+      isInitializing.current = false;
+    }
+  }, [initiallySelectedAddress, setValue]);
 
   return (
     <>
       {fetchingDropdownLists && <FullPageLoadingSpinner />}
       <Modal
-        heading={t("addAddress")}
+        heading={initiallySelectedAddress ? t('updateAddress') : t("addAddress")}
         secondaryButtonHandler={hideModal}
         isPrimaryButtonLoading={isModalButtonLoading}
         primaryButtonClassname="uppercase"
@@ -90,7 +135,7 @@ const AddAddressModal = (props: AddAddressModalProps) => {
             className="flex flex-col gap-y-6"
             onSubmit={handleSubmit(formSubmitHandler)}
           >
-            <div className="grid grid-cols-2 gap-4" dir={isRTL ? 'rtl' : 'ltr'}>
+            <div className="grid grid-cols-2 gap-4" dir={isRTL ? "rtl" : "ltr"}>
               <Controller
                 name={"country"}
                 control={control}
@@ -102,6 +147,7 @@ const AddAddressModal = (props: AddAddressModalProps) => {
                     type={DropdownTypes.borderedLightBg}
                     mainButtonClassNames="w-full"
                     errorMessage={errors.country?.message || ""}
+                    actionsRef={countryActionRef.current}
                     {...field}
                   />
                 )}
@@ -118,6 +164,7 @@ const AddAddressModal = (props: AddAddressModalProps) => {
                     type={DropdownTypes.borderedLightBg}
                     mainButtonClassNames="w-full"
                     errorMessage={errors.state?.message || ""}
+                    actionsRef={stateActionRef.current}
                     {...field}
                   />
                 )}
@@ -134,12 +181,16 @@ const AddAddressModal = (props: AddAddressModalProps) => {
                     type={DropdownTypes.borderedLightBg}
                     mainButtonClassNames="w-full"
                     errorMessage={errors.city?.message || ""}
+                    actionsRef={cityActionRef.current}
                     {...field}
                   />
                 )}
               />
             </div>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-6" dir={isRTL ? 'rtl': 'ltr'}>
+            <div
+              className="grid grid-cols-2 gap-x-4 gap-y-6"
+              dir={isRTL ? "rtl" : "ltr"}
+            >
               <Input
                 type="text"
                 placeholder={t("enterAddress1")}
@@ -164,9 +215,12 @@ const AddAddressModal = (props: AddAddressModalProps) => {
                   required: t("pincodeIsRequired"),
                   minLength: { value: 6, message: t("invalidPincode") },
                   maxLength: { value: 6, message: t("invalidPincode") },
-                  pattern: {value: new RegExp(REGEX_PATTERNS.numberPattern), message: t('invalidPincode')}
+                  pattern: {
+                    value: new RegExp(REGEX_PATTERNS.numberPattern),
+                    message: t("invalidPincode"),
+                  },
                 })}
-                {...{maxLength:6}}
+                {...{ maxLength: 6 }}
                 className="placeholder:capitalize placeholder:text-sm"
                 errorMessage={errors.pincode?.message || ""}
               />
@@ -180,7 +234,7 @@ const AddAddressModal = (props: AddAddressModalProps) => {
                 onClickHandler={() => {}}
                 isLoading={isModalButtonLoading}
               >
-                <span>{t("add")}</span>
+                <span>{initiallySelectedAddress ? t('update') : t("add")}</span>
               </Button>
               <Button
                 buttonType={ButtonTypes.secondaryButton}

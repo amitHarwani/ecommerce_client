@@ -52,17 +52,19 @@ const RadioButtons = React.forwardRef(
                 onChange(item);
               }}
             />
-            <label htmlFor={item.id} className="w-full cursor-pointer">
-              {item.customElement ? (
-                React.cloneElement(item.customElement, {
+            {item.customElement ? (
+              <div className="w-full">
+                {React.cloneElement(item.customElement, {
                   data: item.customElementData,
-                })
-              ) : item.label ? (
-                item.label
-              ) : (
-                <></>
-              )}
-            </label>
+                })}
+              </div>
+            ) : item.label ? (
+              <label htmlFor={item.id} className="w-full cursor-pointer">
+                {item.label}
+              </label>
+            ) : (
+              <></>
+            )}
           </div>
         ))}
       </div>

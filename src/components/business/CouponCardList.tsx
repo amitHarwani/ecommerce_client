@@ -9,11 +9,21 @@ interface CouponCardListProps {
 const CouponCardList = (props: CouponCardListProps) => {
   const { coupons, className = "", childContainerClassName = "" } = props;
   return (
-    <div className={`${className}`}>
-      {coupons.map((coupon) => (
-          <CouponCard coupon={coupon} key={coupon._id} className={childContainerClassName} />
-      ))}
-    </div>
+    <>
+      {coupons.length ? (
+        <div className={`${className}`}>
+          {coupons.map((coupon) => (
+            <CouponCard
+              coupon={coupon}
+              key={coupon._id}
+              className={childContainerClassName}
+            />
+          ))}
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

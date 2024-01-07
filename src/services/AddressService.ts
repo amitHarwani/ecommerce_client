@@ -35,6 +35,47 @@ class AddressService {
     }
   }
 
+  async updateAddress(
+    addressId: string,
+    country: string,
+    state: string,
+    city: string,
+    addressLine1: string,
+    addressLine2: string = "",
+    pincode: string = ""
+  ): Promise<boolean | ApiError> {
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/${addressId}`);
+
+    const response = await apiRequest.patchRequest<AddressClass>({
+      country,
+      state,
+      city,
+      addressLine1,
+      addressLine2,
+      pincode,
+    });
+
+    if (response instanceof ApiResponse && response.success) {
+      return true;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    }
+    return response;
+  }
+
+  async deleteAddress(addressId: string): Promise<boolean | ApiError> {
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/${addressId}`);
+
+    const response = await apiRequest.deleteRequest<AddressClass>();
+
+    if (response instanceof ApiResponse && response.success) {
+      return true;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    }
+    return response;
+  }
+
   /* Get All Addresses Asynchronously: As the requests keep fulfilling response will be sent as callback */
   async getAllAddressesAsync(
     callback: (
