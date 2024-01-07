@@ -5,6 +5,8 @@ import DeleteIcon from "../icons/DeleteIcon";
 import EditIcon from "../icons/EditIcon";
 import AddAddressModalContainer from "../modals/addaddressmodal/container/AddAddressModalContainer";
 import DeleteAddressModalContainer from "../modals/deleteaddressmodal/container/DeleteAddressModalContainer";
+import { useAppSelector } from "../../store";
+import Text from "../basic/Text";
 
 interface AddressCardProps {
   address: AddressClass;
@@ -17,6 +19,8 @@ const AddressCard = (props: AddressCardProps) => {
     className = "shadow",
     onAddressUpdated,
   } = props;
+
+  const isRTL = useAppSelector(state => state.language.isRTL);
 
   const [isAddressUpdateModalShown, setIsAddressUpdateModalShown] =
     useState(false);
@@ -42,12 +46,12 @@ const AddressCard = (props: AddressCardProps) => {
         )
       }
       <div className={`flex flex-col p-2 rounded ${className}`}>
-        <div className="flex flex-col">
+        <div className="flex flex-col" dir={isRTL ? 'rtl': 'ltr'}>
           <span>{`${address.state}, ${address.city}`}</span>
           <span>{address.country}</span>
         </div>
-        <span className="truncate mt-2">{address.addressLine1}</span>
-        <div className="self-end flex gap-x-2">
+        <Text className="truncate mt-2">{address.addressLine1}</Text>
+        <div className={`flex gap-x-2 ${isRTL ? 'self-start flex-row-reverse': 'self-end'}`}>
           <Button
             onClickHandler={() => setIsAddressUpdateModalShown(true)}
             type="button"

@@ -18,6 +18,8 @@ import InvoiceAmountSummary from "../../../business/InvoiceAmountSummary";
 import { CouponClass } from "../../../../services/coupon/CouponTypes";
 import CouponCardList from "../../../business/CouponCardList";
 import Input from "../../../basic/Input";
+import { useAppSelector } from "../../../../store";
+import Text from "../../../basic/Text";
 
 interface CheckoutProps {
   userAddresses: Array<AddressClass>;
@@ -39,6 +41,7 @@ const Checkout = (props: CheckoutProps) => {
     isUpdatingCouponInProgress = false,
   } = props;
 
+  const isRTL = useAppSelector(state => state.language.isRTL);
   const { t } = useTranslation();
 
   /* To convert User Addresses, to types which can be passed to radio buttons component */
@@ -49,10 +52,7 @@ const Checkout = (props: CheckoutProps) => {
   /* If add address modal is shown */
   const [isAddressModalShown, setIsAddressModalShown] = useState(false);
 
-
   const { handleSubmit, watch, reset, control } = useForm<CheckoutFormFields>();
-
-  console.log("Checkout", watch('address'));
 
   const {
     handleSubmit: couponHandleSubmit,
@@ -84,11 +84,11 @@ const Checkout = (props: CheckoutProps) => {
           onAddressAddedOrUpdatedCallback={refreshUserAddresses}
         />
       )}
-      <div className="flex flex-col gap-y-4 lg:flex-row lg:gap-x-4">
+      <div className={`flex flex-col gap-y-4 lg:flex-row lg:gap-x-4 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
         <div className="flex flex-col lg:w-2/4 gap-2">
-          <span className="capitalize text-xl font-poppinsMedium">
+          <Text className="capitalize text-xl font-poppinsMedium">
             {t("selectAddress")}
-          </span>
+          </Text>
           <Controller
             name="address"
             control={control}
@@ -116,12 +116,12 @@ const Checkout = (props: CheckoutProps) => {
 
           <CouponCardList
             coupons={couponsAvailableToUser}
-            className="flex overflow-auto gap-x-2"
+            className={`flex overflow-auto gap-x-2`}
             childContainerClassName="min-w-[300px] *:h-full"
           />
           {!userCart?.coupon?.couponCode ? (
             <form
-              className="flex flex-col gap-y-4 lg:flex-row lg:items-center lg:gap-x-8"
+              className={`flex flex-col gap-y-4 lg:flex-row lg:items-center lg:gap-x-8 ${isRTL ? 'lg:flex-row-reverse': ''}`}
               onSubmit={couponHandleSubmit(applyCouponCodeHandler)}
             >
               <div className="flex-1">
