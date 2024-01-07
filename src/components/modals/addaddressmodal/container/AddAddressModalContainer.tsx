@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { COUNTRIES_DROPDOWN_LIST } from "../../../../data/applicationData";
 import AddAddressModal from "../presentation/AddAddressModal";
 import {
@@ -11,6 +11,7 @@ import ApiError from "../../../../services/ApiError";
 import AddressService from "../../../../services/AddressService";
 import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
 import { useTranslation } from "react-i18next";
+import { AddressClass } from "../../../../services/address/AddressTypes";
 
 type DropdownListActions = {
   type:
@@ -38,6 +39,7 @@ type DropdownListState = {
 interface AddAddressModalContainerProps {
   hideModal(): void;
   onAddressAddedOrUpdatedCallback?(): void;
+  address?: AddressClass /* Address if it exists: In case of Update */;
 }
 
 function dropdownListsReducer(
@@ -130,9 +132,26 @@ function dropdownListsReducer(
   }
 }
 const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
-  const { hideModal = () => {}, onAddressAddedOrUpdatedCallback } = props;
+  const {
+    hideModal = () => {},
+    onAddressAddedOrUpdatedCallback,
+    address,
+  } = props;
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
+
+  /* State to hold initially selected address: In case of update (Default Address) */
+  const [initiallySelectedAddress, setInitiallySelectedAddress] = useState<
+    | {
+        selectedCountry: DropdownItem;
+        selectedState: DropdownItem;
+        selectedCity: DropdownItem;
+        addressLine1: string;
+        addressLine2: string;
+        pincode: string;
+      }
+    | undefined
+  >();
 
   /* Loading state for Saving the address to DB  */
   const [updateInProgress, setUpdateInProgress] = useState(false);
@@ -152,7 +171,6 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
   });
 
   const fetchStatesOfCountry = async (countryName: string) => {
-    dispatch({ type: "FETCHING" });
     const response = await CountryApiService.getStatesOfACountry(countryName);
     if (!(response instanceof ApiError)) {
       const statesList = response.states.map((state) => {
@@ -161,8 +179,7 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
           text: state.name,
         };
       });
-
-      dispatch({ type: "UPDATE_STATES", payload: statesList });
+      return statesList;
     } else {
       // Error
       dispatch({
@@ -172,31 +189,33 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
     }
   };
 
-  const fetchCitiesOfState = async (stateName: string) => {
-    const country = state.selectedCountry?.text || "";
+  const fetchCitiesOfState = useCallback(
+    async (country: string | undefined, stateName: string) => {
+      if (country) {
+        const response = await CountryApiService.getCitiesOfAState(
+          country,
+          stateName
+        );
+        if (!(response instanceof ApiError)) {
+          const citiesList = response.map((city, index) => {
+            return {
+              id: index,
+              text: city,
+            };
+          });
 
-    dispatch({ type: "FETCHING" });
-
-    const response = await CountryApiService.getCitiesOfAState(
-      country,
-      stateName
-    );
-    if (!(response instanceof ApiError)) {
-      const citiesList = response.map((city, index) => {
-        return {
-          id: index,
-          text: city,
-        };
-      });
-      dispatch({ type: "UPDATE_CITIES", payload: citiesList });
-    } else {
-      // Error
-      dispatch({
-        type: "UPDATE_ERROR_STATUS",
-        payload: response.errorResponse?.message || response.errorMessage,
-      });
-    }
-  };
+          return citiesList;
+        } else {
+          // Error
+          dispatch({
+            type: "UPDATE_ERROR_STATUS",
+            payload: response.errorResponse?.message || response.errorMessage,
+          });
+        }
+      }
+    },
+    []
+  );
 
   const dropdownChangeHandlers = async (
     key: ADDRESS_FORM_KEYS,
@@ -207,7 +226,10 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
         // Fetch States
         if (value?.text) {
           dispatch({ type: "COUNTRY_SELECTED", payload: value });
-          await fetchStatesOfCountry(value?.text);
+          dispatch({ type: "FETCHING" });
+          const statesList = await fetchStatesOfCountry(value?.text);
+          statesList &&
+            dispatch({ type: "UPDATE_STATES", payload: statesList });
         }
         return;
       }
@@ -215,7 +237,13 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
         // Fetch States
         if (value?.text) {
           dispatch({ type: "STATE_SELECTED", payload: value });
-          await fetchCitiesOfState(value?.text);
+          dispatch({ type: "FETCHING" });
+          const citiesList = await fetchCitiesOfState(
+            state.selectedCountry?.text,
+            value?.text
+          );
+          citiesList &&
+            dispatch({ type: "UPDATE_CITIES", payload: citiesList });
         }
         return;
       }
@@ -231,17 +259,31 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
 
   const formSubmitHandler = async (data: AddressFormFields) => {
     setUpdateInProgress(true);
-    const response = await AddressService.createAddress(
-      data.country.text || "",
-      data.state.text || "",
-      data.city.text || "",
-      data.addressLine1,
-      data.addressLine2,
-      data.pincode
-    );
+    let response: boolean | ApiError;
+    if (address) {
+      response = await AddressService.updateAddress(
+        address?._id,
+        data.country.text || "",
+        data.state.text || "",
+        data.city.text || "",
+        data.addressLine1,
+        data.addressLine2,
+        data.pincode
+      );
+    } else {
+      response = await AddressService.createAddress(
+        data.country.text || "",
+        data.state.text || "",
+        data.city.text || "",
+        data.addressLine1,
+        data.addressLine2,
+        data.pincode
+      );
+    }
+
     setUpdateInProgress(false);
     if (!(response instanceof ApiError)) {
-      if(onAddressAddedOrUpdatedCallback){
+      if (onAddressAddedOrUpdatedCallback) {
         onAddressAddedOrUpdatedCallback();
       }
       // Success
@@ -253,6 +295,78 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
       });
     }
   };
+
+  useEffect(() => {
+    const initializeStates = async () => {
+      if (address) {
+        /* Find selected country in countries dropdown list */
+        const countryFound = COUNTRIES_DROPDOWN_LIST.find(
+          (country) => country.text === address.country
+        );
+
+        if (!countryFound || !countryFound.text) {
+          return;
+        }
+
+        /* Set selected country */
+        dispatch({ type: "COUNTRY_SELECTED", payload: countryFound });
+
+        /* Fetch states of preselected country */
+        dispatch({ type: "FETCHING" });
+        const statesList = await fetchStatesOfCountry(countryFound.text);
+        if (!statesList) {
+          return;
+        }
+
+        /* Find selected state in states list */
+        const stateFound = statesList.find(
+          (state) => state.text === address.state
+        );
+
+        if (!stateFound) {
+          return;
+        }
+
+        /* Set states list and selected state */
+        dispatch({ type: "STATE_SELECTED", payload: stateFound });
+        dispatch({ type: "UPDATE_STATES", payload: statesList });
+
+        /* Fetch Cities */
+        dispatch({ type: "FETCHING" });
+        const citiesList = await fetchCitiesOfState(
+          countryFound.text,
+          stateFound.text
+        );
+        if (!citiesList) {
+          return;
+        }
+
+        /* Find Selected City In Cities List */
+        const cityFound = citiesList.find((city) => city.text === address.city);
+        if (!cityFound) {
+          return;
+        }
+
+        /* Set cities list and selected city */
+        dispatch({ type: "CITY_SELECTED", payload: cityFound });
+        dispatch({ type: "UPDATE_CITIES", payload: citiesList });
+
+        /* Set Initially selected address */
+        setInitiallySelectedAddress({
+          selectedCountry: countryFound,
+          selectedState: stateFound,
+          selectedCity: cityFound,
+          addressLine1: address.addressLine1,
+          addressLine2: address.addressLine2,
+          pincode: address.pincode,
+        });
+      }
+    };
+
+    initializeStates();
+  }, [address, fetchCitiesOfState]);
+
+
   return (
     <>
       {isSuccessModalShown ? (
@@ -272,6 +386,7 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
           isModalButtonLoading={updateInProgress}
           hideModal={hideModal}
           apiError={state.errorMessage}
+          initiallySelectedAddress={initiallySelectedAddress}
         />
       )}
     </>

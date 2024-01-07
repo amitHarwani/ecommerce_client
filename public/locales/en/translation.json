@@ -100,7 +100,12 @@
     "removeCouponCode": "remove coupon code",
     "codeIsRequired": "code is required",
     "couponCodeAppliedSuccessfully": "coupon code applied successfully",
-    "couponCodeRemovedSuccessfully": "coupon code removed successfully"
+    "couponCodeRemovedSuccessfully": "coupon code removed successfully",
+    "update": "update",
+    "updateAddress": "update address",
+    "areYouSureYouWantToDeleteTheAddress": "are you sure you want to delete the address",
+    "deleteAddress": "delete address",
+    "addressDeletedSuccessfully": "address deleted successfully"
 
 
 

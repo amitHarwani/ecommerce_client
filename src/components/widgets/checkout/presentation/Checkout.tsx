@@ -50,7 +50,9 @@ const Checkout = (props: CheckoutProps) => {
   const [isAddressModalShown, setIsAddressModalShown] = useState(false);
 
 
-  const { handleSubmit, watch, control } = useForm<CheckoutFormFields>();
+  const { handleSubmit, watch, reset, control } = useForm<CheckoutFormFields>();
+
+  console.log("Checkout", watch('address'));
 
   const {
     handleSubmit: couponHandleSubmit,
@@ -66,12 +68,13 @@ const Checkout = (props: CheckoutProps) => {
       tempAddressRadioButton.push({
         id: address._id,
         isDefaultSelected: false,
-        customElement: <AddressCard address={address} className="" />,
+        customElement: <AddressCard address={address} className="" onAddressUpdated={refreshUserAddresses} />,
         customElementData: address,
       });
     });
     setAddressRadioButtons(tempAddressRadioButton);
-  }, [userAddresses]);
+    reset(); /* Reset Address Form Field */
+  }, [userAddresses, refreshUserAddresses, reset]);
 
   return (
     <>
