@@ -4,6 +4,7 @@ This is an ecommerce client app which is made by consuming freeapi: https://gith
 
 ### Steps to run the code locally
 * Download the freeapi project from: https://github.com/hiteshchoudhary/apihub, and set the project up.
+* Create a .env file in the root directory, and copy paste the contents of .env.sample into it.
 * In .env, Replace:
   * VITE_SERVER_URI: With the path where freeapi server is running
   * VITE_PAYPAL_CLIENT_ID: With your own paypal client id.
