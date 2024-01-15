@@ -1,7 +1,7 @@
-import ApiError from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { AddressClass, AddressListClass } from "./address/AddressTypes";
+import ApiError from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { AddressClass, AddressListClass } from "./AddressTypes";
 
 class AddressService {
   BASE_URL = "/api/v1/ecommerce/addresses";

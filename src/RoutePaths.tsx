@@ -10,6 +10,7 @@ import CartPageContainer from "./pages/cart/container/CartPageContainer";
 import ForLoggedInUsers from "./protectedroutes/ForLoggedInUsers";
 import CheckoutPageContainer from "./pages/checkout/container/CheckoutPageContainer";
 import PaymentFeedbackPageContainer from "./pages/paymentfeedback/container/PaymentFeedbackPageContainer";
+import ManageAccountPageContainer from "./pages/manageaccount/container/ManageAccountPageContainer";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -26,6 +27,7 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.cart} element={<CartPageContainer />} />
             <Route path={ROUTE_PATHS.checkout} element={<CheckoutPageContainer />} />
             <Route path={ROUTE_PATHS.paymentFeedback} element={<PaymentFeedbackPageContainer />} />
+            <Route path={ROUTE_PATHS.manageAccount} element={<ManageAccountPageContainer />} />
           </Route>
           <Route path="contact" element={<h1 className="flex justify-center items-center text-2xl">Contact</h1>} />
           <Route path="about" element={<h1 className="flex justify-center items-center text-2xl">About</h1>} />

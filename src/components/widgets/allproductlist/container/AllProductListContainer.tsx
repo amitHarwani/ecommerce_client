@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import AllProductList from "../presentation/AllProductList";
 import { Product, Products } from "../../../../services/product/ProductTypes";
 import ApiError from "../../../../services/ApiError";
-import ProductService from "../../../../services/ProductService";
+import ProductService from "../../../../services/product/ProductService";
 import { useTranslation } from "react-i18next";
 
 interface AllProductListContainerProps {

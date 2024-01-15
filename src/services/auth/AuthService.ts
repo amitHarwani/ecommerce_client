@@ -1,7 +1,7 @@
-import ApiError from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { LoginResp, USER_ROLES, User } from "./auth/AuthTypes";
+import ApiError from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { LoginResp, USER_ROLES, User } from "./AuthTypes";
 
 class AuthService {
   USER_BASE_URL = "/api/v1/users";

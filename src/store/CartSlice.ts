@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { UserCart } from "../services/cart/CartTypes";
-import CartService from "../services/CartService";
+import CartService from "../services/cart/CartService";
 import ApiError from "../services/ApiError";
 import { postMessageAction, removeMessage } from "./ToastMessageSlice";
 import i18n from "../i18n";

@@ -1,7 +1,7 @@
-import ApiError from "./ApiError";
-import ApiResponse from "./ApiResponse";
-import CountryApiRequest from "./CountryApiRequest";
-import { StatesOfACountryResponse } from "./countryapi/CountryApiTypes";
+import ApiError from "../ApiError";
+import ApiResponse from "../ApiResponse";
+import CountryApiRequest from "../CountryApiRequest";
+import { StatesOfACountryResponse } from "./CountryApiTypes";
 
 class CountryApiService {
   COUNTRIES_END_POINT = "/countries";

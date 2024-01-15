@@ -2,6 +2,7 @@ import AccountIcon from "../components/icons/AccountIcon";
 import GuranteeIcon from "../components/icons/GuranteeIcon";
 import HeadphoneIcon from "../components/icons/HeadphoneIcon";
 import LogoutIcon from "../components/icons/LogoutIcon";
+import OrderIcon from "../components/icons/OrderIcon";
 import TruckIcon from "../components/icons/TruckIcon";
 import MyAccountOptionContainer from "../components/widgets/myaccountoption/container/MyAccountOptionContainer";
 import {
@@ -58,6 +59,11 @@ export const MY_ACCOUNT_OPTIONS: Array<SelectionMenuItem> = [
   },
   {
     id: 2,
+    textKey: "myOrders",
+    icon: <OrderIcon className="" />
+  },
+  {
+    id: 3,
     textKey: "logout",
     icon: <LogoutIcon className="" />,
   },

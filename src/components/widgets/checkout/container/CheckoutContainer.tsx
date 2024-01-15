@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Checkout from "../presentation/Checkout";
 import { AddressClass } from "../../../../services/address/AddressTypes";
-import AddressService from "../../../../services/AddressService";
+import AddressService from "../../../../services/address/AddressService";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import { CouponClass } from "../../../../services/coupon/CouponTypes";
-import CouponService from "../../../../services/CouponService";
+import CouponService from "../../../../services/coupon/CouponService";
 import {
   CheckoutApplyCouponCodeFields,
   TOAST_MESSAGE_TYPES,

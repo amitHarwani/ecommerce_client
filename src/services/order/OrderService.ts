@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
-import ApiError, { ApiErrorResponse } from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { GeneratePayPalOrderResponseClass } from "./order/OrderTypes";
+import ApiError, { ApiErrorResponse } from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { GeneratePayPalOrderResponseClass } from "./OrderTypes";
 
 class OrderService {
   BASE_URL = "/api/v1/ecommerce/orders/provider";
