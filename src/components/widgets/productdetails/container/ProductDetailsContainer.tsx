@@ -6,7 +6,6 @@ import ApiError from "../../../../services/ApiError";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import { ROUTE_PATHS } from "../../../../constants";
-import { useTranslation } from "react-i18next";
 import { addOrUpdateToCartThunk, removeFromCartThunk } from "../../../../store/CartSlice";
 import { CartItemClass } from "../../../../services/cart/CartTypes";
 

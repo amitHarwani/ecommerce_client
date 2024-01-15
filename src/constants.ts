@@ -129,7 +129,8 @@ export enum ROUTE_PATHS {
   login = "/login",
   signup = "/signup",
   cart = "/cart",
-  checkout = "/checkout"
+  checkout = "/checkout",
+  paymentFeedback = "/payment-feedback"
 }
 
 
@@ -196,7 +197,7 @@ export type CheckoutApplyCouponCodeFields = {
 export type RADIO_BUTTON_TYPE<T> = {
   label?: string;
   customElement?: React.ReactElement;
-  customElementData?: T
+  data: T
   isDefaultSelected: boolean;
   id: string;
 }

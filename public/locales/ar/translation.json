@@ -105,7 +105,12 @@
     "updateAddress": "عنوان التحديث",
     "areYouSureYouWantToDeleteTheAddress": "هل أنت متأكد أنك تريد حذف العنوان",
     "deleteAddress": "حذف العنوان",
-    "addressDeletedSuccessfully": "تم حذف العنوان بنجاح"
+    "addressDeletedSuccessfully": "تم حذف العنوان بنجاح",
+    "selectAddressToContinueToPayment": "حدد العنوان لمواصلة الدفع",
+    "failedToProcessPaymentTryAgain": "فشلت في معالجة الدفع، يرجى المحاولة مرة أخرى في وقت لاحق",
+    "paymentSuccessfullyCompleted": "اكتمل الدفع بنجاح",
+    "goToHome": "اذهب إلى المنزل"
+
 
 
 

@@ -4,6 +4,7 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import Signup from "../presentation/Signup";
 import AuthService from "../../../../services/AuthService";
 import ApiError from "../../../../services/ApiError";
+import { USER_ROLES } from "../../../../services/auth/AuthTypes";
 
 const SignupContainer = () => {
   const navigate = useCustomNavigate();

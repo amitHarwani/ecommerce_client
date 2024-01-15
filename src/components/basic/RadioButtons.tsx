@@ -7,7 +7,7 @@ interface RadioButtonsProps<T> {
   items: Array<RADIO_BUTTON_TYPE<T>>;
   containerClassName?: string;
   radioButtonContainerClassName?: string;
-  onChange(selectedItem: RADIO_BUTTON_TYPE<T>): void;
+  onChange(selectedItem: T): void;
   errorMessage?: string;
 }
 const RadioButtons = React.forwardRef(
@@ -49,13 +49,13 @@ const RadioButtons = React.forwardRef(
               checked:border-[3px] checked:border-white checked:bg-black
               ${isRTL ? "ml-2" : "mr-2"}`}
               onChange={() => {
-                onChange(item);
+                onChange(item.data);
               }}
             />
             {item.customElement ? (
               <div className="w-full">
                 {React.cloneElement(item.customElement, {
-                  data: item.customElementData,
+                  data: item.data,
                 })}
               </div>
             ) : item.label ? (

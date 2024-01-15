@@ -1,4 +1,4 @@
-import { RefObject, createRef, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AddressClass } from "../../../../services/address/AddressTypes";
 import RadioButtons from "../../../basic/RadioButtons";
 import {
@@ -20,6 +20,8 @@ import CouponCardList from "../../../business/CouponCardList";
 import Input from "../../../basic/Input";
 import { useAppSelector } from "../../../../store";
 import Text from "../../../basic/Text";
+import ErrorMessage from "../../../basic/ErrorMessage";
+import Payment from "../../../business/Payment";
 
 interface CheckoutProps {
   userAddresses: Array<AddressClass>;
@@ -41,7 +43,7 @@ const Checkout = (props: CheckoutProps) => {
     isUpdatingCouponInProgress = false,
   } = props;
 
-  const isRTL = useAppSelector(state => state.language.isRTL);
+  const isRTL = useAppSelector((state) => state.language.isRTL);
   const { t } = useTranslation();
 
   /* To convert User Addresses, to types which can be passed to radio buttons component */
@@ -52,11 +54,14 @@ const Checkout = (props: CheckoutProps) => {
   /* If add address modal is shown */
   const [isAddressModalShown, setIsAddressModalShown] = useState(false);
 
-  const { handleSubmit, watch, reset, control } = useForm<CheckoutFormFields>();
+  const {
+    watch: watchAddress,
+    reset,
+    control,
+  } = useForm<CheckoutFormFields>();
 
   const {
     handleSubmit: couponHandleSubmit,
-    watch: couponCodeWatch,
     register: couponCodeRegister,
     formState: { errors: couponCodeErrors },
   } = useForm<CheckoutApplyCouponCodeFields>();
@@ -68,8 +73,14 @@ const Checkout = (props: CheckoutProps) => {
       tempAddressRadioButton.push({
         id: address._id,
         isDefaultSelected: false,
-        customElement: <AddressCard address={address} className="" onAddressUpdated={refreshUserAddresses} />,
-        customElementData: address,
+        customElement: (
+          <AddressCard
+            address={address}
+            className=""
+            onAddressUpdated={refreshUserAddresses}
+          />
+        ),
+        data: address,
       });
     });
     setAddressRadioButtons(tempAddressRadioButton);
@@ -84,7 +95,11 @@ const Checkout = (props: CheckoutProps) => {
           onAddressAddedOrUpdatedCallback={refreshUserAddresses}
         />
       )}
-      <div className={`flex flex-col gap-y-4 lg:flex-row lg:gap-x-4 ${isRTL ? 'lg:flex-row-reverse' : ''}`}>
+      <div
+        className={`flex flex-col gap-y-4 lg:flex-row lg:gap-x-4 ${
+          isRTL ? "lg:flex-row-reverse" : ""
+        }`}
+      >
         <div className="flex flex-col lg:w-2/4 gap-2">
           <Text className="capitalize text-xl font-poppinsMedium">
             {t("selectAddress")}
@@ -121,7 +136,9 @@ const Checkout = (props: CheckoutProps) => {
           />
           {!userCart?.coupon?.couponCode ? (
             <form
-              className={`flex flex-col gap-y-4 lg:flex-row lg:items-center lg:gap-x-8 ${isRTL ? 'lg:flex-row-reverse': ''}`}
+              className={`flex flex-col gap-y-4 lg:flex-row lg:items-center lg:gap-x-8 ${
+                isRTL ? "lg:flex-row-reverse" : ""
+              }`}
               onSubmit={couponHandleSubmit(applyCouponCodeHandler)}
             >
               <div className="flex-1">
@@ -138,7 +155,7 @@ const Checkout = (props: CheckoutProps) => {
               <Button
                 buttonType={ButtonTypes.primaryButton}
                 type="submit"
-                className="py-2 px-4 uppercase"
+                className="py-2 px-4 uppercase flex justify-center"
                 onClickHandler={() => {}}
                 isLoading={isUpdatingCouponInProgress}
               >
@@ -155,6 +172,13 @@ const Checkout = (props: CheckoutProps) => {
               <span>{t("removeCouponCode")}</span>
             </Button>
           )}
+          {!watchAddress("address") && (
+            <ErrorMessage
+              message={t("selectAddressToContinueToPayment")}
+              errorIconClassName="w-4 h-4"
+            />
+          )}
+            <Payment addressId={watchAddress("address")?._id} isDisabled={!watchAddress("address") ? true : false} />
         </div>
       </div>
     </>
