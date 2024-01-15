@@ -109,7 +109,23 @@
     "selectAddressToContinueToPayment": "حدد العنوان لمواصلة الدفع",
     "failedToProcessPaymentTryAgain": "فشلت في معالجة الدفع، يرجى المحاولة مرة أخرى في وقت لاحق",
     "paymentSuccessfullyCompleted": "اكتمل الدفع بنجاح",
-    "goToHome": "اذهب إلى المنزل"
+    "goToHome": "اذهب إلى المنزل",
+    "myOrders": "طلباتي",
+    "editYourProfile": "عدل ملفك الشخصي",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "countryCode": "الرقم الدولي",
+    "phoneNumber": "رقم التليفون",
+    "firstNameIsRequired": "الإسم الأول مطلوب",
+    "lastNameIsRequired": "إسم العائلة مطلوب",
+    "countryCodeIsRequired": "مطلوب رمز البلد",
+    "phoneNumberIsRequired": "رقم الهاتف مطلوب",
+    "invalidPhoneNumber": "رقم الهاتف غير صحيح",
+    "invalidCountryCode": "رمز البلد غير صالح",
+    "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح"
+
+
+
 
 
 

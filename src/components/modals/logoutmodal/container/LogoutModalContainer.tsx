@@ -4,7 +4,7 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import { logOut } from "../../../../store/AuthSlice";
 import { useState } from "react";
 import ApiError from "../../../../services/ApiError";
-import AuthService from "../../../../services/AuthService";
+import AuthService from "../../../../services/auth/AuthService";
 
 interface LogoutModalContainerProps {
   isShown?: boolean;

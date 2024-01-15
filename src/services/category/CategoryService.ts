@@ -1,7 +1,7 @@
-import ApiError from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { Categories, Category } from "./category/CategoryTypes";
+import ApiError from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { Categories, Category } from "./CategoryTypes";
 
 class CategoryService {
   defaultPageNumber: number = 1;

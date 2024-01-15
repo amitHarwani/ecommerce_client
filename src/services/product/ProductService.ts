@@ -1,8 +1,8 @@
-import { generateRandomNumber } from "../utils/commonHelper";
-import ApiError from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { Product, Products } from "./product/ProductTypes";
+import { generateRandomNumber } from "../../utils/commonHelper";
+import ApiError from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { Product, Products } from "./ProductTypes";
 
 class ProductService {
   defaultPageNumber: number = 1;

@@ -130,7 +130,9 @@ export enum ROUTE_PATHS {
   signup = "/signup",
   cart = "/cart",
   checkout = "/checkout",
-  paymentFeedback = "/payment-feedback"
+  paymentFeedback = "/payment-feedback",
+  manageAccount = "/manage-account",
+  orders = "/orders"
 }
 
 
@@ -143,7 +145,9 @@ export enum PUBLIC_IMAGE_PATHS {
 /* REGEX PATTERNS */
 export const REGEX_PATTERNS = {
   emailPattern : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-  numberPattern: /^[0-9]*$/
+  numberPattern: /^[0-9]*$/,
+  countryCodePattern: /^\+[0-9]{1,3}$/,
+  phoneNumberPattern: /^[0-9]{9,10}$/
 }
 
 
@@ -188,6 +192,13 @@ export type AddressFormFields = {
 
 export type CheckoutFormFields = {
   address: AddressClass
+}
+
+export type ProfileFormFields = {
+  firstName: string,
+  lastName: string,
+  phoneNumber: string,
+  countryCode: string
 }
 
 export type CheckoutApplyCouponCodeFields = {

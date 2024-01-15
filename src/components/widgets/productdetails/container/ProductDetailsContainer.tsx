@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Product } from "../../../../services/product/ProductTypes";
 import ProductDetails from "../presentation/ProductDetails";
-import ProductService from "../../../../services/ProductService";
+import ProductService from "../../../../services/product/ProductService";
 import ApiError from "../../../../services/ApiError";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";

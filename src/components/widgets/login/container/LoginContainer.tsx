@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LoginFormFields, ROUTE_PATHS } from "../../../../constants";
 import Login from "../presentation/Login";
-import AuthService from "../../../../services/AuthService";
+import AuthService from "../../../../services/auth/AuthService";
 import ApiError from "../../../../services/ApiError";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";

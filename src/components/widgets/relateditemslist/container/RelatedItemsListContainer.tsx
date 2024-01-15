@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import ProductService from "../../../../services/ProductService";
+import ProductService from "../../../../services/product/ProductService";
 import { Product } from "../../../../services/product/ProductTypes";
 import RelatedItemsList from "../presentation/RelatedItemsList";
 import { RELATED_PRODUCTS_COUNT } from "../../../../data/applicationData";

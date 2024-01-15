@@ -109,7 +109,22 @@
     "selectAddressToContinueToPayment": "select address to continue to payment",
     "failedToProcessPaymentTryAgain": "failed to process payment, please try again later",
     "paymentSuccessfullyCompleted": "payment successfully completed",
-    "goToHome": "go to home"
+    "goToHome": "go to home",
+    "myOrders": "my orders",
+    "editYourProfile": "edit your profile",
+    "firstName": "first name",
+    "lastName": "last name",
+    "countryCode": "country code",
+    "phoneNumber": "phone number",
+    "firstNameIsRequired": "first name is required",
+    "lastNameIsRequired": "last name is required",
+    "countryCodeIsRequired": "country code is required",
+    "phoneNumberIsRequired": "phone number is required",
+    "invalidPhoneNumber": "invalid phone number",
+    "invalidCountryCode": "invalid country code",
+    "profileUpdatedSuccessfully": "profile updated successfully"
+    
+    
 
 
 

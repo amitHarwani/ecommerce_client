@@ -1,7 +1,7 @@
 import React, { ForwardedRef, useCallback, useEffect, useState } from "react";
 import Header from "../presentation/Header";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
-import AuthService from "../../../../services/AuthService";
+import AuthService from "../../../../services/auth/AuthService";
 import ApiError from "../../../../services/ApiError";
 import { logIn, logOut, updateLoginCheckDone } from "../../../../store/AuthSlice";
 import { NavigationOption, ROUTE_PATHS } from "../../../../constants";

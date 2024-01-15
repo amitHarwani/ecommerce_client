@@ -6,9 +6,9 @@ import {
   AddressFormFields,
   DropdownItem,
 } from "../../../../constants";
-import CountryApiService from "../../../../services/CountryApiService";
+import CountryApiService from "../../../../services/countryapi/CountryApiService";
 import ApiError from "../../../../services/ApiError";
-import AddressService from "../../../../services/AddressService";
+import AddressService from "../../../../services/address/AddressService";
 import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
 import { useTranslation } from "react-i18next";
 import { AddressClass } from "../../../../services/address/AddressTypes";

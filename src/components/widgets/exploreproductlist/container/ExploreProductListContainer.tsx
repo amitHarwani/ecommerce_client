@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ExploreProductList from "../presentation/ExploreProductList";
 import { Product } from "../../../../services/product/ProductTypes";
-import ProductService from "../../../../services/ProductService";
+import ProductService from "../../../../services/product/ProductService";
 import { EXPLORE_PRODUCTS_COUNT } from "../../../../data/applicationData";
 import { ROUTE_PATHS } from "../../../../constants";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";

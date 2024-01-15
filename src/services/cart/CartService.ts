@@ -1,7 +1,7 @@
-import ApiError from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { UserCart } from "./cart/CartTypes";
+import ApiError from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { UserCart } from "./CartTypes";
 
 class CartService {
   BASE_URL = "/api/v1/ecommerce/cart";

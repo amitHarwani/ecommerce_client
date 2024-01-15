@@ -1,6 +1,6 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useMemo } from "react";
-import OrderService from "../../services/OrderService";
+import OrderService from "../../services/order/OrderService";
 import ApiError from "../../services/ApiError";
 import { OnApproveData } from "@paypal/paypal-js/types/components/buttons";
 import useCustomNavigate from "../../hooks/useCustomNavigate";

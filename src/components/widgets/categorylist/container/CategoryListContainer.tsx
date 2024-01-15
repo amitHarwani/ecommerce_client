@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CategoryList from "../presentation/CategoryList";
 import { Category } from "../../../../services/category/CategoryTypes";
-import CategoryService from "../../../../services/CategoryService";
+import CategoryService from "../../../../services/category/CategoryService";
 import { createSearchParams } from "react-router-dom";
 import { QUERY_PARAMS, ROUTE_PATHS } from "../../../../constants";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";

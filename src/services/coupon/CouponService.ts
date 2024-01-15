@@ -1,8 +1,8 @@
-import ApiError from "./ApiError";
-import ApiRequest from "./ApiRequest";
-import ApiResponse from "./ApiResponse";
-import { UserCart } from "./cart/CartTypes";
-import { CouponClass, CouponListClass } from "./coupon/CouponTypes";
+import ApiError from "../ApiError";
+import ApiRequest from "../ApiRequest";
+import ApiResponse from "../ApiResponse";
+import { UserCart } from "../cart/CartTypes";
+import { CouponClass, CouponListClass } from "./CouponTypes";
 
 class CouponService {
   BASE_URL = "/api/v1/ecommerce/coupons";

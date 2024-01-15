@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DeleteAddressModal from "../presentation/DeleteAddressModal";
 import { AddressClass } from "../../../../services/address/AddressTypes";
-import AddressService from "../../../../services/AddressService";
+import AddressService from "../../../../services/address/AddressService";
 import ApiError from "../../../../services/ApiError";
 import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
 import { useTranslation } from "react-i18next";
