@@ -14,6 +14,7 @@ const Cart = (props: CartProps) => {
   const { cart, onQuantityChanged, removeFromCart, checkoutClickHandler } = props;
 
   const isRTL = useAppSelector(state => state.language.isRTL);
+  
   return (
     <div className={`flex flex-col relative lg:flex-row lg:gap-x-4 ${isRTL ? 'lg:flex-row-reverse': ''} `}>
       <div className="overflow-auto h-96 lg:h-auto lg:flex-1">

@@ -16,7 +16,7 @@ const InvoiceAmountSummary = (props: InvoiceAmountSummaryProps) => {
   const isRTL = useAppSelector(state => state.language.isRTL)
 
   const currency = useMemo(() => {
-    return userCart.items[0].product.currency || DEFAULT_CURRENCY
+    return userCart?.items[0]?.product?.currency || DEFAULT_CURRENCY
   }, [userCart])
 
   return (

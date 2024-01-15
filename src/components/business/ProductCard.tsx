@@ -16,7 +16,7 @@ const ProductCard = (props: ProductCardProps) => {
 
   const navigate = useCustomNavigate();
 
-  /* navigate to /product/:productId */
+  /* navigate to /product?productId=<productId>&categoryId=<categoryId> */
   const productClickHandler = () => {
     navigate({
       pathname: ROUTE_PATHS.product,

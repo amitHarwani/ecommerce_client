@@ -142,7 +142,7 @@ const AddAddressModalContainer = (props: AddAddressModalContainerProps) => {
 
   /* State to hold initially selected address: In case of update (Default Address) */
   const [initiallySelectedAddress, setInitiallySelectedAddress] = useState<
-    | {
+     {
         selectedCountry: DropdownItem;
         selectedState: DropdownItem;
         selectedCity: DropdownItem;

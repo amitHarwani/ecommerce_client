@@ -17,7 +17,7 @@ const CartSummary = (props: CartSummaryProps) => {
         <div className={`flex flex-col lg:border lg:border-grey p-4 rounded-md ${className}`}>
             <Text className="font-poppinsMedium text-xl tracking-wider capitalize mb-4">{t('summary')}</Text>
             <InvoiceAmountSummary userCart={userCart} className="mb-4" />
-            <Button onClickHandler={checkoutClickHandler} buttonType={ButtonTypes.primaryButton}
+            <Button onClickHandler={checkoutClickHandler} buttonType={ButtonTypes.primaryButton} isDisabled={!userCart?.items?.length}
             className="px-4 py-1">
                 <span className="capitalize">{t('proceedToCheckout')}</span>
             </Button>

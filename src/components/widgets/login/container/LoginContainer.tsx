@@ -36,7 +36,13 @@ const LoginContainer = () => {
       // Logged In
       dispatch(logIn(response.user));
       const previousRoute = location.state?.previousRoute;
-      previousRoute ? navigate(previousRoute) : navigate('/');
+
+      if(previousRoute){
+        navigate(previousRoute, true);
+      }
+      else{
+        navigate("/")
+      }
     }
   };
 

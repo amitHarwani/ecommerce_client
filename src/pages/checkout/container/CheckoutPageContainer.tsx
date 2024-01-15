@@ -2,12 +2,16 @@ import { useEffect, useMemo } from "react";
 import CheckoutPage from "../presentation/CheckoutPage"
 import { useLocation } from "react-router-dom";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";
+import { useAppSelector } from "../../../store";
 
 
 const CheckoutPageContainer = () => {
 
     const navigate = useCustomNavigate();
     const location = useLocation();
+
+    const userCart = useAppSelector((state) => state.cart.userCart);
+
 
     const isFromCartPage = useMemo(() => {
         return location.state?.isFromCartPage;
@@ -20,6 +24,12 @@ const CheckoutPageContainer = () => {
         }
 
     }, [isFromCartPage, navigate])
+
+    useEffect(() => {
+        if(!userCart?.items?.length){
+            navigate("/", true);
+        }
+    }, [userCart, navigate])
 
     return (
         <CheckoutPage />
