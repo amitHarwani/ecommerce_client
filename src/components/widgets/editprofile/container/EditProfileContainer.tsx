@@ -81,7 +81,7 @@ const EditProfileContainer = () => {
           updateInProgress={updateInProgress}
         />
       ) : errorFetchingProfile ? (
-        <ErrorMessage message={errorFetchingProfile} />
+        <ErrorMessage message={t("failedToFetchInformation")} />
       ) : (
         <></>
       )}

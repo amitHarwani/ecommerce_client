@@ -122,7 +122,8 @@
     "phoneNumberIsRequired": "phone number is required",
     "invalidPhoneNumber": "invalid phone number",
     "invalidCountryCode": "invalid country code",
-    "profileUpdatedSuccessfully": "profile updated successfully"
+    "profileUpdatedSuccessfully": "profile updated successfully",
+    "failedToFetchInformation": "failed to fetch information, please try again later"
     
     
 

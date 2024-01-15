@@ -122,7 +122,9 @@
     "phoneNumberIsRequired": "رقم الهاتف مطلوب",
     "invalidPhoneNumber": "رقم الهاتف غير صحيح",
     "invalidCountryCode": "رمز البلد غير صالح",
-    "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح"
+    "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
+    "failedToFetchInformation": "فشل في جلب المعلومات، يرجى المحاولة مرة أخرى في وقت لاحق"
+
 
 
 
