@@ -1,5 +1,5 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import OrderService from "../../services/order/OrderService";
 import ApiError from "../../services/ApiError";
 import { OnApproveData } from "@paypal/paypal-js/types/components/buttons";
@@ -21,8 +21,14 @@ const Payment = (props: PaymentProps) => {
     return import.meta.env.VITE_PAYPAL_CLIENT_ID;
   }, []);
 
+  const addressIdRef = useRef("");
+
+  useEffect(() => {
+    addressIdRef.current = addressId
+  }, [addressId])
+  
   const createOrder = async () => {
-    return OrderService.generatePayPalOrder(addressId)
+    return OrderService.generatePayPalOrder(addressIdRef.current)
       .then((response) => {
         if (!(response instanceof ApiError)) {
           return response.id;

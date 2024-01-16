@@ -81,6 +81,7 @@ export enum LinkTypes {
 /* DATE TIME FORMATS */
 export enum DATE_TIME_FORMATS {
   standardDateWithTime = "YYYY-MM-DDTHH:mm:ss",
+  displayedDateWithTime = "Do MMM YYYY, hh:mmA"
 }
 
 export type DURATION = {
@@ -132,7 +133,7 @@ export enum ROUTE_PATHS {
   checkout = "/checkout",
   paymentFeedback = "/payment-feedback",
   manageAccount = "/manage-account",
-  orders = "/orders"
+  orders = "/orders",
 }
 
 

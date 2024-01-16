@@ -28,3 +28,7 @@ export const convertMillisecondsToDaysHoursMinsSec = (
     seconds,
   };
 };
+
+export const formatDateTime = (input: string, inputFormat: DATE_TIME_FORMATS, outputFormat: DATE_TIME_FORMATS): string => {
+  return moment(input, inputFormat).format(outputFormat);
+}

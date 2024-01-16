@@ -15,6 +15,7 @@ const MyAccountOptionContainer = () => {
         navigate(ROUTE_PATHS.manageAccount);
         return;
       case 2: 
+        navigate(ROUTE_PATHS.orders);
         return;
       case 3: {
         //Logout

@@ -102,3 +102,7 @@ export const COMPANY_GURANTEE_LIST: COMPANY_GURANTEE[] = [
 export const EXPLORE_PRODUCTS_COUNT = 8;
 export const FEATURED_PRODUCTS_COUNT = 4;
 export const RELATED_PRODUCTS_COUNT = 4;
+
+export enum PAYMENT_TYPES {
+  PAYPAL = "PAYPAL"
+}

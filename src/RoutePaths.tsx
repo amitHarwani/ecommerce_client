@@ -11,6 +11,7 @@ import ForLoggedInUsers from "./protectedroutes/ForLoggedInUsers";
 import CheckoutPageContainer from "./pages/checkout/container/CheckoutPageContainer";
 import PaymentFeedbackPageContainer from "./pages/paymentfeedback/container/PaymentFeedbackPageContainer";
 import ManageAccountPageContainer from "./pages/manageaccount/container/ManageAccountPageContainer";
+import OrdersPageContainer from "./pages/orders/container/OrdersPageContainer";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -28,6 +29,7 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.checkout} element={<CheckoutPageContainer />} />
             <Route path={ROUTE_PATHS.paymentFeedback} element={<PaymentFeedbackPageContainer />} />
             <Route path={ROUTE_PATHS.manageAccount} element={<ManageAccountPageContainer />} />
+            <Route path={ROUTE_PATHS.orders} element={<OrdersPageContainer/>} />
           </Route>
           <Route path="contact" element={<h1 className="flex justify-center items-center text-2xl">Contact</h1>} />
           <Route path="about" element={<h1 className="flex justify-center items-center text-2xl">About</h1>} />
