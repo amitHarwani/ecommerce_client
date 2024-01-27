@@ -123,7 +123,9 @@
     "invalidPhoneNumber": "رقم الهاتف غير صحيح",
     "invalidCountryCode": "رمز البلد غير صالح",
     "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
-    "failedToFetchInformation": "فشل في جلب المعلومات، يرجى المحاولة مرة أخرى في وقت لاحق"
+    "failedToFetchInformation": "فشل في جلب المعلومات، يرجى المحاولة مرة أخرى في وقت لاحق",
+    "signInWithGoogle": "الدخول مع جوجل",
+    "noOrdersFound": "لم يتم العثور على أية طلبات"
 
 
 
