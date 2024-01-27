@@ -123,7 +123,9 @@
     "invalidPhoneNumber": "invalid phone number",
     "invalidCountryCode": "invalid country code",
     "profileUpdatedSuccessfully": "profile updated successfully",
-    "failedToFetchInformation": "failed to fetch information, please try again later"
+    "failedToFetchInformation": "failed to fetch information, please try again later",
+    "signInWithGoogle": "sign in with google",
+    "noOrdersFound": "no orders found"
     
     
 

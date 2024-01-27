@@ -46,6 +46,10 @@ const LoginContainer = () => {
     }
   };
 
+  const googleLoginClickHandler = () => {
+    window.location.href = `${import.meta.env.VITE_SERVER_URI}${AuthService.GOOGLE_LOGIN_REDIRECT_URL}`;
+  }
+
   const signupClickHandler = () => {
     navigate(ROUTE_PATHS.signup)
   };
@@ -54,6 +58,7 @@ const LoginContainer = () => {
   return (
     <Login
       loginClickHandler={loginClickHandler}
+      googleLoginClickHandler={googleLoginClickHandler}
       signupClickHandler={signupClickHandler}
       forgotPasswordClickHandler={forgotPasswordClickHandler}
       isLoading={isLoading}

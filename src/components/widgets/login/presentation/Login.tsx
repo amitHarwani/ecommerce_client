@@ -12,9 +12,11 @@ import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../basic/ErrorMessage";
 import Text from "../../../basic/Text";
 import { useAppSelector } from "../../../../store";
+import GoogleIcon from "../../../icons/GoogleIcon";
 
 interface LoginProps {
   loginClickHandler(inputData: LoginFormFields): void;
+  googleLoginClickHandler(): void;
   forgotPasswordClickHandler(): void;
   signupClickHandler(): void;
   isLoading?: boolean;
@@ -23,14 +25,15 @@ interface LoginProps {
 const Login = (props: LoginProps) => {
   const {
     loginClickHandler,
+    googleLoginClickHandler,
     forgotPasswordClickHandler,
     signupClickHandler,
     isLoading = false,
     apiError = "",
   } = props;
 
-  const isRTL = useAppSelector(state => state.language.isRTL);
-  
+  const isRTL = useAppSelector((state) => state.language.isRTL);
+
   const { t } = useTranslation();
 
   const {
@@ -50,16 +53,19 @@ const Login = (props: LoginProps) => {
       <Text className="capitalize mt-6 self-center lg:self-auto">
         {t("enterYourDetailsBelow")}
       </Text>
-      {
-        apiError &&
-        <ErrorMessage className="text-sm mt-1" errorIconClassName="w-4 h-4" message={apiError}/>
-      }
+      {apiError && (
+        <ErrorMessage
+          className="text-sm mt-1"
+          errorIconClassName="w-4 h-4"
+          message={apiError}
+        />
+      )}
       <Input
         placeholder={t("email")}
         type="text"
         className="mt-12 placeholder:capitalize"
         autoComplete="username"
-        errorMessage={errors.email?.message || ''}
+        errorMessage={errors.email?.message || ""}
         {...register("email", {
           required: t("emailIsRequired"),
           validate: {
@@ -75,11 +81,15 @@ const Login = (props: LoginProps) => {
         type="password"
         className="mt-10 placeholder:capitalize"
         autoComplete="current-password"
-        errorMessage={errors.password?.message || ''}
+        errorMessage={errors.password?.message || ""}
         {...register("password", { required: t("passwordIsRequired") })}
       />
 
-      <div className={`flex justify-between items-center mt-10 ${isRTL ? 'flex-row-reverse' : ''}`}>
+      <div
+        className={`flex justify-between items-center mt-10 ${
+          isRTL ? "flex-row-reverse" : ""
+        }`}
+      >
         <Button
           className="px-4 py-2 capitalize"
           type="submit"
@@ -96,6 +106,18 @@ const Login = (props: LoginProps) => {
           className="capitalize"
         />
       </div>
+
+      <Button
+        className={`px-4 py-2 capitalize mt-4 flex justify-center items-center gap-4 ${isRTL ? 'flex-row-reverse': ''}`}
+        type="button"
+        buttonType={ButtonTypes.secondaryButton}
+        onClickHandler={googleLoginClickHandler}
+      >
+        <>
+          <GoogleIcon className="w-6 h-6" />
+          <span>{t("signInWithGoogle")}</span>
+        </>
+      </Button>
 
       <Link
         text={t("dontHaveAnAccountSignUp")}
