@@ -120,13 +120,15 @@ export enum ARROW_BUTTONS {
 export enum QUERY_PARAMS {
   category = "category",
   productId = "productId",
-  categoryId = "categoryId"
+  categoryId = "categoryId",
+  productNameSearch = "productNameSearch"
 }
 
 /* Paths */
 export enum ROUTE_PATHS {
   products = "/products",
   product = "/product",
+  productSearch = "/product-search",
   login = "/login",
   signup = "/signup",
   cart = "/cart",

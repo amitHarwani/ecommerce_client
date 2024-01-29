@@ -15,10 +15,11 @@ interface HeaderProps {
   navItemList: NavigationOption[];
   itemsInCart: number;
   cartClickHandler(): void;
+  searchHandler(inputText: string): void;
 }
 const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<HTMLDivElement>) {
 
-  const {logoClickHandler, navItemList, itemsInCart = 0, cartClickHandler} = props;
+  const {logoClickHandler, navItemList, itemsInCart = 0, cartClickHandler, searchHandler} = props;
 
   const { t } = useTranslation();
 
@@ -42,6 +43,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
           <SearchInput
             placeholder={t("searchProductsPlaceholder")}
             className="flex-1 mx-8"
+            submitHandler={searchHandler}
           />
           <Button onClickHandler={cartClickHandler}>
             <CartIcon className="w-8 h-8 text-black" quantity={itemsInCart} />
@@ -72,6 +74,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
           <SearchInput
             placeholder={t("searchProductsPlaceholder")}
             className={`w-full ${isRTL ? "ml-2" : "mr-2"}`}
+            submitHandler={searchHandler}
           />
           <Button onClickHandler={cartClickHandler}>
             <CartIcon className="w-8 h-8 text-black" quantity={itemsInCart} />

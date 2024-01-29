@@ -125,7 +125,9 @@
     "profileUpdatedSuccessfully": "profile updated successfully",
     "failedToFetchInformation": "failed to fetch information, please try again later",
     "signInWithGoogle": "sign in with google",
-    "noOrdersFound": "no orders found"
+    "noOrdersFound": "no orders found",
+    "searchResults": "search results",
+    "noResultsFound": "no results found"
     
     
 

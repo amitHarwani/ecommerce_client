@@ -12,6 +12,7 @@ import CheckoutPageContainer from "./pages/checkout/container/CheckoutPageContai
 import PaymentFeedbackPageContainer from "./pages/paymentfeedback/container/PaymentFeedbackPageContainer";
 import ManageAccountPageContainer from "./pages/manageaccount/container/ManageAccountPageContainer";
 import OrdersPageContainer from "./pages/orders/container/OrdersPageContainer";
+import ProductSearchPageContainer from "./pages/productsearch/container/ProductSearchPageContainer";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -24,6 +25,7 @@ const RoutePaths = () => {
           <Route path={ROUTE_PATHS.product} element={<ProductDetailPageContainer />} />
           <Route path={ROUTE_PATHS.login} element={<LoginPageContainer />} />
           <Route path={ROUTE_PATHS.signup} element={<SignupPageContainer />} />
+          <Route path={ROUTE_PATHS.productSearch} element={<ProductSearchPageContainer />} />
           <Route element={<ForLoggedInUsers />}>
             <Route path={ROUTE_PATHS.cart} element={<CartPageContainer />} />
             <Route path={ROUTE_PATHS.checkout} element={<CheckoutPageContainer />} />
