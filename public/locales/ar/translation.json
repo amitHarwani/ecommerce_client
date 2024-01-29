@@ -125,7 +125,11 @@
     "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
     "failedToFetchInformation": "فشل في جلب المعلومات، يرجى المحاولة مرة أخرى في وقت لاحق",
     "signInWithGoogle": "الدخول مع جوجل",
-    "noOrdersFound": "لم يتم العثور على أية طلبات"
+    "noOrdersFound": "لم يتم العثور على أية طلبات",
+    "searchResults": "نتائج البحث",
+    "noResultsFound": "لم يتم العثور على نتائج"
+
+
 
 
 

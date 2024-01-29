@@ -64,9 +64,14 @@ class ProductService {
     }
   }
 
-  async getProducts(pageNumber: number, categoryId?: string): Promise<Products | ApiError> {
-    const url = categoryId ? `${this.CATEGORY_WISE_URL}/${categoryId}` : this.BASE_URL;
-    
+  async getProducts(
+    pageNumber: number,
+    categoryId?: string
+  ): Promise<Products | ApiError> {
+    const url = categoryId
+      ? `${this.CATEGORY_WISE_URL}/${categoryId}`
+      : this.BASE_URL;
+
     const apiRequest = new ApiRequest(url);
 
     const response = await apiRequest.getRequest<Products>({
@@ -97,29 +102,88 @@ class ProductService {
     }
   }
 
-  async getProduct(productId: string): Promise<Product | ApiError> {
+  async getAllProductsAsync(
+    callback: (data: Array<Product>, isDone: boolean, error?: ApiError) => void
+  ) {
+    /* ApiRequest Object */
+    const apiRequest = new ApiRequest(this.BASE_URL);
 
+    let page = this.defaultPageNumber;
+    /* First Request */
+    const firstResponse = await apiRequest.getRequest<Products>({
+      page,
+      limit: this.defaultPageLimit,
+    });
+
+    if (firstResponse instanceof ApiResponse && firstResponse.success) {
+      /* Pending requests */
+      const totalPages = firstResponse.data.totalPages;
+
+      page++;
+
+      let requestsPending = totalPages - page + 1;
+
+      /* If no requests are pending return else send intermediate response */
+      if (!requestsPending) {
+        return callback(firstResponse.data.products, true);
+      }
+      else{
+        callback(firstResponse.data.products, false);
+      }
+      for (let counter = page; counter <= totalPages; counter++) {
+        apiRequest
+          .getRequest<Products>({ page: counter, limit: this.defaultPageLimit })
+          .then((response) => {
+            /* Decrementing pending requests count */
+            requestsPending--;
+
+            /* Error in request: Return */
+            if (!(response instanceof ApiResponse && response.success)) {
+              return response instanceof ApiError
+                ? callback([], true, response)
+                : callback([], true, new ApiError(response.message));
+            } else if (!requestsPending) {
+              /* All Requests are done */
+              return callback(response.data.products, true);
+            } else {
+              /* Sending the data of an in between request */
+              callback(response.data.products, false);
+            }
+          });
+      }
+    } else {
+      /* Error */
+      return firstResponse instanceof ApiError
+        ? firstResponse
+        : new ApiError(firstResponse.message);
+    }
+  }
+
+  async getProduct(productId: string): Promise<Product | ApiError> {
     const apiRequest = new ApiRequest(`${this.BASE_URL}/${productId}`);
 
     const response = await apiRequest.getRequest<Product>();
 
-    if(response instanceof ApiResponse && response.success){
+    if (response instanceof ApiResponse && response.success) {
       return response.data;
-    }
-    else if(response instanceof ApiResponse){
+    } else if (response instanceof ApiResponse) {
       return new ApiError(response.message);
-    }
-    else{
+    } else {
       return response;
     }
   }
 
-  async getRelatedProducts(categoryId: string, numberOfProducts: number): Promise<Product[] | ApiError>{
-    const apiRequest = new ApiRequest(`${this.CATEGORY_WISE_URL}/${categoryId}`);
+  async getRelatedProducts(
+    categoryId: string,
+    numberOfProducts: number
+  ): Promise<Product[] | ApiError> {
+    const apiRequest = new ApiRequest(
+      `${this.CATEGORY_WISE_URL}/${categoryId}`
+    );
 
     const response = await apiRequest.getRequest<Products>();
 
-    if(response instanceof ApiResponse && response.success){
+    if (response instanceof ApiResponse && response.success) {
       const products = response.data.products;
 
       //Shuffle
@@ -128,12 +192,10 @@ class ProductService {
       const relatedProducts = products.splice(0, numberOfProducts);
 
       return relatedProducts;
-    }
-    else if(response instanceof ApiResponse){
+    } else if (response instanceof ApiResponse) {
       return new ApiError(response.message);
-    }
-    else{
-      return response
+    } else {
+      return response;
     }
   }
 }
