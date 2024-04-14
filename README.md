@@ -11,4 +11,7 @@ This is an ecommerce client app which is made by consuming freeapi: https://gith
 * Run ```npm i ```
 * Run ```npm run dev```, the development server will start on port 3000: Visit http://localhost:3000 to view the client app.
 
+### Credits
+ * FreeAPI Project:    https://github.com/hiteshchoudhary/apihub
+ * Design Inspiration: https://www.figma.com/community/file/1219312065205187851
 
