@@ -13,7 +13,10 @@ interface LogoutModalContainerProps {
 const LogoutModalContainer = (props: LogoutModalContainerProps) => {
   const { isShown = false, hideModal } = props;
 
+  /* State for loading spinner */
   const [logoutInProgress, setLogoutInProgress] = useState(false);
+
+  /* To store any error message when logging out */
   const [errorMessage, setErrorMessage] = useState('');
 
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import {
+  DropdownItem,
   DropdownTypes,
-  LanguageDropdownItem,
 } from "../../../../constants";
 import Dropdown from "../../../basic/Dropdown";
 import Link from "../../../basic/Link";
@@ -9,11 +9,11 @@ import { useAppSelector } from "../../../../store";
 
 
 interface InfoHeaderProps {
-  languageConfig: {languageList: Array<LanguageDropdownItem>, defaultSelection: LanguageDropdownItem};
+  languageConfig: {languageList: Array<DropdownItem>, defaultSelection: DropdownItem};
   infoText: string;
   linkText?: string;
   onLinkClickHandler?(): void;
-  languageChangeHandler(selectedLanguage: LanguageDropdownItem): void
+  languageChangeHandler(selectedLanguage: DropdownItem): void
 }
 
 const InfoHeader = (props: InfoHeaderProps) => {
@@ -23,7 +23,7 @@ const InfoHeader = (props: InfoHeaderProps) => {
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
   return (
-    <div className={`bg-black py-1 flex justify-center items-center relative ${isRTL && 'flex-row-reverse'}`}>
+    <div className={`bg-black py-1 flex justify-center items-center`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className={`text-center ${isRTL ? 'mr-auto' : 'ml-auto'}`}>
         {infoText && <span className="text-zinc-50 text-sm">{infoText}</span>}
         {linkText && (

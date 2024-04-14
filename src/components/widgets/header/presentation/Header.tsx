@@ -32,13 +32,12 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
       <header ref={ref} className="fixed top-0 w-full z-10 bg-white">
         <InfoHeaderContainer />
         <div
-          className={`flex items-center justify-between px-2 pb-4 mt-4 border-b-2 border-b-neutral-100 ${
-            isRTL ? "flex-row-reverse" : ""
-          }`}
+          className={`flex items-center justify-between px-2 pb-4 mt-4 border-b-2 border-b-neutral-100`}
+          dir={isRTL ? 'rtl' : 'ltr'}
         >
           <Hamburger
             headingText={t("companyName")}
-            navList={isLG ? [] : navItemList}
+            navList={navItemList}
           />
           <SearchInput
             placeholder={t("searchProductsPlaceholder")}
@@ -58,9 +57,8 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
     <header ref={ref} className="fixed top-0 w-full z-10 bg-white">
       <InfoHeaderContainer />
       <div
-        className={`flex justify-between items-center mt-4 px-10 pb-4 border-b-2 border-b-neutral-100 ${
-          isRTL ? "flex-row-reverse" : ""
-        }`}
+        className={`flex justify-between items-center mt-4 px-10 pb-4 border-b-2 border-b-neutral-100 `}
+        dir={isRTL ? 'rtl' : 'ltr'}
       >
         <button
           className={`font-bold capitalize text-2xl tracking-wider text-black`} onClick={logoClickHandler}
@@ -70,7 +68,7 @@ const Header = forwardRef(function Header(props: HeaderProps, ref: ForwardedRef<
 
         <NavList navList={navItemList} className="w-1/3" />
 
-        <div className={`flex w-2/6 ${isRTL ? "flex-row-reverse" : ""}`}>
+        <div className={`flex w-2/6`}>
           <SearchInput
             placeholder={t("searchProductsPlaceholder")}
             className={`w-full ${isRTL ? "ml-2" : "mr-2"}`}

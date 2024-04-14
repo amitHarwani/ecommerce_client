@@ -8,9 +8,14 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 
 const ExploreProductListContainer = () => {
   const navigate = useCustomNavigate();
+
+  /* Products List */
   const [products, setProducts] = useState<Product[]>([]);
+
+  /* True / False: Representing any error when fetching the products list */
   const [isError, setIsError] = useState(false);
-  const fetchFirstProductPage = async () => {
+
+  const fetchProducts = async () => {
     const response = await ProductService.getTopProducts(EXPLORE_PRODUCTS_COUNT);
 
     if (response instanceof Array) {
@@ -27,7 +32,7 @@ const ExploreProductListContainer = () => {
   }
   
   useEffect(() => {
-    fetchFirstProductPage();
+    fetchProducts();
   }, []);
   return <ExploreProductList products={products} error={isError} viewAllClickHandler={viewAllClickHandler} />;
 };

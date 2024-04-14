@@ -7,16 +7,15 @@ interface NavListProps {
   className?: string;
 }
 
-const NavList = (props: NavListProps) => {
-  const { navList, className = "" } = props;
+const NavList = ({ navList, className = "" }: NavListProps) => {
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
   return (
     <div
       className={`flex flex-col lg:flex-row lg:justify-between lg:items-center 
-        ${isRTL ? "lg:flex-row-reverse" : ""} 
         ${className} `}
+        dir={isRTL ? 'rtl': 'ltr'}
     >
       {navList.map((navItem) =>
         navItem?.customComponent ? (

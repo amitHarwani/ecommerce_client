@@ -16,17 +16,24 @@ import { useTranslation } from "react-i18next";
 
 const CheckoutContainer = () => {
   const dispatch = useAppDispatch();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
+  /* Addresses stored by the user */
   const [userAddresses, setUserAddresses] = useState<Array<AddressClass>>([]);
+
+  /* Coupons List */
   const [couponsAvailableToUser, setCouponsAvailableToUser] = useState<
     Array<CouponClass>
   >([]);
+
+  /* Loading state when applying a coupon or removing a coupon */
   const [isUpdatingCouponInProgress, setIsUpdatingCouponInProgress] =
     useState(false);
 
+  /* User's cart */
   const userCart = useAppSelector((state) => state.cart.userCart);
 
+  /* Fetching all the user's stored addresses asynchronously */
   const fetchUserAddresses = useCallback(() => {
     setUserAddresses([]);
     AddressService.getAllAddressesAsync((data, _, error) => {
@@ -38,6 +45,7 @@ const CheckoutContainer = () => {
     });
   }, []);
 
+  /* Fetching all the coupons available to the user asynchronously */
   const fetchUserCoupons = useCallback(() => {
     setCouponsAvailableToUser([]);
     CouponService.getAllCouponsAvailableToUserAsync((data, _, error) => {
@@ -49,12 +57,15 @@ const CheckoutContainer = () => {
     });
   }, []);
 
+  /* Apply Coupon */
   const applyCouponCodeHandler = async (
     data: CheckoutApplyCouponCodeFields
   ) => {
     setIsUpdatingCouponInProgress(true);
     const response = await CouponService.applyCouponCode(data.couponCode);
     setIsUpdatingCouponInProgress(false);
+
+    /* Success */
     if (!(response instanceof ApiError)) {
       dispatch(updateUserCart(response));
       dispatch(
@@ -74,6 +85,7 @@ const CheckoutContainer = () => {
     }
   };
 
+  /* Remove applied coupon */
   const removeCouponCodeHandler = async () => {
     if (userCart?.coupon.couponCode) {
       setIsUpdatingCouponInProgress(true);
@@ -83,7 +95,8 @@ const CheckoutContainer = () => {
       );
 
       setIsUpdatingCouponInProgress(false);
-
+      
+      /* Success */
       if (!(response instanceof ApiError)) {
         dispatch(updateUserCart(response));
         dispatch(

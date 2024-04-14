@@ -10,7 +10,8 @@ const Footer = () => {
   return (
     <footer className="bg-black">
       <div
-        className={`flex justify-between ${isRTL ? "flex-row-reverse" : ""}`}
+        className={`flex justify-between`}
+        dir={isRTL ? 'rtl' : 'ltr'}
       >
         <FooterSection
           heading={t("companyName")}

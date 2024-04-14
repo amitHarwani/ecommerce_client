@@ -13,13 +13,17 @@ import ToastMessage from "../components/basic/ToastMessage";
 
 const PageLayout = () => {
   const dispatch = useDispatch();
+
+  /* isRTL language */
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  /* Header height in pixels */
   const [headerHeight, setHeaderHeight] = useState("0px");
 
+  /* Reference to the header container */
   const headerContainerRef: RefObject<HTMLDivElement> = createRef();
 
-  /* Updating current breakpoint: As per tailwind css */
+  /* Updating current breakpoint: As per tailwind css and updating the redux state*/
   const checkForBreakpointUpdates = useCallback(() => {
     const breakpoint = getCurrentBreakpoint();
     if (breakpoint) {
@@ -27,6 +31,7 @@ const PageLayout = () => {
     }
   }, [dispatch]);
 
+  /* Checking for resize window event */
   useEffect(() => {
     checkForBreakpointUpdates();
     window.addEventListener("resize", checkForBreakpointUpdates);
@@ -36,10 +41,12 @@ const PageLayout = () => {
     };
   }, [checkForBreakpointUpdates]);
 
+  /* Updating header height */
   useEffect(() => {
     setHeaderHeight(`${headerContainerRef.current?.clientHeight}px`);
   }, [headerContainerRef]);
 
+  /* Scroll to top smoothly */
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

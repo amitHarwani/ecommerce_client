@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { COMPANY_GURANTEE } from "../../constants";
-import RoundedIcon from "../basic/RoundedImage";
+import RoundedIcon from "../basic/RoundedIcon";
 
 
 

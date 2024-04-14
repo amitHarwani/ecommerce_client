@@ -24,22 +24,29 @@ const SelectionMenu = (props: SelectionMenuProps) => {
   const { t } = useTranslation();
   const isRTL = useAppSelector(state => state.language.isRTL);
 
+  /* Menu visibility state */
   const [isMenuShown, setIsMenuShown] = useState(false);
 
+  /* Reference for the menu's top container */
   const selectionMenuRef: RefObject<HTMLDivElement> = createRef();
+
+  /* To check clicks outside the menu's top container */
   const [clickedOutside] = useOutsideClick(selectionMenuRef);
 
-
+  /* Toggle menu visibility */
   const toggleMenu = () => {
     setIsMenuShown((prev) => !prev);
   };
 
+  /* On click of menu item */
   const menuItemClickHandler = (item: SelectionMenuItem) => {
+    /* Hide the menu, call the function passed */
     setIsMenuShown(false);
     onItemSelect(item);
   };
 
   useEffect(() => {
+    /* If an outside click has happened, hide the menu */
     if (clickedOutside) {
       setIsMenuShown(false);
     }
@@ -47,7 +54,7 @@ const SelectionMenu = (props: SelectionMenuProps) => {
 
   return (
     <div className="relative" ref={selectionMenuRef}>
-      <button onClick={toggleMenu} className={`flex justify-between items-center w-full ${isRTL ? 'flex-row-reverse': ''} ${headingClassName}`}>
+      <button onClick={toggleMenu} className={`flex justify-between items-center w-full ${headingClassName}`}>
         <span>{heading}</span>
         {!isLG && (
           <UpArrow
@@ -70,7 +77,7 @@ const SelectionMenu = (props: SelectionMenuProps) => {
                 onClick={() => menuItemClickHandler(item)}
                 className={`text-sm capitalize text-zinc-50 flex items-center`}
               >
-                <span className="w-5 h-5">{item.icon && item.icon}</span>
+                {item.icon && item.icon}
                 <span className={`whitespace-nowrap ${isRTL ? 'mr-2': 'ml-2'}`}>
                   {t(item.textKey)}{" "}
                 </span>

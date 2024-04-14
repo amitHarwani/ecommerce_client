@@ -46,9 +46,8 @@ const CartItem = (props: CartItemProps) => {
 
   return (
     <div
-      className={`flex shadow-md rounded p-4 items-center justify-between ${
-        isRTL ? "flex-row-reverse" : ""
-      }`}
+      className={`flex shadow-md rounded p-4 items-center justify-between`}
+      dir={isRTL ? 'rtl' : 'ltr'}
     >
       <Image
         src={product.mainImage.url}

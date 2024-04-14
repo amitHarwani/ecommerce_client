@@ -13,10 +13,10 @@ interface CategoryList {
   categoryClickHandler(category: Category) : void; 
 }
 const CategoryList = (props: CategoryList) => {
-  const { categories, error,categoryClickHandler } = props;
+  const { categories, error, categoryClickHandler } = props;
   const { t } = useTranslation();
 
-
+  /* Category Card Container Reference */
   const categoryContainerRef: RefObject<HTMLDivElement> = createRef();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);

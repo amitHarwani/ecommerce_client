@@ -4,51 +4,53 @@
 
 /* Fonts */
 @font-face {
-    font-family: "poppins-black";
-    src: url("/fonts/poppins/Poppins-Black.ttf");
+  font-family: "poppins-black";
+  src: url("/fonts/poppins/Poppins-Black.ttf");
 }
 
 @font-face {
-    font-family: "poppins-bold";
-    src: url("/fonts/poppins/Poppins-Bold.ttf");
+  font-family: "poppins-bold";
+  src: url("/fonts/poppins/Poppins-Bold.ttf");
 }
 @font-face {
-    font-family: "poppins-light";
-    src: url("/fonts/poppins/Poppins-Light.ttf");
+  font-family: "poppins-light";
+  src: url("/fonts/poppins/Poppins-Light.ttf");
 }
 @font-face {
-    font-family: "poppins-medium";
-    src: url("/fonts/poppins/Poppins-Medium.ttf");
+  font-family: "poppins-medium";
+  src: url("/fonts/poppins/Poppins-Medium.ttf");
 }
 
 @font-face {
-    font-family: "poppins-regular";
-    src: url("/fonts/poppins/Poppins-Regular.ttf");
+  font-family: "poppins-regular";
+  src: url("/fonts/poppins/Poppins-Regular.ttf");
 }
 @font-face {
-    font-family: "poppins-italic";
-    src: url("/fonts/poppins/Poppins-Italic.ttf");
+  font-family: "poppins-italic";
+  src: url("/fonts/poppins/Poppins-Italic.ttf");
 }
-    
+
+/* Default Font Family */
 * {
-    font-family: "poppins-regular";
+  font-family: "poppins-regular";
 }
 
 /* Scroll bar styles*/
 *::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+  width: 4px;
+  height: 4px;
 }
-*::-webkit-scrollbar-track{
-    background: transparent;
+/* Entire bar*/
+*::-webkit-scrollbar-track {
+  background: transparent;
 }
-*::-webkit-scrollbar-thumb{
-    background-color: #a1a1aa;
-    border-radius: 12px;
+/* Draggable Area*/
+*::-webkit-scrollbar-thumb {
+  background-color: #a1a1aa;
+  border-radius: 12px;
 }
 
 /* No Scrollbar class name */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-     

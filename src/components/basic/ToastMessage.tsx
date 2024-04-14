@@ -7,12 +7,13 @@ import TickIcon from "../icons/TickIcon";
 interface ToastMessageProps {
   className?: string;
 }
-const ToastMessage = (props: ToastMessageProps) => {
-  const { className } = props;
+const ToastMessage = ({ className }: ToastMessageProps) => {
+  /* Toast message state from redux */
   const message = useAppSelector((state) => state.toastMessage);
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  /* Whether success message is shown */
   const isSuccessMessage = useMemo(() => {
     if (message.type === TOAST_MESSAGE_TYPES.success) {
       return true;
@@ -26,11 +27,8 @@ const ToastMessage = (props: ToastMessageProps) => {
           className={`z-20 fixed top-20 flex justify-center items-center w-full ${className}`}
         >
           <div
-            className={`flex items-center justify-between px-14 py-2 gap-x-2 shadow-xl rounded ${
-              isRTL ? "flex-row-reverse" : ""
-            } 
-              bg-[#dbd7d7]
-            `}
+            className={`flex items-center justify-between px-14 py-2 gap-x-2 shadow-xl rounded bg-[#dbd7d7]`}
+            dir={isRTL ? "rtl" : "ltr"}
           >
             {isSuccessMessage ? (
               <TickIcon
@@ -45,7 +43,9 @@ const ToastMessage = (props: ToastMessageProps) => {
             ) : (
               <ErrorIcon className="w-4 h-4 text-darkRed" />
             )}
-            <span className="capitalize text-sm">{message.message}</span>
+            <span className="capitalize text-sm">
+              {message.message}
+            </span>
           </div>
         </div>
       )}

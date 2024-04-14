@@ -11,3 +11,10 @@ export const formatAmount = (amount: number, currency: string): string => {
     }
     return new Intl.NumberFormat('en-AE', {style: 'currency', currency: currency}).format(amount);
 }
+
+export const zeroFormattedNumber = (number: number): string => {
+    if(number < 10){
+        return `0${number}`
+    }
+    return number.toString();
+}

@@ -31,9 +31,9 @@ const CardContainer = (props: CardContainerProps) => {
 
   return (
     <div className="flex flex-col">
-      <div className={`flex justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+      <div className={`flex justify-between`} dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="flex flex-col">
-          <div className={`text-darkRed flex items-center ${isRTL ? 'flex-row-reverse': ''}`}>
+          <div className={`text-darkRed flex items-center`} dir={isRTL ? 'rtl' : 'ltr'}>
             <RectangleIcon className="w-4 h-10" rectClassName="w-4 h-10" />
             <span className={`font-semibold capitalize ${isRTL ? 'mr-2' : 'ml-2'}`}>{heading}</span>
           </div>

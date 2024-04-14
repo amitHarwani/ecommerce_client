@@ -12,7 +12,7 @@ const CheckoutPageContainer = () => {
 
     const userCart = useAppSelector((state) => state.cart.userCart);
 
-
+    /* Checking for isFromCartPage state in route location */
     const isFromCartPage = useMemo(() => {
         return location.state?.isFromCartPage;
     }, [location])
@@ -25,6 +25,7 @@ const CheckoutPageContainer = () => {
 
     }, [isFromCartPage, navigate])
 
+    /* No Items in the cart */
     useEffect(() => {
         if(!userCart?.items?.length){
             navigate("/", true);

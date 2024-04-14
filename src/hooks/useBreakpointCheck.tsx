@@ -3,6 +3,8 @@ import { BREAKPOINTS } from "../constants";
 import { useAppSelector } from "../store";
 
 const useBreakpointCheck = (breakpoint: BREAKPOINTS) => {
+
+  /* Current breakpoint from redux */
   const currentBreakpoint = useAppSelector(
     (state) => state.breakpoint.currentBreakpoint
   );

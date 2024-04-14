@@ -13,7 +13,7 @@ import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
 import { useTranslation } from "react-i18next";
 import { AddressClass } from "../../../../services/address/AddressTypes";
 
-type DropdownListActions = {
+interface DropdownListActions  {
   type:
     | "FETCHING"
     | "UPDATE_CITIES"
@@ -24,8 +24,8 @@ type DropdownListActions = {
     | "STATE_SELECTED"
     | "CITY_SELECTED";
   payload?: DropdownItem[] | string | DropdownItem;
-};
-type DropdownListState = {
+}
+interface DropdownListState  {
   selectedCountry: DropdownItem | undefined;
   selectedState: DropdownItem | undefined;
   selectedCity: DropdownItem | undefined;
@@ -35,7 +35,7 @@ type DropdownListState = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
-};
+}
 interface AddAddressModalContainerProps {
   hideModal(): void;
   onAddressAddedOrUpdatedCallback?(): void;

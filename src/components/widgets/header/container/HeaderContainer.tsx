@@ -30,21 +30,30 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
 
   const [navigationList, setNavigationList] = useState<NavigationOption[]>([]);
 
+  /* Navigate to /, on click of logo*/
   const logoClickHandler = () => {
     navigate("/");
   };
 
+  /* On click of cart */
   const cartClickHandler = () => {
     navigate(ROUTE_PATHS.cart);
   };
 
   const fetchUser = useCallback(async () => {
+    /* Get current user info */
     const response = await AuthService.getCurrentUser();
+
+    /* If the user details are returned */
     if (!(response instanceof ApiError)) {
+      /* Login and store the user details */
       dispatch(logIn(response));
     } else {
+      /* Logout */
       dispatch(logOut());
     }
+
+    /* Is logged in check is done */
     dispatch(updateLoginCheckDone(true));
   }, [dispatch]);
 
@@ -75,6 +84,7 @@ const HeaderContainer = React.forwardRef(function HeaderContainer(
     }
   }, [dispatch, isLoggedIn]);
 
+  /* Get Navigation Item List based on isLoggedIn flag */
   useEffect(() => {
     setNavigationList(getNavigationItemList(isLoggedIn));
   }, [isLoggedIn]);

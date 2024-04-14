@@ -11,6 +11,7 @@ const CarouselButtons = (props: CarouselButtons) => {
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  /* Next & Back buttons disabled state */
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
   const [isBackButtonDisabled, setIsBackButtonDisabled] = useState(true);
 
@@ -30,7 +31,7 @@ const CarouselButtons = (props: CarouselButtons) => {
 
   const onElementScroll = useCallback(() => {
     if (scrollableElementRef.current) {
-      /* Checking if there is more scrollable width: Disbaling/Enabling Button based on it */
+      /* Checking if there is more scrollable width: Disabling/Enabling Button based on it */
       const scrollWidth = scrollableElementRef.current.scrollWidth;
       const clientWidth = scrollableElementRef.current.clientWidth;
       const scrollLeft = Math.abs(scrollableElementRef.current.scrollLeft);
@@ -61,19 +62,22 @@ const CarouselButtons = (props: CarouselButtons) => {
       elementRef?.removeEventListener("scroll", onElementScroll);
     };
   }, [scrollableElementRef, onElementScroll]);
+  
   return (
-    <div className={`flex justify-between`}>
+    <div className={`flex justify-between`} dir={'ltr'}>
       <ArrowButton
         type={ARROW_BUTTONS.LEFT}
         onClickHandler={onBackClickHandler}
         isDisabled={isRTL ? isNextButtonDisabled : isBackButtonDisabled}
       />
+      <span>Left</span>
       <ArrowButton
         type={ARROW_BUTTONS.RIGHT}
         onClickHandler={onNextClickHandler}
         isDisabled={isRTL ? isBackButtonDisabled : isNextButtonDisabled}
         className="ml-1"
       />
+      <span>Right</span>
     </div>
   );
 };

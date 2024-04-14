@@ -5,6 +5,7 @@ import { createSearchParams } from "react-router-dom";
 import { PUBLIC_IMAGE_PATHS, QUERY_PARAMS, ROUTE_PATHS } from "../../constants";
 import useCustomNavigate from "../../hooks/useCustomNavigate";
 import { formatAmount } from "../../utils/commonHelper";
+import { useAppSelector } from "../../store";
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +16,7 @@ const ProductCard = (props: ProductCardProps) => {
   const { product, className, imageContainerClassName } = props;
 
   const navigate = useCustomNavigate();
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
   /* navigate to /product?productId=<productId>&categoryId=<categoryId> */
   const productClickHandler = () => {
@@ -51,7 +53,7 @@ const ProductCard = (props: ProductCardProps) => {
             </span>
             {product.previousPrice && (
               <span
-                className={`font-poppinsMedium text-neutral-500 line-through ml-2`}
+                className={`font-poppinsMedium text-neutral-500 line-through ${isRTL ? 'mr-2' : 'ml-2'}`}
               >
               {formatAmount(product.previousPrice, product.currency || DEFAULT_CURRENCY)}
               </span>

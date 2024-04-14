@@ -55,21 +55,21 @@ export const MY_ACCOUNT_OPTIONS: Array<SelectionMenuItem> = [
   {
     id: 1,
     textKey: "manageAccount",
-    icon: <AccountIcon className=""/>,
+    icon: <AccountIcon className="w-5 h-5"/>,
   },
   {
     id: 2,
     textKey: "myOrders",
-    icon: <OrderIcon className="" />
+    icon: <OrderIcon className="w-5 h-5" />
   },
   {
     id: 3,
     textKey: "logout",
-    icon: <LogoutIcon className="" />,
+    icon: <LogoutIcon className="w-5 h-5" />,
   },
 ];
 
-export const BANNER_PROMOTION_END_DATE = "2024-01-31T00:00:00";
+export const BANNER_PROMOTION_END_DATE = "2024-04-30T00:00:00";
 
 export const CATEGORY_ICONS: CategoryIcon = {};
 

@@ -1,5 +1,4 @@
-const LoadingSpinner = (props: { className: string }) => {
-  const { className } = props;
+const LoadingSpinner = ({className}: { className: string }) => {
   return (
     <svg
       aria-hidden="true"

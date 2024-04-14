@@ -10,15 +10,20 @@ const FeaturedProductListContainer = () => {
   
   const navigate = useCustomNavigate();
 
+  /* List of products */
   const [products, setProducts] = useState<Product[]>([]);
+
+  /* True/False: Representing any error when fetching featured products */
   const [isError, setIsError] = useState(false);
+
+  /* Fetch featured products */
   const fetchFeaturedProducts = async () => {
     const response = await ProductService.getTopOnSaleProducts(FEATURED_PRODUCTS_COUNT);
 
-    if (response instanceof Array) {
+    if (Array.isArray(response)) {
       setProducts(response);
     } else {
-      // Error here
+      // Error 
       setIsError(true);
     }
   };
@@ -28,6 +33,7 @@ const FeaturedProductListContainer = () => {
     navigate(ROUTE_PATHS.products);
   }
 
+  /* Initial Render */
   useEffect(() => {
     fetchFeaturedProducts();
   }, []);

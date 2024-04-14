@@ -9,10 +9,13 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 const CategoryListContainer = () => {
   const navigate = useCustomNavigate();
 
+  /* List of all categories */
   const [categories, setCategories] = useState<Category[]>([]);
 
+  /* To know if an error has occurred when fetching categories */
   const [isError, setIsError] = useState(false);
 
+  /* Fetch All Categories Asynchronously */
   const fetchAllCategories = () => {
     CategoryService.getAllCategoriesAsync((data, _, error) => {
       if (!error) {
@@ -34,6 +37,7 @@ const CategoryListContainer = () => {
     });
   };
 
+  /* Initial Render */
   useEffect(() => {
     fetchAllCategories();
   }, []);

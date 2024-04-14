@@ -23,15 +23,20 @@ const Input = forwardRef(
       ...otherProps
     } = props;
 
+    /* Unique id */
     const id = useId();
 
     const isRTL = useAppSelector((state) => state.language.isRTL);
 
+    /* Password visibility state */
     const [isPasswordVisisble, setIsPasswordVisible] = useState(false);
 
+    /* Toggle password visibility */
     const togglePassword = () => {
       setIsPasswordVisible((prev) => !prev);
     };
+
+    /* Password Input */
     if (type === "password") {
       return (
         <div className="flex flex-col">

@@ -86,9 +86,8 @@ const Login = (props: LoginProps) => {
       />
 
       <div
-        className={`flex justify-between items-center mt-10 ${
-          isRTL ? "flex-row-reverse" : ""
-        }`}
+        className={`flex justify-between items-center mt-10`}
+        dir={isRTL ? 'rtl' : 'ltr'}
       >
         <Button
           className="px-4 py-2 capitalize"

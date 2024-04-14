@@ -19,7 +19,7 @@ interface ProductDetailsProps {
   removeFromCart(product: Product): void;
   quantityInCart: number;
   isAddOrUpdateCartInProgress?: boolean;
-  isRemoverFromCartInProgress?: boolean;
+  isRemoveFromCartInProgress?: boolean;
 }
 const ProductDetails = (props: ProductDetailsProps) => {
   const {
@@ -28,7 +28,7 @@ const ProductDetails = (props: ProductDetailsProps) => {
     updateQuantityButtonShown = false,
     removeFromCartButtonShown = false,
     isAddOrUpdateCartInProgress = false,
-    isRemoverFromCartInProgress = false,
+    isRemoveFromCartInProgress = false,
     addToCart,
     removeFromCart,
     quantityInCart,
@@ -38,8 +38,10 @@ const ProductDetails = (props: ProductDetailsProps) => {
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  /* If the product is already in cart, it's quantity is stored in this state */
   const [quantity, setQuantity] = useState(quantityInCart ? quantityInCart : 1);
 
+  /* Whether the product is available */
   const isInStock = useMemo(() => {
     if (product) {
       if (product.stock > 0) {
@@ -49,6 +51,7 @@ const ProductDetails = (props: ProductDetailsProps) => {
     }
   }, [product]);
 
+  /* Case when user has added the entire stock in cart */
   const isMaxQuantityReached = useMemo(() => {
     if (product && quantity >= product.stock) {
       return true;
@@ -56,14 +59,17 @@ const ProductDetails = (props: ProductDetailsProps) => {
     return false;
   }, [quantity, product]);
 
+  /* Quantity change handler */
   const onQuantityChanged = (newQuantity: number): void => {
     setQuantity(newQuantity);
   };
 
+  /* Whenever quantityInCart prop changes, update quantity state */
   useEffect(() => {
     if (quantityInCart) {
       setQuantity(quantityInCart);
     } else {
+      /* Default quantity, If product is not added in cart yet */
       setQuantity(1);
     }
   }, [quantityInCart]);
@@ -146,7 +152,7 @@ const ProductDetails = (props: ProductDetailsProps) => {
                 <Button
                   buttonType={ButtonTypes.secondaryButton}
                   className="flex-1 px-4 py-3 lg:p-0 flex justify-center items-center"
-                  isLoading={isRemoverFromCartInProgress}
+                  isLoading={isRemoveFromCartInProgress}
                   onClickHandler={() => {
                     removeFromCart(product);
                   }}

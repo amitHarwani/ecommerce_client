@@ -16,7 +16,10 @@ const LoginContainer = () => {
 
   const location = useLocation();
 
+  /* Login in progress flag */
   const [isLoading, setIsLoading] = useState(false);
+
+  /* API Error message state */
   const [errorMessage, setErrorMessage] = useState("");
 
   const loginClickHandler = async (inputData: LoginFormFields) => {
@@ -46,10 +49,12 @@ const LoginContainer = () => {
     }
   };
 
+  /* Redirection to Backend URL for google login  */
   const googleLoginClickHandler = () => {
     window.location.href = `${import.meta.env.VITE_SERVER_URI}${AuthService.GOOGLE_LOGIN_REDIRECT_URL}`;
   }
 
+  /* navigating to /signup */
   const signupClickHandler = () => {
     navigate(ROUTE_PATHS.signup)
   };

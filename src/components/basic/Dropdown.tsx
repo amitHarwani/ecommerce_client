@@ -16,9 +16,9 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 import ErrorMessage from "./ErrorMessage";
 
 /* To expose Dropdown Actions to parents */
-export type DropdownActions = {
+export interface DropdownActions {
   forceSetSelectedItem(item: DropdownItem): void;
-};
+}
 
 interface DropdownProps {
   type: DropdownTypes;
@@ -47,24 +47,39 @@ const Dropdown = forwardRef(
     const { t } = useTranslation();
     const isRTL = useAppSelector((state) => state.language.isRTL);
 
+    /* Reference to the top container of dropdown */
     const dropdownRef: RefObject<HTMLDivElement> = createRef();
 
+    /* To check for clicks outside the dropdown container, used to hide the dropdown menu */
+    const [clickedOutside] = useOutsideClick(dropdownRef);
+
+    /* Selected Item state */
     const [selectedItem, setSelectedItem] = useState(
       defaultSelectedItem ? defaultSelectedItem : null
     );
+
+    /* Dropdown menu visibility state */
     const [isDropdownMenuShown, setIsDropdownMenuShown] = useState(false);
 
-    const [clickedOutside] = useOutsideClick(dropdownRef);
-
+    /* Toggle dropdown menu visibility */
     const toggleDropdownMenu = () => {
       setIsDropdownMenuShown((prev) => !prev);
     };
+
+    /* On click of an dropdown item */
     const itemChangeHandler = (item: DropdownItem): void => {
       setSelectedItem(item);
       onChange(item);
+
+      /* Hide dropdown menu */
       toggleDropdownMenu();
     };
 
+    /**
+     * Text displayed against each option 
+     * If text value is present use that, 
+     * else use the textKey value to get the value from locales folder.
+     */
     const getDisplayedButtonText = useCallback(
       (item: DropdownItem): string => {
         if (item.text) {
@@ -78,6 +93,7 @@ const Dropdown = forwardRef(
       [t]
     );
 
+    /* Styles for different dropdown types */
     const typeStyles: {
       mainButton: string;
       textColor: string;
@@ -118,6 +134,7 @@ const Dropdown = forwardRef(
       }
     }, [clickedOutside]);
 
+    /* Default selection */
     useEffect(() => {
       setSelectedItem(defaultSelectedItem ? defaultSelectedItem : null);
     }, [itemsList, defaultSelectedItem]);
@@ -148,7 +165,8 @@ const Dropdown = forwardRef(
           onClick={toggleDropdownMenu}
           className={`flex justify-between items-center ${
             typeStyles.mainButton
-          }  ${isRTL && "flex-row-reverse"} ${mainButtonClassNames}`}
+          }  ${mainButtonClassNames}`}
+          dir={isRTL ? 'rtl' : 'ltr'}
         >
           <span
             className={`text-sm capitalize truncate ${typeStyles.textColor}`}

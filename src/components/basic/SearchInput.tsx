@@ -38,7 +38,7 @@ const SearchInput = (props: SearchInputProps) => {
   };
   return (
     <form
-      className={`flex justify-between items-center rounded-xl bg-neutral-100 px-4 py-2 ${isRTL && 'flex-row-reverse'} ${className}`}
+      className={`flex justify-between items-center rounded-xl bg-neutral-100 px-4 py-2 ${className}`}
       onSubmit={submit}
     >
       <input

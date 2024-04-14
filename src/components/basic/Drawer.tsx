@@ -26,6 +26,7 @@ const Drawer = (props: DrawerProps) => {
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  /* On click of an DrawerOption, call the function passed as prop */
   const onOptionSelected = (option: DrawerOption) => {
     if (typeof onOptionClickHandler === "function") {
       onOptionClickHandler(option);
@@ -44,9 +45,8 @@ const Drawer = (props: DrawerProps) => {
       `}
     >
       <div
-        className={`flex items-center justify-between ${
-          isRTL && "flex-row-reverse"
-        }`}
+        className={`flex items-center justify-between`}
+        dir={isRTL ? 'rtl' : 'ltr'}
       >
         <span className={`capitalize text-2xl tracking-wider text-zinc-50`}>
           {headingText}

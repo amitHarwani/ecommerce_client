@@ -32,7 +32,7 @@ class CategoryService {
       /* Incrementing page counter */
       pageNumberCounter++;
 
-      /* Number of requests to be made */
+      /* Number of requests to be made, adding 1 as pageNumberCounter has been incremented above */
       let requestsPending = totalPages - pageNumberCounter + 1;
 
       /* If first request is the last request: return */
@@ -53,7 +53,7 @@ class CategoryService {
             /* Decrementing pending requests count */
             requestsPending--;
 
-            /* Error in request: Return */
+            /* Error in response: Return */
             if (!(res instanceof ApiResponse && res.success)) {
               return res instanceof ApiError
                 ? callback([], true, res)

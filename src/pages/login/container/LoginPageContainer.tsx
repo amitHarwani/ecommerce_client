@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import LoginPage from "../presentation/LoginPage"
-import store, { useAppSelector } from "../../../store";
+import { useAppSelector } from "../../../store";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";
 
 

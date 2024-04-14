@@ -6,6 +6,7 @@ import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 
 const MyAccountOptionContainer = () => {
 
+  /* Logout modal visibility state */
   const [isLogoutModalShown, setIsLogoutModalShown] = useState(false);
   const navigate = useCustomNavigate();
 

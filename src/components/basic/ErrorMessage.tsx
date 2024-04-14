@@ -13,7 +13,7 @@ const ErrorMessage = (props: ErrorMessageProps) => {
 
     const isRTL = useAppSelector((state) => state.language.isRTL);
     return (
-        <div className={`flex items-center text-darkRed ${isRTL ? 'flex-row-reverse': ''} ${className}`}>
+        <div className={`flex items-center text-darkRed ${className}`} dir={isRTL ? 'rtl' : 'ltr'}>
             {
                 isErrorIconShown &&
                 <ErrorIcon className={errorIconClassName} />

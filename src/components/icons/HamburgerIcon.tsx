@@ -1,5 +1,4 @@
-const HamburgerIcon = (props: { className: string }) => {
-  const { className } = props;
+const HamburgerIcon = ({className}: { className: string }) => {
   return (
     <svg
       className={className}

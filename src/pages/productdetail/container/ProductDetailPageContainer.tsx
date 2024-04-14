@@ -6,6 +6,7 @@ import { useEffect, useMemo } from "react";
 const ProductDetailPageContainer = () => {
   const [searchParams] = useSearchParams();
 
+  /* Getting the productId and categoryId from search parameters */
   const productId = useMemo(() => {
     return searchParams.get(QUERY_PARAMS.productId);
   }, [searchParams]);

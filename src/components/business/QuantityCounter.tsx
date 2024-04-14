@@ -22,6 +22,7 @@ const QuantityCounter = (props: QuantityCounterProps) => {
   const isRTL = useAppSelector(state => state.language.isRTL);
   const [quantity, setQuantity] = useState(defaultQuantity);
 
+  /* Text Styles */
   const textStyles = useMemo(() => {
     if(textClassName){
       return textClassName;
@@ -29,32 +30,36 @@ const QuantityCounter = (props: QuantityCounterProps) => {
     return 'text-lg font-poppinsMedium'
   }, [textClassName])
 
+  /* If default quantity prop changes, update the quantity state */
   useEffect(() => {
     setQuantity(defaultQuantity);
   }, [defaultQuantity]);
 
+  /* On click of add quantity */
   const addQuantity = () => {
     setQuantity((prev) => {
       prev++;
       return prev;
     });
   };
+
+  /* On click of subtract quantity */
   const subtractQuantity = () => {
     setQuantity((prev) => {
       if (prev !== 1) {
         prev--;
-        return prev;
       }
       return prev;
     });
   };
 
+  /* On change of quantity, call the parent onQuanityChanged function */
   useEffect(() => {
     onQuantityChanged(quantity);
   }, [quantity, onQuantityChanged]);
 
   return (
-    <div className={`flex ${isRTL ? 'flex-row-reverse': ''} ${className}`}>
+    <div className={`flex ${className}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <button
         className={`w-1/4 bg-white border-2 border-grey flex justify-center items-center py-2 ${isRTL ? 'border-l-0 rounded-r' : 'border-r-0 rounded-l'}`}
         onClick={subtractQuantity}

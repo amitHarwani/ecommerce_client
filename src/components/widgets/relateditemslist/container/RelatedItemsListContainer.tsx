@@ -12,6 +12,7 @@ interface RelatedItemsListContainerProps {
 const RelatedItemsListContainer = (props: RelatedItemsListContainerProps) => {
   const { categoryId, productId } = props;
 
+  /* Related products list */
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   /* Error while fetching related items */

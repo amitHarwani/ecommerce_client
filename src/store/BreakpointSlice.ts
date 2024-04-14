@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/* Stores the breakpoint being applied from the list of Breakpoints */
 const initialState = {
     currentBreakpoint: ""
 }

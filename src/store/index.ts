@@ -15,7 +15,7 @@ const store = configureStore({
         cart: CartSlice.reducer
     }
 })
-/* useAppSelector for typescript */
+/* useAppSelector and useAppDispatch for typescript */
 export type ReduxRootState = ReturnType<typeof store.getState>
 export const useAppSelector: TypedUseSelectorHook<ReduxRootState> = useSelector;
 

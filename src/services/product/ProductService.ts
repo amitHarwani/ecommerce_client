@@ -22,6 +22,7 @@ class ProductService {
 
     if (response instanceof ApiResponse && response.success) {
       const products = response.data.products;
+      /* Shuffling the products */
       products.sort(() => Math.random() - 0.5);
       const featuredProducts = products.slice(0, numberOfProducts);
       return featuredProducts;
@@ -44,15 +45,22 @@ class ProductService {
 
     if (response instanceof ApiResponse && response.success) {
       const products = response.data.products;
+
+      /* Shuffling the products list */
       products.sort(() => Math.random() - 0.5);
+
       const bestSellingProducts: Product[] = [];
 
       for (let counter = 0; counter < numberOfProducts; counter++) {
+        /* Generating random discount percent */
         const discountPercent = generateRandomNumber(10, 20);
+
+        /* Calculating price before discount: ((100 * current price) / (100 - discount percentage)) */
         products[counter].previousPrice = Math.round(
           (100 * products[counter].price) / (100 - discountPercent)
         );
 
+        /* Pushing to best selling products list */
         bestSellingProducts.push(products[counter]);
       }
 
@@ -68,6 +76,11 @@ class ProductService {
     pageNumber: number,
     categoryId?: string
   ): Promise<Products | ApiError> {
+
+    /* 
+       If categoryId is passed, get products for the particular category, 
+       else get all the products 
+    */
     const url = categoryId
       ? `${this.CATEGORY_WISE_URL}/${categoryId}`
       : this.BASE_URL;

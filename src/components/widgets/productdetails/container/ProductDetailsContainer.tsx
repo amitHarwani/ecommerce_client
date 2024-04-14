@@ -6,7 +6,10 @@ import ApiError from "../../../../services/ApiError";
 import { useAppDispatch, useAppSelector } from "../../../../store";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
 import { ROUTE_PATHS } from "../../../../constants";
-import { addOrUpdateToCartThunk, removeFromCartThunk } from "../../../../store/CartSlice";
+import {
+  addOrUpdateToCartThunk,
+  removeFromCartThunk,
+} from "../../../../store/CartSlice";
 import { CartItemClass } from "../../../../services/cart/CartTypes";
 
 interface ProductDetailsContainerProps {
@@ -18,10 +21,10 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   const dispatch = useAppDispatch();
   const navigate = useCustomNavigate();
 
-
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const userCart = useAppSelector((state) => state.cart.userCart);
 
+  /* Product Details State */
   const [productDetails, setProductDetails] = useState<Product>();
 
   /* If the product is in cart and the quantity in cart */
@@ -33,10 +36,13 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
   /* Error while fetching product details */
   const [isProductDetailsError, setIsProductDetailsError] = useState(false);
 
-  const isAddOrUpdateCartInProgress = useAppSelector(state => state.cart.isAddOrUpdateToCartInProgress);
-  const isRemoverFromCartInProgress = useAppSelector(state => state.cart.isRemoveFromCartInProgress);
-
-
+  /* For loading spinner */
+  const isAddOrUpdateCartInProgress = useAppSelector(
+    (state) => state.cart.isAddOrUpdateToCartInProgress
+  );
+  const isRemoveFromCartInProgress = useAppSelector(
+    (state) => state.cart.isRemoveFromCartInProgress
+  );
 
   const fetchProductDetails = useCallback(async () => {
     if (productId) {
@@ -54,25 +60,31 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
     }
   }, [productId]);
 
+  /* Add to cart function */
   const addToCart = async (product: Product, quantity: number) => {
+    /* If the user is not logged in, route to login */
     if (!isLoggedIn) {
       navigate(ROUTE_PATHS.login);
       return;
     }
-    dispatch(addOrUpdateToCartThunk({productId: product._id, quantity}));
 
+    /* Add to cart thunk */
+    dispatch(addOrUpdateToCartThunk({ productId: product._id, quantity }));
   };
 
+  /* Remove from cart function */
   const removeFromCart = async (product: Product) => {
+    /* If the user is not logged in, route to login */
     if (!isLoggedIn) {
       navigate(ROUTE_PATHS.login);
       return;
     }
-    dispatch(removeFromCartThunk({productId: product._id})); 
-
+    /* Remove from cart thunk */
+    dispatch(removeFromCartThunk({ productId: product._id }));
   };
 
   const checkProductInCart = useCallback(() => {
+    /* Finding the product in user cart */
     const product = userCart?.items.find(
       (item: CartItemClass) => item.product._id === productId
     );
@@ -104,7 +116,7 @@ const ProductDetailsContainer = (props: ProductDetailsContainerProps) => {
       updateQuantityButtonShown={productInCart.isProductExistsInCart}
       quantityInCart={productInCart.currentQuantity}
       isAddOrUpdateCartInProgress={isAddOrUpdateCartInProgress}
-      isRemoverFromCartInProgress={isRemoverFromCartInProgress}
+      isRemoveFromCartInProgress={isRemoveFromCartInProgress}
     />
   );
 };

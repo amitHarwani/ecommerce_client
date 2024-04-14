@@ -1,7 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { NavigationOption } from "../../constants";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../../store";
 import { useMemo } from "react";
 
 interface NavItemProps {
@@ -13,8 +12,6 @@ const NavItem = (props: NavItemProps) => {
   const { navItem, className = "" } = props;
 
   const { t } = useTranslation();
-
-  const isRTL = useAppSelector((state) => state.language.isRTL);
 
   const { pathname, search } = useLocation();
   const currentPath = useMemo(() => {
@@ -28,10 +25,10 @@ const NavItem = (props: NavItemProps) => {
           className={({
             isActive,
           }) => `w-full lg:w-auto flex text-zinc-50 lg:text-black
-          lg:before:absolute lg:before:content-[''] lg:before:-bottom-px lg:before:w-0 lg:before:h-px lg:before:bg-zinc-400 lg:before:transition-all
+          lg:before:absolute lg:before:-bottom-px lg:before:w-0 lg:before:h-px lg:before:bg-zinc-400 lg:before:transition-all
           lg:before:hover:w-full
-          ${isRTL ? "flex-row-reverse" : ""}  
           ${
+            /* Underline styles */
             isActive
               ? "lg:hover:before:w-0 font-bold lg:font-normal lg:underline lg:underline-offset-[7.4px] lg:decoration-1"
               : ""

@@ -7,23 +7,19 @@ export enum DropdownTypes {
   borderedLightBg
 }
 
-export type DropdownItem = {
+export interface DropdownItem {
   id?: string | number;
   textKey?: string;
   text?: string;
-};
-
-export interface LanguageDropdownItem extends DropdownItem {
-  id: string;
-  textKey: string;
 }
 
+
 /* SELECTION MENU */
-export type SelectionMenuItem = {
+export interface SelectionMenuItem {
   id: string | number;
   textKey: string;
   icon?: React.ReactElement
-};
+}
 
 /* LANGUAGE */
 export enum SUPPORTED_LANGUAGES {
@@ -50,20 +46,20 @@ export enum BREAKPOINTS {
 }
 
 /* DRAWER OPTION */
-export type NavigationOption = {
+export interface NavigationOption {
   id: string | number;
   textKey: string;
   icon?: React.ReactElement;
   navigateTo: string;
   customComponent?: React.ReactElement
-};
+}
 
 /* DRAWER OPTION */
-export type DrawerOption = {
+export interface DrawerOption  {
   id: string | number;
   textKey: string;
   icon?: React.ReactElement;
-};
+}
 
 /* BUTTON TYPES */
 export enum ButtonTypes {
@@ -84,15 +80,15 @@ export enum DATE_TIME_FORMATS {
   displayedDateWithTime = "Do MMM YYYY, hh:mmA"
 }
 
-export type DURATION = {
+export interface DURATION {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
-};
+}
 
 /* Category Icon Type */
-export type CategoryIcon = { [id: string]: React.ReactElement };
+export interface CategoryIcon  { [id: string]: React.ReactElement }
 
 /* Card Container */
 export enum CARD_CONTAINER_OPTION {
@@ -102,12 +98,12 @@ export enum CARD_CONTAINER_OPTION {
 }
 
 /* Company Gurantee */
-export type COMPANY_GURANTEE = {
+export interface COMPANY_GURANTEE {
   id: string | number,
   icon: React.ReactElement;
   headingKey: string;
   descriptionKey: string;
-};
+}
 
 /* Arrow Button Types */
 export enum ARROW_BUTTONS {
@@ -155,10 +151,10 @@ export const REGEX_PATTERNS = {
 
 
 /* LOGIN FORM FIELDS */
-export type LoginFormFields = {
+export interface LoginFormFields {
   email: string;
   password: string;
-};
+}
 
 /* SIGN UP FORM FIELDS */
 export type SignupFormFields = {

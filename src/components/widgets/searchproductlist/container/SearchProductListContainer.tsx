@@ -28,7 +28,9 @@ const SearchProductListContainer = (props: SearchProductListContainerProps) => {
         if (!error) {
           /* Filtering according to the searched product name */
           const filteredProducts = products.filter((product) =>
-            product.name?.toLowerCase()?.includes(productNameSearched?.toLowerCase())
+            product.name
+              ?.toLowerCase()
+              ?.includes(productNameSearched?.toLowerCase())
           );
 
           /* Setting products list and displayed products list */
@@ -40,10 +42,13 @@ const SearchProductListContainer = (props: SearchProductListContainerProps) => {
               /* If there is space for more products to be shown */
               if (prev.length <= ProductService.defaultPageLimit) {
                 /* slice from 0 to the page limit */
-                return updatedProductsList.slice(
-                  0,
-                  ProductService.defaultPageLimit
-                );
+                prev = [
+                  ...prev,
+                  ...updatedProductsList.slice(
+                    0,
+                    ProductService.defaultPageLimit - prev.length
+                  ),
+                ];
               }
               return prev;
             });
@@ -57,14 +62,16 @@ const SearchProductListContainer = (props: SearchProductListContainerProps) => {
   const loadMoreHandler = () => {
     /* Adding more products to displayed products list from the previously added once */
     setDisplayedProductsList((prev) => {
-        return [...prev, ...productsList.splice(prev.length, ProductService.defaultPageLimit)];
-    })
-  }
+      return [
+        ...prev,
+        ...productsList.slice(prev.length, ProductService.defaultPageLimit),
+      ];
+    });
+  };
 
   useEffect(() => {
     findProducts();
   }, [findProducts]);
-
 
   return (
     <SearchProductList

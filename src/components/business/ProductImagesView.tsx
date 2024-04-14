@@ -12,13 +12,20 @@ interface ProductImagesViewProps {
 const ProductImagesView = (props: ProductImagesViewProps) => {
   const { mainImage, subImages, productName, className } = props;
 
-  const isRTL = useAppSelector(state => state.language.isRTL);
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  /* Top Image is the largest image shown */
   const [topImage, setTopImage] = useState(mainImage);
+
+  /* Other images */
   const [otherImages, setOtherImages] = useState(subImages);
 
   /* To Change the main top image shown */
   const changeTopImage = (newTopImage: ImageClass): void => {
+    /* 
+    Replace the image clicked (newTopImage) with the top image, 
+    and set the top image to the image clicked (newTopImage) 
+    */
     setOtherImages((prev) => {
       const imageIndex = prev.findIndex(
         (image) => image.url === newTopImage.url
@@ -32,14 +39,18 @@ const ProductImagesView = (props: ProductImagesViewProps) => {
   };
 
   useEffect(() => {
-    setTopImage(mainImage)
-  }, [mainImage])
+    setTopImage(mainImage);
+  }, [mainImage]);
 
   useEffect(() => {
     setOtherImages(subImages);
-  }, [subImages])
+  }, [subImages]);
   return (
-    <div className={`flex flex-col ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'} ${className}`}>
+    <div
+      className={`flex flex-col ${
+        isRTL ? "lg:flex-row-reverse" : "lg:flex-row"
+      } ${className}`}
+    >
       <div className="bg-neutral-100 rounded --add-later-p-4 flex justify-center items-center lg:order-1 lg:flex-1">
         <Image
           src={topImage.url}

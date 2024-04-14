@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store/index.ts";
 import axios from "axios";
 
+/* Configuring base URL for axios */
 if (import.meta.env.MODE === "production") {
   axios.defaults.baseURL = import.meta.env.VITE_SERVER_URI;
 }
