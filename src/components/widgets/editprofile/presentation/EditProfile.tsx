@@ -17,9 +17,15 @@ interface EditProfileProps {
   currentProfile: ProfileFormFields;
   updateProfileHandler(data: ProfileFormFields): void;
   updateInProgress: boolean;
+  isChangePasswordOptionVisible: boolean;
 }
 const EditProfile = (props: EditProfileProps) => {
-  const { currentProfile, updateProfileHandler, updateInProgress } = props;
+  const {
+    currentProfile,
+    updateProfileHandler,
+    updateInProgress,
+    isChangePasswordOptionVisible = true,
+  } = props;
 
   const { t } = useTranslation();
   const isRTL = useAppSelector((state) => state.language.isRTL);
@@ -61,6 +67,9 @@ const EditProfile = (props: EditProfileProps) => {
         setIsValuesUpdated(false);
       }
     });
+
+    /* Setting to false as currentProfile has been updated here */
+    setIsValuesUpdated(false);
 
     return () => {
       subscribe.unsubscribe();
@@ -128,12 +137,14 @@ const EditProfile = (props: EditProfileProps) => {
           />
         </div>
 
-        <Link
-          text={t("changePassword")}
-          className="capitalize text-sm"
-          linkType={LinkTypes.red}
-          onClick={toggleChangePasswordModal}
-        />
+        {isChangePasswordOptionVisible && (
+          <Link
+            text={t("changePassword")}
+            className="capitalize text-sm"
+            linkType={LinkTypes.red}
+            onClick={toggleChangePasswordModal}
+          />
+        )}
 
         <Button
           type="submit"

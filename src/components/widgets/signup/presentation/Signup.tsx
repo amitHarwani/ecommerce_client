@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import {
   ButtonTypes,
   LinkTypes,
+  MIN_USERNAME_LENGTH,
   REGEX_PATTERNS,
   SignupFormFields,
 } from "../../../../constants";
@@ -104,7 +105,13 @@ const Signup = (props: SignupProps) => {
         className="mt-10 placeholder:capitalize"
         autoComplete="username"
         errorMessage={errors.username?.message || ""}
-        {...register("username", { required: t("usernameIsRequired") })}
+        {...register("username", { required: t("usernameIsRequired"),
+          validate: (value) => {
+            if(value.length < MIN_USERNAME_LENGTH){
+              return t("usernameMustBeThreeCharactersLong")
+            }
+          }
+         })}
       />
 
       <Input

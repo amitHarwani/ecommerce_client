@@ -136,7 +136,8 @@
     "newPassword": "new password",
     "confirmNewPassword": "confirm new password",
     "thisFieldIsRequired": "this field is required",
-    "passwordChangedSuccessfully": "password changed successfully"
+    "passwordChangedSuccessfully": "password changed successfully",
+    "usernameMustBeThreeCharactersLong": "username must be at least 3 characters long"
     
     
 
