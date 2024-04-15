@@ -11,6 +11,7 @@ import {
   DropdownItem,
   NavigationOption,
   SelectionMenuItem,
+  TabItemConfig,
 } from "../constants";
 
 export const DRAWER_ITEMS: Array<NavigationOption> = [
@@ -106,3 +107,18 @@ export const RELATED_PRODUCTS_COUNT = 4;
 export enum PAYMENT_TYPES {
   PAYPAL = "PAYPAL"
 }
+
+export const MANAGE_ACCOUNT_TABS: Array<TabItemConfig> = [
+  {
+    id: 1, 
+    tabHeadingKey: "editProfile"
+  },
+  {
+    id: 2, 
+    tabHeadingKey: "myAddresses"
+  },
+  {
+    id: 3, 
+    tabHeadingKey: "accountSettings"
+  } 
+]

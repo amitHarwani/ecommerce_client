@@ -115,7 +115,7 @@ const EditProfile = (props: EditProfileProps) => {
         isLoading={updateInProgress}
         isDisabled={!isValuesUpdated}
       >
-        <span className="capitalize">{t("submit")}</span>
+        <span className="capitalize">{t("update")}</span>
       </Button>
     </form>
   );

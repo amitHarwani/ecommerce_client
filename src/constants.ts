@@ -157,7 +157,7 @@ export interface LoginFormFields {
 }
 
 /* SIGN UP FORM FIELDS */
-export type SignupFormFields = {
+export interface SignupFormFields {
   email: string,
   password: string,
   username: string,
@@ -180,7 +180,7 @@ export enum ADDRESS_FORM_KEYS  {
   pincode
 }
 
-export type AddressFormFields = {
+export interface AddressFormFields {
   country: DropdownItem,
   city: DropdownItem,
   state: DropdownItem,
@@ -189,25 +189,33 @@ export type AddressFormFields = {
   pincode: string
 }
 
-export type CheckoutFormFields = {
+export interface CheckoutFormFields {
   address: AddressClass
 }
 
-export type ProfileFormFields = {
+export interface ProfileFormFields {
   firstName: string,
   lastName: string,
   phoneNumber: string,
   countryCode: string
 }
 
-export type CheckoutApplyCouponCodeFields = {
+export interface CheckoutApplyCouponCodeFields {
   couponCode: string
 }
 
-export type RADIO_BUTTON_TYPE<T> = {
+export interface RADIO_BUTTON_TYPE<T> {
   label?: string;
   customElement?: React.ReactElement;
   data: T
   isDefaultSelected: boolean;
   id: string;
+}
+
+/**
+ * Tab Config 
+ */
+export interface TabItemConfig {
+  id: number | string,
+  tabHeadingKey: string
 }

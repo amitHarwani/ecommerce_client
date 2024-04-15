@@ -14,13 +14,9 @@ interface AddressCardProps {
   onAddressUpdated?(): void;
 }
 const AddressCard = (props: AddressCardProps) => {
-  const {
-    address,
-    className = "shadow",
-    onAddressUpdated,
-  } = props;
+  const { address, className = "shadow", onAddressUpdated } = props;
 
-  const isRTL = useAppSelector(state => state.language.isRTL);
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
   const [isAddressUpdateModalShown, setIsAddressUpdateModalShown] =
     useState(false);
@@ -36,29 +32,34 @@ const AddressCard = (props: AddressCardProps) => {
           onAddressAddedOrUpdatedCallback={onAddressUpdated}
         />
       )}
-      {
-        isDeleteAddressModalShown && (
-          <DeleteAddressModalContainer 
-            address={address}
-            hideModal={() => setIsDeleteAddressModalShown(false)}
-            onAddressDeletedCallback={onAddressUpdated}
-          />
-        )
-      }
+      {isDeleteAddressModalShown && (
+        <DeleteAddressModalContainer
+          address={address}
+          hideModal={() => setIsDeleteAddressModalShown(false)}
+          onAddressDeletedCallback={onAddressUpdated}
+        />
+      )}
       <div className={`flex flex-col p-2 rounded ${className}`}>
-        <div className="flex flex-col" dir={isRTL ? 'rtl': 'ltr'}>
+        <div className="flex flex-col" dir={isRTL ? "rtl" : "ltr"}>
           <span>{`${address.state}, ${address.city}`}</span>
           <span>{address.country}</span>
         </div>
         <Text className="truncate mt-2">{address.addressLine1}</Text>
-        <div className={`flex gap-x-2 ${isRTL ? 'self-start flex-row-reverse': 'self-end'}`}>
+        <div
+          className={`flex gap-x-2 ${isRTL ? "self-start flex-row-reverse" : "self-end"}`}
+        >
           <Button
             onClickHandler={() => setIsAddressUpdateModalShown(true)}
             type="button"
           >
             <EditIcon className="w-4 h-4" />
           </Button>
-          <Button type="button" onClickHandler={() => {setIsDeleteAddressModalShown(true)}}>
+          <Button
+            type="button"
+            onClickHandler={() => {
+              setIsDeleteAddressModalShown(true);
+            }}
+          >
             <DeleteIcon className="w-4 h-4" />
           </Button>
         </div>

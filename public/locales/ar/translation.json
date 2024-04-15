@@ -127,7 +127,10 @@
     "signInWithGoogle": "الدخول مع جوجل",
     "noOrdersFound": "لم يتم العثور على أية طلبات",
     "searchResults": "نتائج البحث",
-    "noResultsFound": "لم يتم العثور على نتائج"
+    "noResultsFound": "لم يتم العثور على نتائج",
+    "editProfile": "تعديل الملف الشخصي",
+    "myAddresses": "عناويني",
+    "accountSettings": "إعدادت الحساب"
 
 
 
