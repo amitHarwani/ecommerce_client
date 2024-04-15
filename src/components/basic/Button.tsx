@@ -38,7 +38,7 @@ const Button = (props: ButtonProps) => {
     <button
       type={type}
       className={`transition transform lg:hover:scale-105 active:scale-95 lg:active:scale-95 
-      disabled:lg:hover:scale-100 disabled:active:scale-100 disabled:lg:active:scale-100
+      disabled:lg:hover:scale-100 disabled:active:scale-100 disabled:lg:active:scale-100 disabled:opacity-50
        ${buttonStyles} ${className}`}
       onClick={onClickHandler}
       disabled={isDisabled}

@@ -70,14 +70,12 @@ const CarouselButtons = (props: CarouselButtons) => {
         onClickHandler={onBackClickHandler}
         isDisabled={isRTL ? isNextButtonDisabled : isBackButtonDisabled}
       />
-      <span>Left</span>
       <ArrowButton
         type={ARROW_BUTTONS.RIGHT}
         onClickHandler={onNextClickHandler}
         isDisabled={isRTL ? isBackButtonDisabled : isNextButtonDisabled}
         className="ml-1"
       />
-      <span>Right</span>
     </div>
   );
 };

@@ -130,7 +130,16 @@
     "noResultsFound": "لم يتم العثور على نتائج",
     "editProfile": "تعديل الملف الشخصي",
     "myAddresses": "عناويني",
-    "accountSettings": "إعدادت الحساب"
+    "accountSettings": "إعدادت الحساب",
+    "changePassword": "تغيير كلمة المرور",
+    "currentPassword": "كلمة السر الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+    "thisFieldIsRequired": "هذه الخانة مطلوبه",
+    "passwordChangedSuccessfully": "تم تغيير الرقم السري بنجاح"
+
+
+    
 
 
 

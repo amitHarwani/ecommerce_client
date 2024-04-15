@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TabItemConfig } from "../../constants";
 import TabItem from "./TabItem";
+import { useAppSelector } from "../../store";
 
 interface TabsProps {
   tabsConfig: TabItemConfig[];
@@ -18,6 +19,8 @@ const Tabs = (props: TabsProps) => {
     tabItemClassName = ""
   } = props;
 
+  const isRTL = useAppSelector((state) => state.language.isRTL);
+
   /* Selected Tab */
   const [selectedTab, setSelectedTab] =
     useState<TabItemConfig>(defaultSelectedTab);
@@ -32,7 +35,9 @@ const Tabs = (props: TabsProps) => {
   };
 
   return (
-    <div className={`flex border-b-2 gap-x-4  border-b-neutral-100 shadow-sm ${tabsContainerClassName}`}>
+    <div className={`flex border-b-2 gap-x-4  border-b-neutral-100 shadow-sm ${tabsContainerClassName}`}
+      dir={isRTL ? 'rtl' : 'ltr'}
+    >
       {tabsConfig.map((tab) => (
         <TabItem
           tabItem={tab}

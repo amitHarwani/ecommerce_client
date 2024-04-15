@@ -219,3 +219,10 @@ export interface TabItemConfig {
   id: number | string,
   tabHeadingKey: string
 }
+
+/* Change Password Form Fields */
+export interface ChangePasswordFields {
+  currentPassword: string,
+  newPassword: string,
+  confirmNewPassword: string
+}

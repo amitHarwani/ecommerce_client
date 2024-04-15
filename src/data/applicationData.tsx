@@ -116,9 +116,5 @@ export const MANAGE_ACCOUNT_TABS: Array<TabItemConfig> = [
   {
     id: 2, 
     tabHeadingKey: "myAddresses"
-  },
-  {
-    id: 3, 
-    tabHeadingKey: "accountSettings"
-  } 
+  }
 ]
