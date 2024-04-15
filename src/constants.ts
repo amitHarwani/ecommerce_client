@@ -149,6 +149,7 @@ export const REGEX_PATTERNS = {
   phoneNumberPattern: /^[0-9]{10}$/
 }
 
+export const MIN_USERNAME_LENGTH = 3;
 
 /* LOGIN FORM FIELDS */
 export interface LoginFormFields {
