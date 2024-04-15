@@ -104,7 +104,13 @@ const Signup = (props: SignupProps) => {
         className="mt-10 placeholder:capitalize"
         autoComplete="username"
         errorMessage={errors.username?.message || ""}
-        {...register("username", { required: t("usernameIsRequired") })}
+        {...register("username", { required: t("usernameIsRequired"),
+          validate: (value) => {
+            if(value.length < 3){
+              return t("usernameMustBeThreeCharactersLong")
+            }
+          }
+         })}
       />
 
       <Input

@@ -1,21 +1,31 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import ApiError from "../../../../services/ApiError";
 import ProfileService from "../../../../services/profile/ProfileService";
 import EditProfile from "../presentation/EditProfile";
 import { ProfileFormFields, TOAST_MESSAGE_TYPES } from "../../../../constants";
 import ErrorMessage from "../../../basic/ErrorMessage";
-import { useAppDispatch } from "../../../../store";
+import { useAppDispatch, useAppSelector } from "../../../../store";
 import { postMessageAction } from "../../../../store/ToastMessageSlice";
 import { useTranslation } from "react-i18next";
+import { LOGIN_TYPES } from "../../../../services/auth/AuthTypes";
 
 const EditProfileContainer = () => {
   const dispatch = useAppDispatch();
 
   const {t} = useTranslation();
 
+  const loggedInUser = useAppSelector((state) => state.auth.userDetails);
+
   const [currentProfile, setCurrentProfile] = useState<ProfileFormFields>();
   const [errorFetchingProfile, setErrorFetchingProfile] = useState("");
   const [updateInProgress, setUpdateInProgress] = useState(false);
+
+  const isChangePasswordOptionVisible = useMemo(() => {
+    if(loggedInUser?.loginType !== LOGIN_TYPES.emailPassword){
+      return false;
+    }
+    return true;
+  }, [loggedInUser])
 
   const fetchUserProfile = useCallback(async () => {
     setErrorFetchingProfile("");
@@ -79,6 +89,7 @@ const EditProfileContainer = () => {
           currentProfile={currentProfile}
           updateProfileHandler={updateProfileHandler}
           updateInProgress={updateInProgress}
+          isChangePasswordOptionVisible={isChangePasswordOptionVisible}
         />
       ) : errorFetchingProfile ? (
         <ErrorMessage message={t("failedToFetchInformation")} />
