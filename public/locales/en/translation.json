@@ -3,7 +3,7 @@
     "ar": "عربي",
     "select": "Select",
     "infoHeaderMessage": "",
-    "companyName": "freeapicomm",
+    "companyName": "ecomm",
     "home": "home",
     "contact": "contact",
     "about": "about",
@@ -127,7 +127,10 @@
     "signInWithGoogle": "sign in with google",
     "noOrdersFound": "no orders found",
     "searchResults": "search results",
-    "noResultsFound": "no results found"
+    "noResultsFound": "no results found",
+    "editProfile": "edit profile",
+    "myAddresses": "my addresses",
+    "accountSettings": "account settings"
     
     
 
