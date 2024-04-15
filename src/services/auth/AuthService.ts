@@ -1,3 +1,4 @@
+import { ChangePasswordFields } from "../../constants";
 import ApiError from "../ApiError";
 import ApiRequest from "../ApiRequest";
 import ApiResponse from "../ApiResponse";
@@ -78,6 +79,25 @@ class AuthService {
 
     if (response instanceof ApiResponse && response.success) {
       return response.data;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    } else {
+      return response;
+    }
+  }
+
+  async changePassword(
+    fields: ChangePasswordFields
+  ): Promise<boolean | ApiError> {
+    const apiRequest = new ApiRequest(`${this.USER_BASE_URL}/change-password`);
+
+    const response = await apiRequest.postRequest<object>({
+      newPassword: fields.newPassword,
+      oldPassword: fields.currentPassword,
+    });
+
+    if (response instanceof ApiResponse && response.success) {
+      return true;
     } else if (response instanceof ApiResponse) {
       return new ApiError(response.message);
     } else {

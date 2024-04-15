@@ -1,11 +1,14 @@
+import { useAppSelector } from "../../store";
+
 const CartIcon = (props: { className: string; quantity?: number }) => {
   const { className = "", quantity} = props;
 
+  const isRTL = useAppSelector((state) => state.language.isRTL);
   return (
     <div className="relative">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className={className}
+        className={`${className} ${isRTL ? 'transform -scale-x-[1]': ''}`}
         viewBox="0 0 32 32"
         fill="none"
       >
@@ -39,7 +42,7 @@ const CartIcon = (props: { className: string; quantity?: number }) => {
         />
       </svg>
       {quantity ? (
-        <div className="absolute w-4 h-4 p-[10px] bg-darkRed  rounded-full -top-1 -right-1 flex justify-center items-center">
+        <div className={`absolute w-4 h-4 p-[10px] bg-darkRed  rounded-full -top-1 ${isRTL ? '-left-1' : '-right-1'} flex justify-center items-center`}>
           <span className="text-zinc-50 text-xs">{quantity}</span>
         </div>
       ) : <></>}

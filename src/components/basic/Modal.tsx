@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { ButtonTypes } from "../../constants";
 import Button from "./Button";
 
@@ -8,7 +9,7 @@ interface ModalProps {
   primaryButtonText?: string;
   primaryButtonClassname?: string;
   secondaryButtonText?: string;
-  secondaryButtonClassname?:string;
+  secondaryButtonClassname?: string;
   primaryButtonHandler?(): void;
   secondaryButtonHandler?(): void;
   isPrimaryButtonLoading?: boolean;
@@ -20,12 +21,27 @@ const Modal = (props: ModalProps) => {
     heading = "",
     primaryButtonText = "",
     secondaryButtonText = "",
-    primaryButtonClassname = '',
-    secondaryButtonClassname = '',
+    primaryButtonClassname = "",
+    secondaryButtonClassname = "",
     primaryButtonHandler,
     secondaryButtonHandler,
-    isPrimaryButtonLoading = false
+    isPrimaryButtonLoading = false,
   } = props;
+
+  const isModalFooterShown = useMemo(() => {
+    if (
+      (primaryButtonText && primaryButtonHandler) ||
+      (secondaryButtonText && secondaryButtonHandler)
+    ) {
+      return true;
+    }
+    return false;
+  }, [
+    primaryButtonText,
+    primaryButtonHandler,
+    secondaryButtonText,
+    secondaryButtonHandler,
+  ]);
   return (
     <div className="w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50 flex justify-center items-center z-20">
       <dialog
@@ -38,27 +54,29 @@ const Modal = (props: ModalProps) => {
         )}
         {children}
 
-        <div className="flex flex-col justify-center gap-2 mt-8">
-          {primaryButtonText && primaryButtonHandler && (
-            <Button
-              buttonType={ButtonTypes.primaryButton}
-              className={`px-12 py-1 flex justify-center ${primaryButtonClassname}`}
-              onClickHandler={primaryButtonHandler}
-              isLoading={isPrimaryButtonLoading}
-            >
-              <span>{primaryButtonText}</span>
-            </Button>
-          )}
-          {secondaryButtonText && secondaryButtonHandler && (
-            <Button
-              buttonType={ButtonTypes.secondaryButton}
-              className={`px-12 py-1 flex justify-center ${secondaryButtonClassname}`}
-              onClickHandler={secondaryButtonHandler}
-            >
-              <span>{secondaryButtonText}</span>
-            </Button>
-          )}
-        </div>
+        {isModalFooterShown && (
+          <div className="flex flex-col justify-center gap-2 mt-8">
+            {primaryButtonText && primaryButtonHandler && (
+              <Button
+                buttonType={ButtonTypes.primaryButton}
+                className={`px-12 py-1 flex justify-center ${primaryButtonClassname}`}
+                onClickHandler={primaryButtonHandler}
+                isLoading={isPrimaryButtonLoading}
+              >
+                <span>{primaryButtonText}</span>
+              </Button>
+            )}
+            {secondaryButtonText && secondaryButtonHandler && (
+              <Button
+                buttonType={ButtonTypes.secondaryButton}
+                className={`px-12 py-1 flex justify-center ${secondaryButtonClassname}`}
+                onClickHandler={secondaryButtonHandler}
+              >
+                <span>{secondaryButtonText}</span>
+              </Button>
+            )}
+          </div>
+        )}
       </dialog>
     </div>
   );

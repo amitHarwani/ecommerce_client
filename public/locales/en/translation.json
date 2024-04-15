@@ -130,7 +130,13 @@
     "noResultsFound": "no results found",
     "editProfile": "edit profile",
     "myAddresses": "my addresses",
-    "accountSettings": "account settings"
+    "accountSettings": "account settings",
+    "changePassword": "change password",
+    "currentPassword": "current password",
+    "newPassword": "new password",
+    "confirmNewPassword": "confirm new password",
+    "thisFieldIsRequired": "this field is required",
+    "passwordChangedSuccessfully": "password changed successfully"
     
     
 
