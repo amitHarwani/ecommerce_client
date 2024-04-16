@@ -1,4 +1,8 @@
-import { ChangePasswordFields } from "../../constants";
+import {
+  ChangePasswordFields,
+  ForgotPasswordFields,
+  ResetForgottenPasswordFields,
+} from "../../constants";
 import ApiError from "../ApiError";
 import ApiRequest from "../ApiRequest";
 import ApiResponse from "../ApiResponse";
@@ -103,6 +107,44 @@ class AuthService {
     } else {
       return response;
     }
+  }
+
+  async forgotPassword(
+    fields: ForgotPasswordFields
+  ): Promise<ApiResponse<null> | ApiError> {
+    const apiRequest = new ApiRequest(`${this.USER_BASE_URL}/forgot-password`);
+
+    const response = await apiRequest.postRequest<null>({
+      email: fields.email,
+    });
+
+    if (response instanceof ApiResponse && response.success) {
+      return response;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    } else {
+      return response;
+    }
+  }
+
+  async resetForgottenPassword(
+    token: string,
+    fields: ResetForgottenPasswordFields
+  ): Promise<ApiResponse<object> | ApiError> {
+    const apiRequest = new ApiRequest(
+      `${this.USER_BASE_URL}/reset-password/${token}`
+    );
+
+    const response = await apiRequest.postRequest<object>({
+      newPassword: fields.newPassword,
+    });
+
+    if (response instanceof ApiResponse && response.success) {
+      return response;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    }
+    return response;
   }
 }
 

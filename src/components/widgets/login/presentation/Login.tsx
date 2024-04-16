@@ -99,7 +99,7 @@ const Login = (props: LoginProps) => {
           <span>{t("login")}</span>
         </Button>
         <Link
-          text={t("forgetPassword")}
+          text={t("forgotPassword")}
           linkType={LinkTypes.red}
           onClick={forgotPasswordClickHandler}
           className="capitalize"

@@ -43,7 +43,7 @@
     "enterYourDetailsBelow": "enter your details below",
     "email": "email",
     "password": "password",
-    "forgetPassword": "forget password",
+    "forgotPassword": "forgot password",
     "dontHaveAnAccountSignUp": "don't have an account ? signup",
     "emailIsRequired": "email is required",
     "passwordIsRequired": "password is required",
@@ -137,7 +137,15 @@
     "confirmNewPassword": "confirm new password",
     "thisFieldIsRequired": "this field is required",
     "passwordChangedSuccessfully": "password changed successfully",
-    "usernameMustBeThreeCharactersLong": "username must be at least 3 characters long"
+    "usernameMustBeThreeCharactersLong": "username must be at least 3 characters long",
+    "submit": "submit",
+    "passwordResetEmailSent": "password reset mail has been sent on your mail id",
+    "pageNotFound": "404: page not found",
+    "resetPassword": "reset password",
+    "reset": "reset",
+    "tryAgainLater": "try again later",
+    "resetPasswordSuccessful": "reset password successful"
+    
     
     
 

@@ -43,7 +43,7 @@
     "enterYourDetailsBelow": "أدخل التفاصيل الخاصة بك أدناه",
     "email": "بريد إلكتروني",
     "password": "كلمة المرور",
-    "forgetPassword": "نسيت كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور",
     "dontHaveAnAccountSignUp": "ليس لديك حساب؟ قم بالتسجيل",
     "emailIsRequired": "البريد الالكتروني مطلوب",
     "passwordIsRequired": "كلمة المرور مطلوبة",
@@ -137,7 +137,20 @@
     "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
     "thisFieldIsRequired": "هذه الخانة مطلوبه",
     "passwordChangedSuccessfully": "تم تغيير الرقم السري بنجاح",
-    "usernameMustBeThreeCharactersLong": "يجب أن يتكون اسم المستخدم من 3 أحرف على الأقل"
+    "usernameMustBeThreeCharactersLong": "يجب أن يتكون اسم المستخدم من 3 أحرف على الأقل",
+    "submit": "يُقدِّم",
+    "passwordResetEmailSent": "تم إرسال بريد إعادة تعيين كلمة المرور على معرف البريد الخاص بك",
+    "pageNotFound": "الصفحة غير موجودة",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "reset": "إعادة ضبط",
+    "tryAgainLater": "حاول مرة أخرى في وقت لاحق",
+    "resetPasswordSuccessful": "تمت إعادة تعيين كلمة المرور بنجاح"
+
+
+
+
+
+
 
 
 
