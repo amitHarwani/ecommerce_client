@@ -13,6 +13,8 @@ import PaymentFeedbackPageContainer from "./pages/paymentfeedback/container/Paym
 import ManageAccountPageContainer from "./pages/manageaccount/container/ManageAccountPageContainer";
 import OrdersPageContainer from "./pages/orders/container/OrdersPageContainer";
 import ProductSearchPageContainer from "./pages/productsearch/container/ProductSearchPageContainer";
+import ResetForgottenPasswordPageContainer from "./pages/resetforgottenpassword/container/ResetForgottenPasswordPageContainer";
+import PageNotFoundPageContainer from "./pages/pagenotfound/container/PageNotFoundPageContainer";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -26,6 +28,7 @@ const RoutePaths = () => {
           <Route path={ROUTE_PATHS.login} element={<LoginPageContainer />} />
           <Route path={ROUTE_PATHS.signup} element={<SignupPageContainer />} />
           <Route path={ROUTE_PATHS.productSearch} element={<ProductSearchPageContainer />} />
+          <Route path={ROUTE_PATHS.resetForgottenPassword} element={<ResetForgottenPasswordPageContainer />} />
           <Route element={<ForLoggedInUsers />}>
             <Route path={ROUTE_PATHS.cart} element={<CartPageContainer />} />
             <Route path={ROUTE_PATHS.checkout} element={<CheckoutPageContainer />} />
@@ -36,6 +39,8 @@ const RoutePaths = () => {
           <Route path="contact" element={<h1 className="flex justify-center items-center text-2xl">Contact</h1>} />
           <Route path="about" element={<h1 className="flex justify-center items-center text-2xl">About</h1>} />
           <Route path="register" element={<h1 className="flex justify-center items-center text-2xl">Register</h1>} />
+          <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />
+          <Route path="*" element={<PageNotFoundPageContainer />} />
         </Route>
       </Routes>
     </BrowserRouter>

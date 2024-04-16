@@ -132,6 +132,8 @@ export enum ROUTE_PATHS {
   paymentFeedback = "/payment-feedback",
   manageAccount = "/manage-account",
   orders = "/orders",
+  resetForgottenPassword = "/forgot-password/:token",
+  pageNotFound = "/page-not-found"
 }
 
 
@@ -224,6 +226,17 @@ export interface TabItemConfig {
 /* Change Password Form Fields */
 export interface ChangePasswordFields {
   currentPassword: string,
+  newPassword: string,
+  confirmNewPassword: string
+}
+
+/* Forgot Password Form Fields */
+export interface ForgotPasswordFields {
+  email: string
+}
+
+/* Reset Forgotten Password Form Fields */
+export interface ResetForgottenPasswordFields {
   newPassword: string,
   confirmNewPassword: string
 }

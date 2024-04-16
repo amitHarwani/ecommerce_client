@@ -7,9 +7,9 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../../store/AuthSlice";
 import useCustomNavigate from "../../../../hooks/useCustomNavigate";
+import ForgotPasswordModalContainer from "../../../modals/forgotpasswordmodal/container/ForgotPasswordModalContainer";
 
 const LoginContainer = () => {
-
   const navigate = useCustomNavigate();
 
   const dispatch = useDispatch();
@@ -21,6 +21,10 @@ const LoginContainer = () => {
 
   /* API Error message state */
   const [errorMessage, setErrorMessage] = useState("");
+
+  /* Forgot Password Modal Visibility */
+  const [isForgotPasswordModalShown, setIsForgotPasswordModalShown] =
+    useState(false);
 
   const loginClickHandler = async (inputData: LoginFormFields) => {
     setIsLoading(true);
@@ -40,11 +44,10 @@ const LoginContainer = () => {
       dispatch(logIn(response.user));
       const previousRoute = location.state?.previousRoute;
 
-      if(previousRoute){
+      if (previousRoute) {
         navigate(previousRoute, true);
-      }
-      else{
-        navigate("/")
+      } else {
+        navigate("/");
       }
     }
   };
@@ -52,23 +55,30 @@ const LoginContainer = () => {
   /* Redirection to Backend URL for google login  */
   const googleLoginClickHandler = () => {
     window.location.href = `${import.meta.env.VITE_SERVER_URI}${AuthService.GOOGLE_LOGIN_REDIRECT_URL}`;
-  }
+  };
 
   /* navigating to /signup */
   const signupClickHandler = () => {
-    navigate(ROUTE_PATHS.signup)
+    navigate(ROUTE_PATHS.signup);
   };
 
-  const forgotPasswordClickHandler = () => {};
+  const toggleForgotPasswordModal = () => {
+    setIsForgotPasswordModalShown((prev) => !prev);
+  };
   return (
-    <Login
-      loginClickHandler={loginClickHandler}
-      googleLoginClickHandler={googleLoginClickHandler}
-      signupClickHandler={signupClickHandler}
-      forgotPasswordClickHandler={forgotPasswordClickHandler}
-      isLoading={isLoading}
-      apiError={errorMessage}
-    />
+    <>
+      {isForgotPasswordModalShown && (
+        <ForgotPasswordModalContainer hideModal={toggleForgotPasswordModal} />
+      )}
+      <Login
+        loginClickHandler={loginClickHandler}
+        googleLoginClickHandler={googleLoginClickHandler}
+        signupClickHandler={signupClickHandler}
+        forgotPasswordClickHandler={toggleForgotPasswordModal}
+        isLoading={isLoading}
+        apiError={errorMessage}
+      />
+    </>
   );
 };
 
