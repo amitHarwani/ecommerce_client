@@ -1,4 +1,4 @@
-import SearchProductListContainer from "../../../components/widgets/searchproductlist/container/SearchProductListContainer";
+import AllProductListContainer from "../../../components/widgets/allproductlist/container/AllProductListContainer";
 
 
 interface ProductSearchPageProps {
@@ -8,7 +8,7 @@ const ProductSearchPage = (props: ProductSearchPageProps) => {
     const {productNameSearched = ''} = props;
     return (
         <div className="px-2 py-4 lg:px-10">
-            <SearchProductListContainer productNameSearched={productNameSearched} />
+            <AllProductListContainer productNameSearched={productNameSearched} />
         </div>
     )
 }

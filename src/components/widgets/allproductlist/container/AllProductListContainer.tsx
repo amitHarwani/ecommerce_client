@@ -7,9 +7,10 @@ import { ProductFilterFields } from "../../../../constants";
 
 interface AllProductListContainerProps {
   categoryId?: string;
+  productNameSearched?: string;
 }
 const AllProductListContainer = (props: AllProductListContainerProps) => {
-  const { categoryId = "" } = props;
+  const { categoryId = "", productNameSearched = "" } = props;
 
   const { t } = useTranslation();
 
@@ -34,6 +35,20 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
   /* Flag to store when data fetching has started*/
   const isFetchingDataStarted = useRef(false);
 
+  const setDisplayedProductsForSearch = (data: Product[]) => {
+    setDisplayedProducts((prev) => {
+      /* If there is space for more products to be shown */
+      if (prev.length <= ProductService.defaultPageLimit) {
+        /* slice from 0 to the page limit */
+        prev = [
+          ...prev,
+          ...data.slice(0, ProductService.defaultPageLimit - prev.length),
+        ];
+      }
+      return prev;
+    });
+  };
+  
   const fetchProducts = useCallback(async () => {
     /* Data fetching has started */
     isFetchingDataStarted.current = true;
@@ -49,15 +64,31 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
 
     ProductService.getAllProductsAsync((data, _, error, categoryInfo) => {
       if (!error) {
+
+        /* If productNameIsSearched, filter data by product name */
+        if (productNameSearched) {
+          data = data.filter((product) =>
+            product.name
+              ?.toLowerCase()
+              ?.includes(productNameSearched?.toLowerCase())
+          );
+        }
+
         /* Set overall products list */
         setProducts((prev) => [...prev, ...data]);
         setFilteredProducts((prev) => [...prev, ...data]);
 
+        /* If productNameIsSearched set displayed products list by checking page limit */
+        if (productNameSearched) {
+          setDisplayedProductsForSearch(data);
+        }
+
         /* On first response, set displayed products list, category name and hide loading spinner */
         if (isFirstResponse) {
-          if (!displayedProducts.length) {
+          if (!productNameSearched) {
             setDisplayedProducts(data);
           }
+
           if (categoryInfo) {
             setCategoryName(categoryInfo.name);
           }
@@ -73,7 +104,7 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
 
     /* Hide Loading spinner */
     setIsLoading(false);
-  }, [categoryId, displayedProducts]);
+  }, [categoryId, productNameSearched]);
 
   /* Load more handler */
   const loadMoreHandler = () => {
@@ -95,7 +126,7 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
 
     /* Setting displayed products from the complete product list */
     setDisplayedProducts(products.slice(0, ProductService.defaultPageLimit));
-  }
+  };
 
   /* Filtering products */
   const onFiltersChanged = (fields: ProductFilterFields) => {
@@ -113,7 +144,7 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
 
     /* Setting filtered product list */
     setFilteredProducts(filtered);
-    
+
     /* Displayed product list from the list of filtered products */
     setDisplayedProducts(filtered.slice(0, ProductService.defaultPageLimit));
   };
@@ -126,10 +157,18 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
 
   return (
     <AllProductList
-      heading={categoryId && categoryName ? categoryName : t("ourProducts")}
+      heading={
+        productNameSearched
+          ? t("searchResults")
+          : categoryId && categoryName
+            ? categoryName
+            : t("ourProducts")
+      }
       products={displayedProducts}
       error={isError ? true : false}
-      loadMoreShown={filteredProducts.length > displayedProducts.length ? true : false}
+      loadMoreShown={
+        filteredProducts.length > displayedProducts.length ? true : false
+      }
       loadMore={loadMoreHandler}
       isLoading={isLoading}
       onFiltersChanged={onFiltersChanged}
