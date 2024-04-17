@@ -144,7 +144,13 @@
     "resetPassword": "reset password",
     "reset": "reset",
     "tryAgainLater": "try again later",
-    "resetPasswordSuccessful": "reset password successful"
+    "resetPasswordSuccessful": "reset password successful",
+    "minPrice": "min price",
+    "maxPrice": "max price",
+    "to": "to",
+    "filter": "filter",
+    "invalidValue": "invalid value",
+    "maxValueIsLessThanMinValue": "max value is less than min value"
     
     
     

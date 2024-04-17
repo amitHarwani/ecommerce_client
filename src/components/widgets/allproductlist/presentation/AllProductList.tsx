@@ -3,7 +3,12 @@ import { Product } from "../../../../services/product/ProductTypes";
 import CardContainer from "../../../business/CardContainer";
 import ProductList from "../../../business/ProductList";
 import ErrorMessage from "../../../basic/ErrorMessage";
-import { CARD_CONTAINER_OPTION } from "../../../../constants";
+import {
+  CARD_CONTAINER_OPTION,
+  ProductFilterFields,
+} from "../../../../constants";
+import ProductFilters from "../../../business/ProductFilters";
+import { useAppSelector } from "../../../../store";
 
 interface AllProductListProps {
   products: Product[];
@@ -12,6 +17,8 @@ interface AllProductListProps {
   isLoading?: boolean;
   loadMoreShown: boolean;
   loadMore(): void;
+  onFiltersChanged(fields: ProductFilterFields): void;
+  resetFilterHandler(): void;
 }
 const AllProductList = (props: AllProductListProps) => {
   const {
@@ -21,9 +28,13 @@ const AllProductList = (props: AllProductListProps) => {
     isLoading = false,
     loadMoreShown = true,
     loadMore,
+    onFiltersChanged,
+    resetFilterHandler,
   } = props;
 
   const { t } = useTranslation();
+
+  const isRTL = useAppSelector((state) => state.language.isRTL);
 
   return (
     <CardContainer
@@ -35,7 +46,12 @@ const AllProductList = (props: AllProductListProps) => {
       extraOptionButtonClickHandler={loadMore}
       isLoadingButton={isLoading}
     >
-      <>
+      <div className="lg:flex lg:flex-col" dir={isRTL ? 'rtl' : 'ltr'}>
+        <ProductFilters
+          onFiltersChanged={onFiltersChanged}
+          resetFilterHandler={resetFilterHandler}
+          className="lg:self-end lg:mt-2 lg:mb-2"
+        />
         <ProductList products={products} className="mt-4" />
         {error && (
           <ErrorMessage
@@ -43,7 +59,7 @@ const AllProductList = (props: AllProductListProps) => {
             className="justify-center"
           />
         )}
-      </>
+      </div>
     </CardContainer>
   );
 };

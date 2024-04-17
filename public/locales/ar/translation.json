@@ -144,7 +144,17 @@
     "resetPassword": "إعادة تعيين كلمة المرور",
     "reset": "إعادة ضبط",
     "tryAgainLater": "حاول مرة أخرى في وقت لاحق",
-    "resetPasswordSuccessful": "تمت إعادة تعيين كلمة المرور بنجاح"
+    "resetPasswordSuccessful": "تمت إعادة تعيين كلمة المرور بنجاح",
+    "minPrice": "سعر دقيقة",
+    "maxPrice": "الحد الأقصى للسعر",
+    "to": "ل",
+    "filter": "منقي",
+    "invalidValue": "قيمة غير صالحة",
+    "maxValueIsLessThanMinValue": "القيمة القصوى أقل من القيمة الدنيا"
+
+
+
+
 
 
 
