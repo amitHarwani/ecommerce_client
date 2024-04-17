@@ -240,3 +240,11 @@ export interface ResetForgottenPasswordFields {
   newPassword: string,
   confirmNewPassword: string
 }
+
+/* Fields for product filters */
+export interface ProductFilterFields {
+  price: {
+    min: number,
+    max: number
+  }
+}

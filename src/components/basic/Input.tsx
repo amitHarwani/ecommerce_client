@@ -10,6 +10,7 @@ interface InputProps {
   className?: string;
   autoComplete?: string;
   errorMessage?: string;
+  containerClassName?: string;
 }
 
 const Input = forwardRef(
@@ -18,6 +19,7 @@ const Input = forwardRef(
       placeholder = "",
       type = "text",
       className = "",
+      containerClassName = "",
       autoComplete = "",
       errorMessage = "",
       ...otherProps
@@ -39,7 +41,7 @@ const Input = forwardRef(
     /* Password Input */
     if (type === "password") {
       return (
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${containerClassName}`}>
           <div
             className={`flex justify-between border-b border-b-grey pb-1 focus-within:border-b-black`}
             dir={isRTL ? "rtl" : "ltr"}
@@ -71,7 +73,7 @@ const Input = forwardRef(
       );
     }
     return (
-      <div className="flex flex-col">
+      <div className={`flex flex-col ${containerClassName}`}>
         <input
           ref={ref}
           placeholder={placeholder}
