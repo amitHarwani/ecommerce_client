@@ -64,7 +64,7 @@ const SearchProductListContainer = (props: SearchProductListContainerProps) => {
     setDisplayedProductsList((prev) => {
       return [
         ...prev,
-        ...productsList.slice(prev.length, ProductService.defaultPageLimit),
+        ...productsList.slice(prev.length, prev.length + ProductService.defaultPageLimit),
       ];
     });
   };

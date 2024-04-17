@@ -10,7 +10,8 @@ const ResetForgottenPasswordPageContainer = () => {
 
   /* If there is not token navigate to pageNotFound */
   if (!token) {
-    return navigate(ROUTE_PATHS.pageNotFound, true);
+    navigate(ROUTE_PATHS.pageNotFound, true);
+    return <></>
   }
 
   return (
