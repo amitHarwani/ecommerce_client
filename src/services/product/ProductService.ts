@@ -76,7 +76,6 @@ class ProductService {
     pageNumber: number,
     categoryId?: string
   ): Promise<Products | ApiError> {
-
     /* 
        If categoryId is passed, get products for the particular category, 
        else get all the products 
@@ -116,10 +115,19 @@ class ProductService {
   }
 
   async getAllProductsAsync(
-    callback: (data: Array<Product>, isDone: boolean, error?: ApiError) => void
+    callback: (data: Array<Product>, isDone: boolean, error?: ApiError, categoryInfo?: {_id: string, name: string}) => void,
+    categoryId?: string
   ) {
+    /* 
+       If categoryId is passed, get products for the particular category, 
+       else get all the products 
+    */
+    const url = categoryId
+      ? `${this.CATEGORY_WISE_URL}/${categoryId}`
+      : this.BASE_URL;
+
     /* ApiRequest Object */
-    const apiRequest = new ApiRequest(this.BASE_URL);
+    const apiRequest = new ApiRequest(url);
 
     let page = this.defaultPageNumber;
     /* First Request */
@@ -138,10 +146,9 @@ class ProductService {
 
       /* If no requests are pending return else send intermediate response */
       if (!requestsPending) {
-        return callback(firstResponse.data.products, true);
-      }
-      else{
-        callback(firstResponse.data.products, false);
+        return callback(firstResponse.data.products, true, undefined, firstResponse.data.category);
+      } else {
+        callback(firstResponse.data.products, false, undefined, firstResponse.data.category);
       }
       for (let counter = page; counter <= totalPages; counter++) {
         apiRequest
@@ -157,18 +164,18 @@ class ProductService {
                 : callback([], true, new ApiError(response.message));
             } else if (!requestsPending) {
               /* All Requests are done */
-              return callback(response.data.products, true);
+              return callback(response.data.products, true, undefined, response.data.category);
             } else {
               /* Sending the data of an in between request */
-              callback(response.data.products, false);
+              callback(response.data.products, false, undefined, response.data.category);
             }
           });
       }
     } else {
       /* Error */
       return firstResponse instanceof ApiError
-        ? firstResponse
-        : new ApiError(firstResponse.message);
+        ? callback([], true, firstResponse)
+        : callback([], true, new ApiError(firstResponse.message));
     }
   }
 

@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import AllProductList from "../presentation/AllProductList";
-import { Product, Products } from "../../../../services/product/ProductTypes";
-import ApiError from "../../../../services/ApiError";
-import ProductService from "../../../../services/product/ProductService";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import ProductService from "../../../../services/product/ProductService";
+import { Product } from "../../../../services/product/ProductTypes";
+import AllProductList from "../presentation/AllProductList";
 
 interface AllProductListContainerProps {
   categoryId?: string;
@@ -19,68 +18,82 @@ const AllProductListContainer = (props: AllProductListContainerProps) => {
   /* Error flag: When fetching products */
   const [isError, setIsError] = useState(false);
 
-  /* Page number which needs to be fetched next */
-  const [pageNumberToFetch, setPageNumberToFetch] = useState(1);
-
-  /* Total number of pages  */
-  const [totalNumberOfPages, setTotalNumberOfPages] = useState(1);
-
   /* Products List */
   const [products, setProducts] = useState<Product[]>([]);
+
+  /* Displayed Products List */
+  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
 
   /* Category name if categoryId is passed */
   const [categoryName, setCategoryName] = useState("");
 
-  const fetchProducts = useCallback(
-    async (pageNumber: number) => {
-      /* Hiding error, Displaying loading spinner */
-      setIsError(false);
-      setIsLoading(true);
+  /* Flag to store when data fetching has started*/
+  const isFetchingDataStarted = useRef(false);
 
-      let response: Products | ApiError;
-      if (categoryId) {
-        response = await ProductService.getProducts(pageNumber, categoryId);
-      } else {
-        response = await ProductService.getProducts(pageNumber);
-      }
+  const fetchProducts = useCallback(async () => {
+    /* Data fetching has started */
+    isFetchingDataStarted.current = true;
 
-      /* Hide Loading spinner */
-      setIsLoading(false);
+    /* Hiding error, Displaying loading spinner */
+    setIsError(false);
+    setIsLoading(true);
+    setProducts([]);
 
-      if (response instanceof Products) {
-        /* If products are fetched by category, 
-           a category object exists in the response which contains the category name 
-        */
-        if (response?.category?.name) {
-          setCategoryName(response.category.name);
+    /* Used to set displayed products list on first response */
+    let isFirstResponse = true;
+
+    ProductService.getAllProductsAsync((data, _, error, categoryInfo) => {
+      if (!error) {
+        /* Set overall products list */
+        setProducts((prev) => [...prev, ...data]);
+
+        /* On first response, set displayed products list, category name and hide loading spinner */
+        if (isFirstResponse) {
+          if (!displayedProducts.length) {
+            setDisplayedProducts(data);
+          }
+          if (categoryInfo) {
+            setCategoryName(categoryInfo.name);
+          }
+          setIsLoading(false);
         }
-
-        /* Setting the products list state */
-        const productsList = response.products;
-        setProducts((prev) => prev.concat(productsList));
-
-        /* Setting total number of pages, incrementing page number to fetch */
-        setTotalNumberOfPages(response.totalPages);
-        setPageNumberToFetch((prev) => ++prev);
       } else {
-        // Error
         setIsError(true);
+        setProducts([]);
       }
-    },
-    [categoryId]
-  );
+      isFirstResponse = false;
+    }, categoryId);
 
+    /* Hide Loading spinner */
+    setIsLoading(false);
+  }, [categoryId, displayedProducts]);
+
+  /* Load more handler */
+  const loadMoreHandler = () => {
+    /**
+     * Append to displayed products list from the end of products list + the default page limit
+     */
+    setDisplayedProducts((prev) => [
+      ...prev,
+      ...products.slice(
+        prev.length,
+        prev.length + ProductService.defaultPageLimit
+      ),
+    ]);
+  };
   useEffect(() => {
-    fetchProducts(1);
+    if (!isFetchingDataStarted.current) {
+      fetchProducts();
+    }
   }, [fetchProducts]);
 
   return (
     <AllProductList
       heading={categoryId && categoryName ? categoryName : t("ourProducts")}
-      products={products}
+      products={displayedProducts}
       error={isError ? true : false}
-      loadMoreShown={pageNumberToFetch > totalNumberOfPages ? false : true}
-      loadMore={() => fetchProducts(pageNumberToFetch)}
+      loadMoreShown={products.length > displayedProducts.length ? true : false}
+      loadMore={loadMoreHandler}
       isLoading={isLoading}
     />
   );
