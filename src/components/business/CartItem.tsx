@@ -60,6 +60,9 @@ const CartItem = (props: CartItemProps) => {
           {product.name}
         </Text>
         <Text>
+          {`x ${cartItem.quantity}`}
+        </Text>
+        <Text>
           {formatAmount(subTotal, product.currency || DEFAULT_CURRENCY)}
         </Text>
 

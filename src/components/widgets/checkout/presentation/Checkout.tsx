@@ -22,6 +22,7 @@ import { useAppSelector } from "../../../../store";
 import Text from "../../../basic/Text";
 import ErrorMessage from "../../../basic/ErrorMessage";
 import Payment from "../../../business/Payment";
+import { DEFAULT_CURRENCY } from "../../../../data/applicationData";
 
 interface CheckoutProps {
   userAddresses: Array<AddressClass>;
@@ -54,11 +55,7 @@ const Checkout = (props: CheckoutProps) => {
   /* If add address modal is shown */
   const [isAddressModalShown, setIsAddressModalShown] = useState(false);
 
-  const {
-    watch: watchAddress,
-    reset,
-    control,
-  } = useForm<CheckoutFormFields>();
+  const { watch: watchAddress, reset, control } = useForm<CheckoutFormFields>();
 
   const {
     handleSubmit: couponHandleSubmit,
@@ -127,7 +124,11 @@ const Checkout = (props: CheckoutProps) => {
         </div>
 
         <div className="lg:w-2/4 flex flex-col gap-y-8 lg:mt-8">
-          <InvoiceAmountSummary userCart={userCart} />
+          <InvoiceAmountSummary
+            total={userCart.cartTotal}
+            discountedTotal={userCart.discountedTotal}
+            currency={userCart.items[0]?.product?.currency || DEFAULT_CURRENCY}
+          />
 
           <CouponCardList
             coupons={couponsAvailableToUser}
@@ -178,7 +179,10 @@ const Checkout = (props: CheckoutProps) => {
               errorIconClassName="w-4 h-4"
             />
           )}
-            <Payment addressId={watchAddress("address")?._id} isDisabled={!watchAddress("address") ? true : false} />
+          <Payment
+            addressId={watchAddress("address")?._id}
+            isDisabled={!watchAddress("address") ? true : false}
+          />
         </div>
       </div>
     </>
