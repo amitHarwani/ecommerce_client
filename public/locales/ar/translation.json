@@ -150,7 +150,9 @@
     "to": "ل",
     "filter": "منقي",
     "invalidValue": "قيمة غير صالحة",
-    "maxValueIsLessThanMinValue": "القيمة القصوى أقل من القيمة الدنيا"
+    "maxValueIsLessThanMinValue": "القيمة القصوى أقل من القيمة الدنيا",
+    "addressDeleted": "تم حذف العنوان"
+
 
 
 

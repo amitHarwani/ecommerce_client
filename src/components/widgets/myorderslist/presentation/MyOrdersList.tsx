@@ -5,10 +5,11 @@ import ErrorMessage from "../../../basic/ErrorMessage";
 
 interface MyOrdersListProps {
   ordersList: Array<OrderClass>;
+  orderClickHandler(order: OrderClass): void;
   isError: boolean;
 }
 const MyOrdersList = (props: MyOrdersListProps) => {
-  const { ordersList, isError = false } = props;
+  const { ordersList, isError = false, orderClickHandler } = props;
 
   const { t } = useTranslation();
   return (
@@ -19,7 +20,7 @@ const MyOrdersList = (props: MyOrdersListProps) => {
           className="justify-center"
         />
       ) : (
-        <OrdersList ordersList={ordersList} />
+        <OrdersList ordersList={ordersList} orderClickHandler={orderClickHandler} />
       )}
     </>
   );

@@ -150,7 +150,8 @@
     "to": "to",
     "filter": "filter",
     "invalidValue": "invalid value",
-    "maxValueIsLessThanMinValue": "max value is less than min value"
+    "maxValueIsLessThanMinValue": "max value is less than min value",
+    "addressDeleted": "address deleted"
     
     
     

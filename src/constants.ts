@@ -117,7 +117,8 @@ export enum QUERY_PARAMS {
   category = "category",
   productId = "productId",
   categoryId = "categoryId",
-  productNameSearch = "productNameSearch"
+  productNameSearch = "productNameSearch",
+  orderId = "orderId"
 }
 
 /* Paths */
@@ -132,6 +133,7 @@ export enum ROUTE_PATHS {
   paymentFeedback = "/payment-feedback",
   manageAccount = "/manage-account",
   orders = "/orders",
+  orderDetail = "/order",
   resetForgottenPassword = "/forgot-password/:token",
   pageNotFound = "/page-not-found"
 }

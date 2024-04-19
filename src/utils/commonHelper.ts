@@ -18,3 +18,15 @@ export const zeroFormattedNumber = (number: number): string => {
     }
     return number.toString();
 }
+
+export const capitalizeSentence = (sentence: string): string => {
+    /* Split by space */
+    const updatedWords = sentence.split(" ").map((word) => {
+        /* Capitalize first letter of each word */
+        return word.charAt(0).toUpperCase() + word.substring(1);
+    })
+
+    /* Join the words back to a string */
+    return updatedWords.join(" ");
+    
+}

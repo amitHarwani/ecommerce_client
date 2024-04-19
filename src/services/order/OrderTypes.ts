@@ -1,5 +1,6 @@
 import { PAYMENT_TYPES } from "../../data/applicationData";
 import { AddressClass } from "../address/AddressTypes";
+import { Product } from "../product/ProductTypes";
 
 export class GeneratePayPalOrderResponseClass {
   constructor(
@@ -54,3 +55,46 @@ export class OrderListClass {
 
   }
 }
+
+export class OrderItemClass {
+  constructor(
+    public _id: string,
+    public product: Product,
+    public quantity: number
+  ){
+
+  }
+}
+export class OrderDetailClass {
+  constructor(
+    public _id: string,
+    public order: {
+      __v: number,
+      _id: string,
+      address: AddressClass,
+      coupon: {
+        _id: string,
+        couponCode: string,
+        name: string
+      },
+      createdAt: string,
+      customer: {
+        _id: string,
+        email: string,
+        username: string
+      },
+      discountedOrderPrice: number,
+      isPaymentDone: boolean,
+      items: Array<OrderItemClass>,
+      orderPrice: number,
+      paymentId: string,
+      paymentProvider: string,
+      status: string,
+      updatedAt: string
+    }
+
+  )  {
+
+  }
+}
+

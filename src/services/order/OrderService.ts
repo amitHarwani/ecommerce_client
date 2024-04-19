@@ -2,9 +2,14 @@ import axios, { AxiosError } from "axios";
 import ApiError, { ApiErrorResponse } from "../ApiError";
 import ApiRequest from "../ApiRequest";
 import ApiResponse from "../ApiResponse";
-import { GeneratePayPalOrderResponseClass, OrderListClass } from "./OrderTypes";
+import {
+  GeneratePayPalOrderResponseClass,
+  OrderDetailClass,
+  OrderListClass,
+} from "./OrderTypes";
 
 class OrderService {
+  BASE_ORDERS_URL = "/api/v1/ecommerce/orders";
   BASE_URL = "/api/v1/ecommerce/orders/provider";
 
   async generatePayPalOrder(
@@ -36,6 +41,19 @@ class OrderService {
       }
       return new ApiError("");
     }
+  }
+
+  async getOrderDetail(orderId: string): Promise<OrderDetailClass | ApiError> {
+    const apiRequest = new ApiRequest(`${this.BASE_ORDERS_URL}/${orderId}`);
+
+    const response = await apiRequest.getRequest<OrderDetailClass>();
+
+    if (response instanceof ApiResponse && response.success) {
+      return response.data;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    }
+    return response;
   }
 }
 
