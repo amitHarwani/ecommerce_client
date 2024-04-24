@@ -137,14 +137,16 @@ export enum ROUTE_PATHS {
   orders = "/orders",
   orderDetail = "/order",
   resetForgottenPassword = "/forgot-password/:token",
-  pageNotFound = "/page-not-found"
+  pageNotFound = "/page-not-found",
+  about = "/about"
 }
 
 
 /* IMAGES IN PUBLIC FOLDER */
 export enum PUBLIC_IMAGE_PATHS {
   loginSideImage = "/images/loginsideimage.png",
-  defaultProductImage = "/images/defaultproduct.png"
+  defaultProductImage = "/images/defaultproduct.png",
+  aboutSideImage = "/images/aboutsideimage.png"
 }
 
 /* REGEX PATTERNS */

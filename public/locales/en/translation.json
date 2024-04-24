@@ -156,7 +156,8 @@
     "pending": "pending",
     "cancelled": "cancelled",
     "delivered": "delivered",
-    "pleaseSelectAOrderStatus": "please select a order status"    
+    "pleaseSelectAOrderStatus": "please select a order status",
+    "ourStory": "our story"
     
     
 

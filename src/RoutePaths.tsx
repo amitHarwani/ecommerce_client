@@ -16,6 +16,7 @@ import ProductSearchPageContainer from "./pages/productsearch/container/ProductS
 import ResetForgottenPasswordPageContainer from "./pages/resetforgottenpassword/container/ResetForgottenPasswordPageContainer";
 import PageNotFoundPageContainer from "./pages/pagenotfound/container/PageNotFoundPageContainer";
 import OrderDetailPageContainer from "./pages/orderdetail/container/OrderDetailPageContainer";
+import AboutPageContainer from "./pages/about/container/AboutPageContainer";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -39,8 +40,7 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.orderDetail} element={<OrderDetailPageContainer />} />
           </Route>
           <Route path="contact" element={<h1 className="flex justify-center items-center text-2xl">Contact</h1>} />
-          <Route path="about" element={<h1 className="flex justify-center items-center text-2xl">About</h1>} />
-          <Route path="register" element={<h1 className="flex justify-center items-center text-2xl">Register</h1>} />
+          <Route path={ROUTE_PATHS.about} element={<AboutPageContainer />} />
           <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />
           <Route path="*" element={<PageNotFoundPageContainer />} />
         </Route>
