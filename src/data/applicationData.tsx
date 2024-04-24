@@ -29,11 +29,6 @@ export const DRAWER_ITEMS: Array<NavigationOption> = [
   },
   {
     id: 3,
-    textKey: "contact",
-    navigateTo: "/contact",
-  },
-  {
-    id: 4,
     textKey: "login",
     navigateTo: "/login",
   },
@@ -72,7 +67,7 @@ export const MY_ACCOUNT_OPTIONS: Array<SelectionMenuItem> = [
   },
 ];
 
-export const BANNER_PROMOTION_END_DATE = "2024-04-30T00:00:00";
+export const BANNER_PROMOTION_END_DATE = "2023-04-30T00:00:00";
 
 export const CATEGORY_ICONS: CategoryIcon = {};
 

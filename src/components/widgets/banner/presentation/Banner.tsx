@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../../../store";
 import Timer from "../../../business/Timer";
 
 interface BannerProps {
@@ -8,11 +9,26 @@ interface BannerProps {
 }
 const Banner = (props: BannerProps) => {
   const { bannerText, isTimerShown, startTime, endTime } = props;
+
+  const isRTL = useAppSelector((state) => state.language.isRTL);
+
   return (
-    <div className="bg-gradient-to-b from-black via-stone-600 to-black flex flex-col items-center rounded-3xl py-16">
-      <span className="text-zinc-50 text-2xl lg:text-3xl lg:font-semibold tracking-wider">{bannerText}</span>
+    <div
+      className=" flex flex-col rounded-3xl h-56 lg:h-72
+    bg-[url('./images/bannerimage.png')] bg-cover bg-right bg-no-repeat
+    "
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      <span className="text-zinc-50 text-2xl font-poppinsMedium m-6 w-fit tracking-wider backdrop-blur-md">
+        {bannerText}
+      </span>
       {isTimerShown && startTime && endTime && (
-        <Timer startTime={startTime} endTime={endTime} className="w-full mt-4 justify-center" timerContainerClassName="mr-4" />
+        <Timer
+          startTime={startTime}
+          endTime={endTime}
+          className="w-full mt-4 justify-center"
+          timerContainerClassName="mr-4"
+        />
       )}
     </div>
   );

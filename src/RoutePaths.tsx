@@ -39,7 +39,6 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.orders} element={<OrdersPageContainer/>} />
             <Route path={ROUTE_PATHS.orderDetail} element={<OrderDetailPageContainer />} />
           </Route>
-          <Route path="contact" element={<h1 className="flex justify-center items-center text-2xl">Contact</h1>} />
           <Route path={ROUTE_PATHS.about} element={<AboutPageContainer />} />
           <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />
           <Route path="*" element={<PageNotFoundPageContainer />} />

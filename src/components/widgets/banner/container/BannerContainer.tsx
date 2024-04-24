@@ -23,7 +23,7 @@ const BannerContainer = () => {
   return (
     <Banner
       bannerText={t("bannerPromotion")}
-      isTimerShown={true}
+      isTimerShown={false}
       startTime={startTime}
       endTime={BANNER_PROMOTION_END_DATE}
     />
