@@ -1,15 +1,15 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { RefObject, createRef, useCallback, useEffect, useState } from "react";
-import { getCurrentBreakpoint } from "../utils/breakpointsHelper";
 import { updateBreakpoint } from "../store/BreakpointSlice";
+import { getCurrentBreakpoint } from "../utils/breakpointsHelper";
 
-import HeaderContainer from "../components/widgets/header/container/HeaderContainer";
-import FooterContainer from "../components/widgets/footer/container/FooterContainer";
 import { Outlet } from "react-router-dom";
 import ArrowButton from "../components/basic/ArrowButton";
+import ToastMessage from "../components/basic/ToastMessage";
+import FooterContainer from "../components/widgets/footer/container/FooterContainer";
+import HeaderContainer from "../components/widgets/header/container/HeaderContainer";
 import { ARROW_BUTTONS } from "../constants";
 import { useAppSelector } from "../store";
-import ToastMessage from "../components/basic/ToastMessage";
 
 const PageLayout = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const PageLayout = () => {
   const [headerHeight, setHeaderHeight] = useState("0px");
 
   /* Reference to the header container */
-  const headerContainerRef: RefObject<HTMLDivElement> = createRef();
+  const headerContainerRef = useRef<HTMLDivElement>(null);
 
   /* Updating current breakpoint: As per tailwind css and updating the redux state*/
   const checkForBreakpointUpdates = useCallback(() => {

@@ -1,5 +1,6 @@
 import React from "react";
 import { AddressClass } from "./services/address/AddressTypes";
+import { DateRange } from "react-day-picker";
 
 /* DROPDOWN */
 export enum DropdownTypes {
@@ -77,7 +78,8 @@ export enum LinkTypes {
 /* DATE TIME FORMATS */
 export enum DATE_TIME_FORMATS {
   standardDateWithTime = "YYYY-MM-DDTHH:mm:ss",
-  displayedDateWithTime = "Do MMM YYYY, hh:mmA"
+  displayedDateWithTime = "Do MMM YYYY, hh:mmA",
+  standardDate = "YYYY-MM-DD"
 }
 
 export interface DURATION {
@@ -217,6 +219,15 @@ export interface RADIO_BUTTON_TYPE<T> {
   id: string;
 }
 
+export interface CHECKBOX_TYPE<T> {
+  label?: string;
+  isLabelKey?: boolean;
+  customElement?: React.ReactElement;
+  data: T
+  isDefaultSelected: boolean;
+  id: string;
+}
+
 /**
  * Tab Config 
  */
@@ -249,4 +260,9 @@ export interface ProductFilterFields {
     min: number,
     max: number
   }
+}
+
+export interface OrderListFilterFields {
+  dateRange: DateRange,
+  checkedStatus: Array<CHECKBOX_TYPE<null>>
 }

@@ -151,8 +151,12 @@
     "filter": "filter",
     "invalidValue": "invalid value",
     "maxValueIsLessThanMinValue": "max value is less than min value",
-    "addressDeleted": "address deleted"
-    
+    "addressDeleted": "address deleted",
+    "selectRange": "select range",
+    "pending": "pending",
+    "cancelled": "cancelled",
+    "delivered": "delivered",
+    "pleaseSelectAOrderStatus": "please select a order status"    
     
     
 

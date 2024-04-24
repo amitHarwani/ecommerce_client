@@ -6,6 +6,7 @@ import OrderIcon from "../components/icons/OrderIcon";
 import TruckIcon from "../components/icons/TruckIcon";
 import MyAccountOptionContainer from "../components/widgets/myaccountoption/container/MyAccountOptionContainer";
 import {
+  CHECKBOX_TYPE,
   COMPANY_GURANTEE,
   CategoryIcon,
   DropdownItem,
@@ -13,6 +14,7 @@ import {
   SelectionMenuItem,
   TabItemConfig,
 } from "../constants";
+import i18n from "../i18n";
 
 export const DRAWER_ITEMS: Array<NavigationOption> = [
   {
@@ -116,5 +118,34 @@ export const MANAGE_ACCOUNT_TABS: Array<TabItemConfig> = [
   {
     id: 2, 
     tabHeadingKey: "myAddresses"
+  }
+]
+
+export enum ORDER_STATUS {
+  PENDING= "PENDING",
+  CANCELLED= "CANCELLED",
+  DELIVERED= "DELIVERED",
+}
+export const ORDER_STATUS_FILTERS_CHECKBOX: Array<CHECKBOX_TYPE<null>> = [
+  {
+    id: ORDER_STATUS.PENDING,
+    data: null, 
+    isDefaultSelected: true,
+    isLabelKey: true,
+    label: i18n.t("pending")
+  },
+  {
+    id: ORDER_STATUS.CANCELLED,
+    data: null, 
+    isDefaultSelected: true,
+    label: i18n.t("cancelled"),
+    isLabelKey: true,
+  },
+  {
+    id: ORDER_STATUS.DELIVERED,
+    data: null, 
+    isDefaultSelected: true,
+    label: i18n.t("delivered"),
+    isLabelKey: true,
   }
 ]

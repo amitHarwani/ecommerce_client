@@ -1,10 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BREAKPOINTS, SelectionMenuItem } from "../../constants";
-import { RefObject, createRef, useEffect, useState } from "react";
-import useOutsideClick from "../../hooks/useOutsideClick";
 import useBreakpointCheck from "../../hooks/useBreakpointCheck";
-import UpArrow from "../icons/UpArrow";
+import useOutsideClick from "../../hooks/useOutsideClick";
 import { useAppSelector } from "../../store";
+import UpArrow from "../icons/UpArrow";
 
 interface SelectionMenuProps {
   items: SelectionMenuItem[];
@@ -28,7 +28,7 @@ const SelectionMenu = (props: SelectionMenuProps) => {
   const [isMenuShown, setIsMenuShown] = useState(false);
 
   /* Reference for the menu's top container */
-  const selectionMenuRef: RefObject<HTMLDivElement> = createRef();
+  const selectionMenuRef = useRef<HTMLDivElement>(null);
 
   /* To check clicks outside the menu's top container */
   const [clickedOutside] = useOutsideClick(selectionMenuRef);

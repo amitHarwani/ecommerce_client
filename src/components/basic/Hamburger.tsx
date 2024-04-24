@@ -1,9 +1,9 @@
-import { RefObject, createRef, useCallback, useEffect, useState } from "react";
-import { DrawerOption, NavigationOption } from "../../constants";
-import Drawer from "./Drawer";
-import HamburgerIcon from "../icons/HamburgerIcon";
-import useOutsideClick from "../../hooks/useOutsideClick";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { DrawerOption, NavigationOption } from "../../constants";
+import useOutsideClick from "../../hooks/useOutsideClick";
+import HamburgerIcon from "../icons/HamburgerIcon";
+import Drawer from "./Drawer";
 
 interface HamburgerProps {
   headingText: string;
@@ -24,7 +24,7 @@ const Hamburger = (props: HamburgerProps) => {
   }, [setIsDrawerShown]);
 
   /* Hamburger components top container reference */
-  const hamburgerRef: RefObject<HTMLDivElement> = createRef();
+  const hamburgerRef = useRef<HTMLDivElement>(null);
 
   /* To check for clicks outside the hamburgers top container */
   const [clickedOutside] = useOutsideClick(hamburgerRef);

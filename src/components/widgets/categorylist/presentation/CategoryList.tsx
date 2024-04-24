@@ -1,11 +1,11 @@
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import CardContainer from "../../../business/CardContainer";
 import { CARD_CONTAINER_OPTION } from "../../../../constants";
 import { Category } from "../../../../services/category/CategoryTypes";
-import CategoryCard from "../../../business/CategoryCard";
-import { RefObject, createRef } from "react";
 import { useAppSelector } from "../../../../store";
 import ErrorMessage from "../../../basic/ErrorMessage";
+import CardContainer from "../../../business/CardContainer";
+import CategoryCard from "../../../business/CategoryCard";
 
 interface CategoryList {
   categories: Category[];
@@ -17,7 +17,7 @@ const CategoryList = (props: CategoryList) => {
   const { t } = useTranslation();
 
   /* Category Card Container Reference */
-  const categoryContainerRef: RefObject<HTMLDivElement> = createRef();
+  const categoryContainerRef = useRef<HTMLDivElement>(null);
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 

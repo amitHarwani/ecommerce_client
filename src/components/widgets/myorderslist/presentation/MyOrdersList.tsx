@@ -1,15 +1,18 @@
 import { useTranslation } from "react-i18next";
+import { OrderListFilterFields } from "../../../../constants";
 import { OrderClass } from "../../../../services/order/OrderTypes";
-import OrdersList from "../../../business/OrdersList";
 import ErrorMessage from "../../../basic/ErrorMessage";
+import OrderListFilters from "../../../business/OrderListFilters";
+import OrdersList from "../../../business/OrdersList";
 
 interface MyOrdersListProps {
   ordersList: Array<OrderClass>;
   orderClickHandler(order: OrderClass): void;
   isError: boolean;
+  filtersChangeHandler(fields: OrderListFilterFields): void;
 }
 const MyOrdersList = (props: MyOrdersListProps) => {
-  const { ordersList, isError = false, orderClickHandler } = props;
+  const { ordersList, isError = false, orderClickHandler, filtersChangeHandler } = props;
 
   const { t } = useTranslation();
   return (
@@ -20,7 +23,13 @@ const MyOrdersList = (props: MyOrdersListProps) => {
           className="justify-center"
         />
       ) : (
-        <OrdersList ordersList={ordersList} orderClickHandler={orderClickHandler} />
+        <div className="flex flex-col gap-y-4">
+          <OrderListFilters orderFiltersSubmitHandler={filtersChangeHandler}/>
+          <OrdersList
+            ordersList={ordersList}
+            orderClickHandler={orderClickHandler}
+          />
+        </div>
       )}
     </>
   );

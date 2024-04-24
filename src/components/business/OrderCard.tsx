@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { OrderClass } from "../../services/order/OrderTypes";
-import { formatDateTime } from "../../utils/dateTimeHelper";
+import { convertUTCToLocalTime, formatDateTime } from "../../utils/dateTimeHelper";
 import { DATE_TIME_FORMATS } from "../../constants";
 import { capitalizeSentence, formatAmount } from "../../utils/commonHelper";
 import { DEFAULT_CURRENCY } from "../../data/applicationData";
@@ -21,8 +21,10 @@ const OrderCard = (props: OrderCardProps) => {
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
   const displayedOrderDate = useMemo(() => {
+    const orderDateInLocalTime = convertUTCToLocalTime(order.createdAt, DATE_TIME_FORMATS.standardDateWithTime);
+    
     return formatDateTime(
-      order.createdAt,
+      orderDateInLocalTime,
       DATE_TIME_FORMATS.standardDateWithTime,
       DATE_TIME_FORMATS.displayedDateWithTime
     );
@@ -44,7 +46,7 @@ const OrderCard = (props: OrderCardProps) => {
       >
         <div className={`flex justify-between items-center`}>
           <span className="text-sm">{displayedOrderDate}</span>
-          <span className="font-bold">{order.status}</span>
+          <span className="font-bold">{t(order.status.toLowerCase())}</span>
         </div>
         <span className=" text-ellipsis line-clamp-1 text-start">
           {displayedOrderAddress}

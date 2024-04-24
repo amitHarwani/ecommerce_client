@@ -1,18 +1,17 @@
 import {
   ForwardedRef,
-  RefObject,
-  createRef,
   forwardRef,
   useCallback,
   useEffect,
   useMemo,
-  useState,
+  useRef,
+  useState
 } from "react";
-import { DropdownItem, DropdownTypes } from "../../constants";
-import DownArrow from "../icons/DownArrow";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../../store";
+import { DropdownItem, DropdownTypes } from "../../constants";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import { useAppSelector } from "../../store";
+import DownArrow from "../icons/DownArrow";
 import ErrorMessage from "./ErrorMessage";
 
 /* To expose Dropdown Actions to parents */
@@ -48,7 +47,7 @@ const Dropdown = forwardRef(
     const isRTL = useAppSelector((state) => state.language.isRTL);
 
     /* Reference to the top container of dropdown */
-    const dropdownRef: RefObject<HTMLDivElement> = createRef();
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     /* To check for clicks outside the dropdown container, used to hide the dropdown menu */
     const [clickedOutside] = useOutsideClick(dropdownRef);
