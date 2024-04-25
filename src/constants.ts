@@ -146,7 +146,8 @@ export enum ROUTE_PATHS {
 export enum PUBLIC_IMAGE_PATHS {
   loginSideImage = "/images/loginsideimage.png",
   defaultProductImage = "/images/defaultproduct.png",
-  aboutSideImage = "/images/aboutsideimage.png"
+  aboutSideImage = "/images/aboutsideimage.png",
+  bannerProductImage = "/images/bannerproduct.png"
 }
 
 /* REGEX PATTERNS */
