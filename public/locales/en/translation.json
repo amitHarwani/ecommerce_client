@@ -1,6 +1,7 @@
 {
     "en": "english",
     "ar": "عربي",
+    "hn": "हिन्दी",
     "select": "Select",
     "infoHeaderMessage": "",
     "companyName": "ecomm",
@@ -31,7 +32,7 @@
     "bestSellingProducts": "best selling products",
     "viewAll": "view all",
     "freeAndFastDelivery": "free and fast delivery",
-    "freeDeliveryFor": "free delivery for all orders over AED 200",
+    "freeDeliveryFor": "free delivery for all orders over 200",
     "247customerService": "24/7 customer service",
     "247customerServiceDescription": "friendly 24/7 customer support",
     "guranteeHeading": "money back gurantee",

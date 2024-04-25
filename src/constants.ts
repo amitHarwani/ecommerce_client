@@ -26,6 +26,7 @@ export interface SelectionMenuItem {
 export enum SUPPORTED_LANGUAGES {
   english = "en",
   arabic = "ar",
+  hindi = "hn"
 }
 
 export const DEFAULT_LANGUAGE = SUPPORTED_LANGUAGES.english;

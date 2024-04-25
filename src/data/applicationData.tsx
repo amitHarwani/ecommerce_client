@@ -71,11 +71,11 @@ export const BANNER_PROMOTION_END_DATE = "2023-04-30T00:00:00";
 
 export const CATEGORY_ICONS: CategoryIcon = {};
 
-export const DEFAULT_CURRENCY = "AED";
+export const DEFAULT_CURRENCY = "INR";
 
 export const DEFAULT_COUNTRY = "United Arab Emirates";
 
-export const COUNTRIES_DROPDOWN_LIST: DropdownItem[] = [{id: 1, text: DEFAULT_COUNTRY}]
+export const COUNTRIES_DROPDOWN_LIST: DropdownItem[] = [{id: 1, text: DEFAULT_COUNTRY}, {id: 2, text: "India"}]
 export const COMPANY_GURANTEE_LIST: COMPANY_GURANTEE[] = [
   {
     id: 1,
