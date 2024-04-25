@@ -35,6 +35,7 @@ const MyOrdersListContainer = () => {
     ProfileService.getUsersOrdersAsync(
       (orders: Array<OrderClass>, _: boolean, error?: ApiError) => {
         if (!error) {
+          orders = orders.filter((order) => order.isPaymentDone);
           setOrdersList((prev) => [...prev, ...orders]);
         } else {
           console.error(
