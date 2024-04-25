@@ -6,7 +6,7 @@ import {
 import ApiError from "../ApiError";
 import ApiRequest from "../ApiRequest";
 import ApiResponse from "../ApiResponse";
-import { LoginResp, USER_ROLES, User } from "./AuthTypes";
+import { LoginResp, RefreshTokenResp, USER_ROLES, User } from "./AuthTypes";
 
 class AuthService {
   USER_BASE_URL = "/api/v1/users";
@@ -138,6 +138,21 @@ class AuthService {
     const response = await apiRequest.postRequest<object>({
       newPassword: fields.newPassword,
     });
+
+    if (response instanceof ApiResponse && response.success) {
+      return response;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    }
+    return response;
+  }
+
+  async refreshAccessToken(): Promise<
+    ApiResponse<RefreshTokenResp> | ApiError
+  > {
+    const apiRequest = new ApiRequest(`${this.USER_BASE_URL}/refresh-token`);
+
+    const response = await apiRequest.postRequest<RefreshTokenResp>({});
 
     if (response instanceof ApiResponse && response.success) {
       return response;

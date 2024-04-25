@@ -21,6 +21,15 @@ export class LoginResp {
   ) {}
 }
 
+export class RefreshTokenResp {
+  constructor(
+    public accessToken: string,
+    public refreshToken: string,
+  ){
+    
+  }
+}
+
 export class User {
   constructor(
     public _id: string,
