@@ -54,6 +54,7 @@ axios.interceptors.response.use(
 /* Axios Instance For Country API */
 export const axiosCountryApi = axios.create({
   baseURL: import.meta.env.VITE_COUNTRY_API,
+  withCredentials: false
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

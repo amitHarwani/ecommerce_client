@@ -31,7 +31,7 @@ const EditAddresses = (props: EditAddressesProps) => {
       )}
       <AddressCardList
         addressList={addressList}
-        addressListContainerClassName="h-[500px] overflow-auto"
+        addressListContainerClassName="max-h-[400px] overflow-auto"
         onAddressUpdated={refetchAddresses}
         addressCardItemClassName="border "
       />
