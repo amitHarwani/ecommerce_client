@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ChangePasswordFields, ROUTE_PATHS } from "../../../../constants";
-import ChangePasswordModal from "../presentation/ChangePasswordModal";
-import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
 import { useTranslation } from "react-i18next";
-import AuthService from "../../../../services/auth/AuthService";
+import { ChangePasswordFields } from "../../../../constants";
 import ApiError from "../../../../services/ApiError";
+import AuthService from "../../../../services/auth/AuthService";
+import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
+import ChangePasswordModal from "../presentation/ChangePasswordModal";
 
 interface ChangePasswordModalContainerProps {
   hideModal(): void;

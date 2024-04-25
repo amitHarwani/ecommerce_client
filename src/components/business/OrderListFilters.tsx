@@ -21,7 +21,6 @@ const OrderListFilters = (props: OrderListFiltersProps) => {
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
   const {
-    watch,
     formState: { errors },
     control,
     handleSubmit,

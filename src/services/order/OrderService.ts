@@ -1,11 +1,10 @@
 import axios, { AxiosError } from "axios";
-import ApiError, { ApiErrorResponse } from "../ApiError";
+import ApiError from "../ApiError";
 import ApiRequest from "../ApiRequest";
 import ApiResponse from "../ApiResponse";
 import {
   GeneratePayPalOrderResponseClass,
-  OrderDetailClass,
-  OrderListClass,
+  OrderDetailClass
 } from "./OrderTypes";
 
 class OrderService {

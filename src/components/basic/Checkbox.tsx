@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CHECKBOX_TYPE } from "../../constants";
 import ErrorMessage from "./ErrorMessage";
-import { useTranslation } from "react-i18next";
 
 export interface CheckboxActionsRef<T> {
   forceSetCheckedItems(checkedItems: CHECKBOX_TYPE<T>[]): void;
