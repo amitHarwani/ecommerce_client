@@ -4,28 +4,22 @@ import { useEffect, useMemo } from "react";
 import useCustomNavigate from "../../../hooks/useCustomNavigate";
 import OrderDetailPage from "../presentation/OrderDetailPage";
 
-
 const OrderDetailPageContainer = () => {
+  const navigate = useCustomNavigate();
 
-    const navigate = useCustomNavigate();
+  const [searchParams] = useSearchParams();
 
-    const [searchParams] = useSearchParams();
+  const orderId = useMemo(() => {
+    return searchParams.get(QUERY_PARAMS.orderId);
+  }, [searchParams]);
 
-    const orderId = useMemo(() => {
-        return searchParams.get(QUERY_PARAMS.orderId);
-    }, [searchParams])
+  useEffect(() => {
+    if (!orderId) {
+      navigate("/");
+    }
+  }, [orderId, navigate]);
 
-    useEffect(() => {
-        if(!orderId){
-            navigate("/")
-        }
-    }, [orderId, navigate])
-
-    return (
-        <>
-            <OrderDetailPage orderId={orderId} />
-        </>
-    )
-}
+  return <>{orderId && <OrderDetailPage orderId={orderId} />}</>;
+};
 
 export default OrderDetailPageContainer;

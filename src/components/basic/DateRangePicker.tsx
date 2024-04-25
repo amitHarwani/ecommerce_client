@@ -1,13 +1,13 @@
+import { ar } from "date-fns/locale/ar";
+import { enIN } from "date-fns/locale/en-IN";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { DateRange, DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import useOutsideClick from "../../hooks/useOutsideClick";
-import "../../styles/DateRangePicker.css";
 import { useTranslation } from "react-i18next";
-import ErrorMessage from "./ErrorMessage";
+import useOutsideClick from "../../hooks/useOutsideClick";
 import { useAppSelector } from "../../store";
-import { ar } from "date-fns/locale/ar";
-import { enIN } from "date-fns/locale/en-IN";
+import "../../styles/DateRangePicker.css";
+import ErrorMessage from "./ErrorMessage";
 
 export interface DateRangePickerActionsRef {
   forceSetSelectedRange(range: DateRange): void;
@@ -20,7 +20,7 @@ interface DateRangePickerProps {
   containerClassName?: string;
 }
 const DateRangePicker = React.forwardRef(
-  (props: DateRangePickerProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+  (props: DateRangePickerProps, _: React.ForwardedRef<HTMLInputElement>) => {
     const { onChange, errorMessage = "", actionsRef, containerClassName = "", inputClassName = "" } = props;
 
     const { t } = useTranslation();

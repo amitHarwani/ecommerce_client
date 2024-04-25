@@ -6,10 +6,9 @@ import { Provider } from "react-redux";
 import store from "./store/index.ts";
 import axios from "axios";
 
-/* Configuring base URL for axios */
-if (import.meta.env.MODE === "production") {
-  axios.defaults.baseURL = import.meta.env.VITE_SERVER_URI;
-}
+/* Configuring base URL for axios, withCredentials to send http only cookies when making requests */
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_URI;
+axios.defaults.withCredentials = true;
 
 /* Axios Instance For Country API */
 export const axiosCountryApi = axios.create({

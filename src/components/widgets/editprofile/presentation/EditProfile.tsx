@@ -1,16 +1,16 @@
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import Input from "../../../basic/Input";
-import Button from "../../../basic/Button";
 import {
   ButtonTypes,
   LinkTypes,
   ProfileFormFields,
   REGEX_PATTERNS,
 } from "../../../../constants";
-import { useForm } from "react-hook-form";
-import { useEffect, useMemo, useState } from "react";
-import Link from "../../../basic/Link";
 import { useAppSelector } from "../../../../store";
+import Button from "../../../basic/Button";
+import Input from "../../../basic/Input";
+import Link from "../../../basic/Link";
 import ChangePasswordModalContainer from "../../../modals/changepasswordmodal/container/ChangePasswordModalContainer";
 
 interface EditProfileProps {

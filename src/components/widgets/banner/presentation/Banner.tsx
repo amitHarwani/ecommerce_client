@@ -15,7 +15,7 @@ const Banner = (props: BannerProps) => {
   return (
     <div
       className=" flex flex-col rounded-3xl h-56 lg:h-72
-    bg-[url('./images/bannerimage.png')] bg-cover bg-right bg-no-repeat
+    bg-[url('/images/bannerimage.png')] bg-cover bg-right bg-no-repeat
     "
       dir={isRTL ? "rtl" : "ltr"}
     >
