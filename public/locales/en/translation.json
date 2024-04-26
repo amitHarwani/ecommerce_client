@@ -57,7 +57,7 @@
     "yes": "yes",
     "no": "no",
     "areYouSureYouWantToLogout": "are you sure you want to logout ?",
-    "ok" : "ok",
+    "ok": "ok",
     "signup": "signup",
     "username": "username",
     "usernameIsRequired": "username is required",
@@ -159,10 +159,7 @@
     "cancelled": "cancelled",
     "delivered": "delivered",
     "pleaseSelectAOrderStatus": "please select a order status",
-    "ourStory": "our story"
-    
-    
-
-
-
-}
+    "ourStory": "our story",
+    "admin": "admin"
+  }
+  

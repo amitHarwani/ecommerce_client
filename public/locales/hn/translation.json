@@ -57,7 +57,7 @@
     "yes": "हाँ",
     "no": "नहीं",
     "areYouSureYouWantToLogout": "क्या आप लॉग आउट करना चाहते हैं ?",
-    "ok" : "ठीक",
+    "ok": "ठीक",
     "signup": "साइन अप",
     "username": "उपयोगकर्ता नाम",
     "usernameIsRequired": "उपयोगकर्ता नाम आवश्यक है",
@@ -159,10 +159,7 @@
     "cancelled": "रद्द",
     "delivered": "वितरित",
     "pleaseSelectAOrderStatus": "कृपया एक आदेश की स्थिति चुनें",
-    "ourStory": "हमारी कहानी"
-    
-    
-
-
-
-}
+    "ourStory": "हमारी कहानी",
+    "admin": "व्यवस्थापक"
+  }
+  

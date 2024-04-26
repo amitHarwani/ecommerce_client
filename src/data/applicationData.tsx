@@ -13,6 +13,7 @@ import {
   NavigationOption,
   SelectionMenuItem,
   TabItemConfig,
+  USER_ROLES,
 } from "../constants";
 import i18n from "../i18n";
 
@@ -34,7 +35,37 @@ export const DRAWER_ITEMS: Array<NavigationOption> = [
   },
 ];
 
-export const getNavigationItemList = (isLoggedIn: boolean) => {
+export const ADMIN_NAVIGATION_ITEMS: Array<NavigationOption> = [
+  {
+    id: 1,
+    textKey: "categories",
+    navigateTo: "/admin/categories"
+  },
+  {
+    id: 2,
+    textKey: "products",
+    navigateTo: "/admin/products"
+  },
+  {
+    id: 3,
+    textKey: "orders",
+    navigateTo: "/admin/orders"
+  },
+  {
+    id: 4,
+    textKey: "coupons",
+    navigateTo: "/admin/coupons"
+  },
+  {
+    id: 5,
+    textKey: "users",
+    navigateTo: "/admin/users"
+  },
+  
+  
+]
+
+export const getNavigationItemList = (isLoggedIn: boolean, role: USER_ROLES) => {
   const tempDrawerItems = [...DRAWER_ITEMS];
   if (isLoggedIn) {
     tempDrawerItems.pop();
@@ -44,6 +75,13 @@ export const getNavigationItemList = (isLoggedIn: boolean) => {
       navigateTo: "my-account",
       customComponent: <MyAccountOptionContainer />
     });
+  }
+  if(role === USER_ROLES.admin){
+    tempDrawerItems.push({
+      id: 5,
+      textKey: "admin",
+      navigateTo: "admin/categories"
+    })
   }
   return tempDrawerItems;
 };

@@ -139,7 +139,13 @@ export enum ROUTE_PATHS {
   orderDetail = "/order",
   resetForgottenPassword = "/forgot-password/:token",
   pageNotFound = "/page-not-found",
-  about = "/about"
+  about = "/about",
+  admin = "/admin"
+}
+
+export enum USER_ROLES {
+  admin = "ADMIN",
+  user = "USER"
 }
 
 

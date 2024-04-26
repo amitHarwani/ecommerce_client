@@ -17,6 +17,7 @@ import ResetForgottenPasswordPageContainer from "./pages/resetforgottenpassword/
 import PageNotFoundPageContainer from "./pages/pagenotfound/container/PageNotFoundPageContainer";
 import OrderDetailPageContainer from "./pages/orderdetail/container/OrderDetailPageContainer";
 import AboutPageContainer from "./pages/about/container/AboutPageContainer";
+import ForAdminUsers from "./protectedroutes/ForAdminUsers";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -31,6 +32,7 @@ const RoutePaths = () => {
           <Route path={ROUTE_PATHS.signup} element={<SignupPageContainer />} />
           <Route path={ROUTE_PATHS.productSearch} element={<ProductSearchPageContainer />} />
           <Route path={ROUTE_PATHS.resetForgottenPassword} element={<ResetForgottenPasswordPageContainer />} />
+          <Route path={ROUTE_PATHS.about} element={<AboutPageContainer />} />
           <Route element={<ForLoggedInUsers />}>
             <Route path={ROUTE_PATHS.cart} element={<CartPageContainer />} />
             <Route path={ROUTE_PATHS.checkout} element={<CheckoutPageContainer />} />
@@ -39,7 +41,9 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.orders} element={<OrdersPageContainer/>} />
             <Route path={ROUTE_PATHS.orderDetail} element={<OrderDetailPageContainer />} />
           </Route>
-          <Route path={ROUTE_PATHS.about} element={<AboutPageContainer />} />
+          <Route element={<ForAdminUsers />}>
+            <Route path={ROUTE_PATHS.admin}  />
+          </Route>
           <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />
           <Route path="*" element={<PageNotFoundPageContainer />} />
         </Route>
