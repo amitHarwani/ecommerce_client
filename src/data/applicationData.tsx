@@ -11,6 +11,7 @@ import {
   CategoryIcon,
   DropdownItem,
   NavigationOption,
+  ROUTE_PATHS,
   SelectionMenuItem,
   TabItemConfig,
   USER_ROLES,
@@ -26,12 +27,12 @@ export const DRAWER_ITEMS: Array<NavigationOption> = [
   {
     id: 2,
     textKey: "about",
-    navigateTo: "/about",
+    navigateTo: ROUTE_PATHS.about,
   },
   {
     id: 3,
     textKey: "login",
-    navigateTo: "/login",
+    navigateTo: ROUTE_PATHS.login,
   },
 ];
 
@@ -39,27 +40,27 @@ export const ADMIN_NAVIGATION_ITEMS: Array<NavigationOption> = [
   {
     id: 1,
     textKey: "categories",
-    navigateTo: "/admin/categories"
+    navigateTo: ROUTE_PATHS.adminCategories
   },
   {
     id: 2,
     textKey: "products",
-    navigateTo: "/admin/products"
+    navigateTo: ROUTE_PATHS.adminProducts
   },
   {
     id: 3,
     textKey: "orders",
-    navigateTo: "/admin/orders"
+    navigateTo: ROUTE_PATHS.adminOrders
   },
   {
     id: 4,
     textKey: "coupons",
-    navigateTo: "/admin/coupons"
+    navigateTo: ROUTE_PATHS.adminCoupons
   },
   {
     id: 5,
     textKey: "users",
-    navigateTo: "/admin/users"
+    navigateTo: ROUTE_PATHS.adminUsers
   },
   
   
@@ -80,7 +81,7 @@ export const getNavigationItemList = (isLoggedIn: boolean, role: USER_ROLES) => 
     tempDrawerItems.push({
       id: 5,
       textKey: "admin",
-      navigateTo: "admin/categories"
+      navigateTo: ROUTE_PATHS.adminCategories
     })
   }
   return tempDrawerItems;

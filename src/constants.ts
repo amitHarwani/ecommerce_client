@@ -140,7 +140,12 @@ export enum ROUTE_PATHS {
   resetForgottenPassword = "/forgot-password/:token",
   pageNotFound = "/page-not-found",
   about = "/about",
-  admin = "/admin"
+  admin = "/admin",
+  adminCategories = "/admin/categories",
+  adminProducts = "/admin/products",
+  adminOrders = "/admin/orders",
+  adminCoupons = "/admin/coupons",
+  adminUsers = "/admin/users"
 }
 
 export enum USER_ROLES {

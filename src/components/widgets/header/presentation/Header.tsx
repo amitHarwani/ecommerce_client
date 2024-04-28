@@ -73,7 +73,7 @@ const Header = forwardRef(function Header(
   /* Desktop */
   return (
     <header ref={ref} className="fixed top-0 w-full z-10 bg-white">
-      {!isAdminPageLayoutShown && <InfoHeaderContainer />}
+      <InfoHeaderContainer />
       <div
         className={`flex justify-between items-center mt-4 px-10 pb-4 border-b-2 border-b-neutral-100 `}
         dir={isRTL ? "rtl" : "ltr"}

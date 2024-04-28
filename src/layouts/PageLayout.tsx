@@ -10,6 +10,7 @@ import FooterContainer from "../components/widgets/footer/container/FooterContai
 import HeaderContainer from "../components/widgets/header/container/HeaderContainer";
 import { ARROW_BUTTONS, ROUTE_PATHS, USER_ROLES } from "../constants";
 import { useAppSelector } from "../store";
+import { updateHeaderHeight } from "../store/UIinfoSlice";
 
 const PageLayout = () => {
   const dispatch = useDispatch();
@@ -58,7 +59,8 @@ const PageLayout = () => {
   /* Updating header height */
   useEffect(() => {
     setHeaderHeight(`${headerContainerRef.current?.clientHeight}px`);
-  }, [headerContainerRef]);
+    dispatch(updateHeaderHeight(headerContainerRef?.current?.clientHeight));
+  }, [headerContainerRef, dispatch]);
 
   /* Scroll to top smoothly */
   const scrollToTop = () => {

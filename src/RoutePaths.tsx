@@ -1,23 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PageLayout from "./layouts/PageLayout";
-import HomePageContainer from "./pages/home/container/HomePageContainer";
-import ProductsPageContainer from "./pages/products/container/ProductsPageContainer";
 import { ROUTE_PATHS } from "./constants";
-import ProductDetailPageContainer from "./pages/productdetail/container/ProductDetailPageContainer";
-import LoginPageContainer from "./pages/login/container/LoginPageContainer";
-import SignupPageContainer from "./pages/signup/container/SignupPageContainer";
+import PageLayout from "./layouts/PageLayout";
+import AboutPageContainer from "./pages/about/container/AboutPageContainer";
+import AdminCategoriesPageContainer from "./pages/admin/categories/container/AdminCategoriesPageContainer";
 import CartPageContainer from "./pages/cart/container/CartPageContainer";
-import ForLoggedInUsers from "./protectedroutes/ForLoggedInUsers";
 import CheckoutPageContainer from "./pages/checkout/container/CheckoutPageContainer";
-import PaymentFeedbackPageContainer from "./pages/paymentfeedback/container/PaymentFeedbackPageContainer";
+import HomePageContainer from "./pages/home/container/HomePageContainer";
+import LoginPageContainer from "./pages/login/container/LoginPageContainer";
 import ManageAccountPageContainer from "./pages/manageaccount/container/ManageAccountPageContainer";
+import OrderDetailPageContainer from "./pages/orderdetail/container/OrderDetailPageContainer";
 import OrdersPageContainer from "./pages/orders/container/OrdersPageContainer";
+import PageNotFoundPageContainer from "./pages/pagenotfound/container/PageNotFoundPageContainer";
+import PaymentFeedbackPageContainer from "./pages/paymentfeedback/container/PaymentFeedbackPageContainer";
+import ProductDetailPageContainer from "./pages/productdetail/container/ProductDetailPageContainer";
+import ProductsPageContainer from "./pages/products/container/ProductsPageContainer";
 import ProductSearchPageContainer from "./pages/productsearch/container/ProductSearchPageContainer";
 import ResetForgottenPasswordPageContainer from "./pages/resetforgottenpassword/container/ResetForgottenPasswordPageContainer";
-import PageNotFoundPageContainer from "./pages/pagenotfound/container/PageNotFoundPageContainer";
-import OrderDetailPageContainer from "./pages/orderdetail/container/OrderDetailPageContainer";
-import AboutPageContainer from "./pages/about/container/AboutPageContainer";
+import SignupPageContainer from "./pages/signup/container/SignupPageContainer";
 import ForAdminUsers from "./protectedroutes/ForAdminUsers";
+import ForLoggedInUsers from "./protectedroutes/ForLoggedInUsers";
 
 /* All Routes */
 const RoutePaths = () => {
@@ -42,7 +43,7 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.orderDetail} element={<OrderDetailPageContainer />} />
           </Route>
           <Route element={<ForAdminUsers />}>
-            <Route path={ROUTE_PATHS.admin}  />
+            <Route path={ROUTE_PATHS.adminCategories} element={<AdminCategoriesPageContainer />}  />
           </Route>
           <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />
           <Route path="*" element={<PageNotFoundPageContainer />} />
