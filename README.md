@@ -4,6 +4,18 @@ This is an ecommerce client app which is made by consuming freeapi: https://gith
 
 ### Steps to run the code locally
 * Download the freeapi project from: https://github.com/hiteshchoudhary/apihub, and set the project up.
+    * Make sure to configure the following:
+        * **CORS_ORIGIN as the exact frontend endpoint**.
+        * MAILTRAP credentials for emails. (Used in forgot password feature)
+        * Paypal Client ID and Client Secret.
+        * Google SSO Credentials for logging in with google.
+        * In .env, Set CLIENT_SSO_REDIRECT_URL to <FRONT_END_ENDPOINT>/ for redirects after logging in from google. example http://localhost:3000/
+    * Update the following in the freeapi project:
+        * Add an environment variable in .env file for forgot password redirection, and point it to the <FRONT_END_ENDPOINT>/forgot-password, as follows: 
+          ```FORGOT_PASSWORD_REDIRECT_URL=http://localhost:3000/forgot-password```
+        * In src/controllers/apps/auth/user.controller.js file, Update the forgot password controller to use the above environment variable when sending an email
+          by using ```${process.env.FORGOT_PASSWORD_REDIRECT_URL}/${unHashedToken}``` when calling the sendEmail function inside the controller.
+          
 * Create a .env file in the root directory of this project, and copy paste the contents of .env.sample into it.
 * In .env, Replace:
   * VITE_SERVER_URI: With the path where freeapi server is running example http://localhost:8080 by default

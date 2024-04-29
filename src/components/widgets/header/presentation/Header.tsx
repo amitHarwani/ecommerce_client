@@ -79,8 +79,7 @@ const Header = forwardRef(function Header(
         dir={isRTL ? "rtl" : "ltr"}
       >
         <button
-          className={`font-bold capitalize text-2xl tracking-wider text-black`}
-          onClick={logoClickHandler}
+          className={`font-semibold capitalize text-2xl tracking-wider text-black`} onClick={logoClickHandler}
         >
           {t("companyName")}
         </button>
