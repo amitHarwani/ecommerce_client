@@ -4,7 +4,6 @@ import CategoriesTable from "../presentation/CategoriesTable";
 import { Category } from "../../../../services/category/CategoryTypes";
 
 const CategoriesTableContainer = () => {
-
   /* List of all categories */
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -23,6 +22,35 @@ const CategoriesTableContainer = () => {
     });
   };
 
+  /* Once a category has been updated or added (In order to avoid another apiCall) */
+  const onCategoryAddedOrUpdatedHandler = (
+    newCategory: Category,
+    selectedCategoryIndex: number
+  ) => {
+    console.log("onCategoryAddedOrUpdatedHandler", "selectedCategoryIndex", selectedCategoryIndex);
+    if (selectedCategoryIndex !== -1) {
+      /* Update category at selectedCategoryIndex */
+      setCategories((prev) => {
+        prev[selectedCategoryIndex] = { ...newCategory };
+        return [...prev];
+      });
+    } else {
+      /* Inserting it at the top */
+      setCategories((prev) => {
+        prev.unshift(newCategory);
+        return [...prev];
+      });
+    }
+  };
+
+  console.log("Categories Table Container", categories);
+
+  const onCategoryDeletedHandler = (categoryIndex: number) => {
+    setCategories((prev) => {
+      prev.splice(categoryIndex, 1);
+      return [...prev];
+    })
+  }
 
   /* Initial Render */
   useEffect(() => {
@@ -31,9 +59,11 @@ const CategoriesTableContainer = () => {
 
   return (
     <>
-      <CategoriesTable 
+      <CategoriesTable
         categories={categories}
         isError={isError}
+        onCategoryAddedOrUpdatedHandler={onCategoryAddedOrUpdatedHandler}
+        onCategoryDeletedHandler={onCategoryDeletedHandler}
       />
     </>
   );

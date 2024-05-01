@@ -1,6 +1,7 @@
 import React from "react";
 import { AddressClass } from "./services/address/AddressTypes";
 import { DateRange } from "react-day-picker";
+import { Category } from "./services/category/CategoryTypes";
 
 /* DROPDOWN */
 export enum DropdownTypes {
@@ -280,4 +281,13 @@ export interface ProductFilterFields {
 export interface OrderListFilterFields {
   dateRange: DateRange,
   checkedStatus: Array<CHECKBOX_TYPE<null>>
+}
+
+export interface AddCategoryFields {
+  categoryName: string;
+}
+
+export interface EditCategoryFields {
+  category: Category;
+  newCategoryName: string;
 }
