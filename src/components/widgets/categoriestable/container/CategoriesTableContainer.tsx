@@ -1,66 +1,94 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CategoryService from "../../../../services/category/CategoryService";
 import CategoriesTable from "../presentation/CategoriesTable";
 import { Category } from "../../../../services/category/CategoryTypes";
+import {
+  convertUTCToLocalTime,
+  formatDateTime,
+} from "../../../../utils/dateTimeHelper";
+import { DATE_TIME_FORMATS } from "../../../../constants";
 
 const CategoriesTableContainer = () => {
-  /* List of all categories */
-  const [categories, setCategories] = useState<Category[]>([]);
+  /* Key value categories object, key is id and value is the Category */
+  const [categories, setCategories] = useState<{ [key: string]: Category }>({});
 
   /* To know if an error has occurred when fetching categories */
   const [isError, setIsError] = useState(false);
 
+  const formatCategory = (category: Category) => {
+    /* Cloning the object, so the original object from container doesn't get updated */
+    category = { ...category };
+
+    /* Converting all times to local and formatting them */
+    category.createdAt = formatDateTime(
+      convertUTCToLocalTime(
+        category.createdAt,
+        DATE_TIME_FORMATS.standardDateWithTime
+      ),
+      DATE_TIME_FORMATS.standardDateWithTime,
+      DATE_TIME_FORMATS.displayedDateWithTime
+    );
+
+    category.updatedAt = formatDateTime(
+      convertUTCToLocalTime(
+        category.updatedAt,
+        DATE_TIME_FORMATS.standardDateWithTime
+      ),
+      DATE_TIME_FORMATS.standardDateWithTime,
+      DATE_TIME_FORMATS.displayedDateWithTime
+    );
+    return category;
+  };
+
   /* Fetch All Categories Asynchronously */
-  const fetchAllCategories = () => {
+  const fetchAllCategories = useCallback(() => {
     CategoryService.getAllCategoriesAsync((data, _, error) => {
       if (!error) {
-        setCategories((prev) => [...prev, ...data]);
+        setCategories((prev) => {
+          data.map((category) => {
+            /* Formatting category */
+            category = formatCategory(category);
+
+            /* At key: Category ID, value is the category object */
+            prev[category._id] = category;
+          });
+          return {...prev};
+        });
       } else {
         console.error("Error -- fetchAllCategories()", error);
         setIsError(true);
       }
     });
-  };
+  }, []);
 
   /* Once a category has been updated or added (In order to avoid another apiCall) */
   const onCategoryAddedOrUpdatedHandler = (
     newCategory: Category,
-    selectedCategoryIndex: number
   ) => {
-    console.log("onCategoryAddedOrUpdatedHandler", "selectedCategoryIndex", selectedCategoryIndex);
-    if (selectedCategoryIndex !== -1) {
-      /* Update category at selectedCategoryIndex */
-      setCategories((prev) => {
-        prev[selectedCategoryIndex] = { ...newCategory };
-        return [...prev];
-      });
-    } else {
-      /* Inserting it at the top */
-      setCategories((prev) => {
-        prev.unshift(newCategory);
-        return [...prev];
-      });
-    }
+    /* Update category object at the categoryId */
+    setCategories((prev) => {
+      prev[newCategory._id] = formatCategory(newCategory);
+      return {...prev};
+    });
   };
 
-  console.log("Categories Table Container", categories);
-
-  const onCategoryDeletedHandler = (categoryIndex: number) => {
+  const onCategoryDeletedHandler = (deletedCategory: Category) => {
+    /* Removing the key value pair of the deletedCategory */
     setCategories((prev) => {
-      prev.splice(categoryIndex, 1);
-      return [...prev];
-    })
-  }
+      delete prev[deletedCategory._id]
+      return {...prev};
+    });
+  };
 
   /* Initial Render */
   useEffect(() => {
     fetchAllCategories();
-  }, []);
+  }, [fetchAllCategories]);
 
   return (
     <>
       <CategoriesTable
-        categories={categories}
+        categories={Object.values(categories)}
         isError={isError}
         onCategoryAddedOrUpdatedHandler={onCategoryAddedOrUpdatedHandler}
         onCategoryDeletedHandler={onCategoryDeletedHandler}

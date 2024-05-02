@@ -28,19 +28,13 @@ import DeleteCategoryModalContainer from "../../../modals/deletecategorymodal/co
 import { useAppSelector } from "../../../../store";
 
 
-/* Category with it's index in list as part of the object */
-export interface IndexedCategory extends Category {
-  actualIndexInList: number
-}
-
 interface CategoriesTableProps {
   categories: Category[];
   isError: boolean;
   onCategoryAddedOrUpdatedHandler(
-    newCategory: Category,
-    selectedCategoryIndex: number
+    newCategory: Category
   ): void;
-  onCategoryDeletedHandler(categoryIndex: number): void;
+  onCategoryDeletedHandler(deletedCategory: Category): void;
 }
 const CategoriesTable = (props: CategoriesTableProps) => {
   const {
@@ -110,42 +104,8 @@ const CategoriesTable = (props: CategoriesTableProps) => {
     useState(false);
 
   /* Selected category for edit & delete options on a category */
-  const [selectedCategory, setSelectedCategory] = useState<{
-    category: IndexedCategory;
-    index: number;
-  }>();
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
 
-  /* Formatting categories */
-  const categoriesFormatted = useMemo(() => {
-    const formatted: IndexedCategory[] = [];
-    categories.forEach((category, index) => {
-
-      /* Cloning the object, so the original object from container doesn't get updated */
-      category = { ...category };
-
-      /* Converting all times to local and formatting them */
-      category.createdAt = formatDateTime(
-        convertUTCToLocalTime(
-          category.createdAt,
-          DATE_TIME_FORMATS.standardDateWithTime
-        ),
-        DATE_TIME_FORMATS.standardDateWithTime,
-        DATE_TIME_FORMATS.displayedDateWithTime
-      );
-
-      category.updatedAt = formatDateTime(
-        convertUTCToLocalTime(
-          category.updatedAt,
-          DATE_TIME_FORMATS.standardDateWithTime
-        ),
-        DATE_TIME_FORMATS.standardDateWithTime,
-        DATE_TIME_FORMATS.displayedDateWithTime
-      );
-
-      formatted.push({...category, actualIndexInList: index});
-    });
-    return formatted;
-  }, [categories]);
 
   /* Toggle Add Category Dialog */
   const toggleAddCategoryModal = () => {
@@ -156,13 +116,13 @@ const CategoriesTable = (props: CategoriesTableProps) => {
 
   /* Toggle Edit or Delete Category Dialog */
   function toggleEditOrDeleteCategoryModal(
-    category: IndexedCategory,
+    category: Category,
     type: "EDIT" | "DELETE"
   ) {
     /* If there is no selected category: Toggle is to show the dialog */
     if (!selectedCategory && category) {
-      /* Set selected category and index of the category in the list */
-      setSelectedCategory({ category: category, index: category.actualIndexInList });
+      /* Set selected category */
+      setSelectedCategory(category);
     } else {
       /* Set category to undefined */
       setSelectedCategory(undefined);
@@ -206,12 +166,11 @@ const CategoriesTable = (props: CategoriesTableProps) => {
             <AddEditCategoryModalContainer
               hideModal={toggleAddCategoryModal}
               category={
-                selectedCategory ? selectedCategory.category : undefined
+                selectedCategory ? selectedCategory : undefined
               }
               onCategoryAddedOrUpdatedHandler={(category) =>
                 onCategoryAddedOrUpdatedHandler(
-                  category,
-                  selectedCategory ? selectedCategory.index : -1
+                  category
                 )
               }
             />
@@ -220,13 +179,13 @@ const CategoriesTable = (props: CategoriesTableProps) => {
             <DeleteCategoryModalContainer
               hideModal={() =>
                 toggleEditOrDeleteCategoryModal(
-                  selectedCategory.category,
+                  selectedCategory,
                   "DELETE"
                 )
               }
-              category={selectedCategory.category}
-              onCategoryDeleted={() => {
-                onCategoryDeletedHandler(selectedCategory.index);
+              category={selectedCategory}
+              onCategoryDeleted={(deletedCategory) => {
+                onCategoryDeletedHandler(deletedCategory);
               }}
             />
           )}
@@ -239,7 +198,7 @@ const CategoriesTable = (props: CategoriesTableProps) => {
               <span>{t("addCategory")}</span>
             </Button>
             <Grid
-              rowData={categoriesFormatted}
+              rowData={categories}
               columnDefination={CATEGORIES_TABLE_COL_DEFS}
               autoSizeStrategy={autoSizeStrategy}
             />

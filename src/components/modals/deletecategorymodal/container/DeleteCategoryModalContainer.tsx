@@ -9,7 +9,7 @@ import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
 interface DeleteCategoryModalContainerProps {
   hideModal(): void;
   category: Category;
-  onCategoryDeleted(): void;
+  onCategoryDeleted(deletedCategory: Category): void;
 }
 const DeleteCategoryModalContainer = (
   props: DeleteCategoryModalContainerProps
@@ -38,7 +38,7 @@ const DeleteCategoryModalContainer = (
     if (!(response instanceof ApiError)) {
       /* Success */
       setIsDeletionComplete(true);
-      onCategoryDeleted();
+      onCategoryDeleted(response.data.deletedCategory);
     } else {
       /* Error */
       setApiErrorMessage(
