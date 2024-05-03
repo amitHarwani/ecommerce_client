@@ -1,5 +1,6 @@
 import {
   ColDef,
+  GetLocaleTextParams,
   SizeColumnsToContentStrategy,
   SizeColumnsToFitGridStrategy,
   SizeColumnsToFitProvidedWidthStrategy,
@@ -10,6 +11,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../store";
 import "../../styles/Grid.css";
+import { useTranslation } from "react-i18next";
 
 interface GridProps<RowType> {
   rowData: RowType[];
@@ -22,6 +24,8 @@ interface GridProps<RowType> {
 
 const Grid = <RowType,>(props: GridProps<RowType>) => {
   const { rowData, columnDefination, autoSizeStrategy } = props;
+
+  const {t} = useTranslation();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 

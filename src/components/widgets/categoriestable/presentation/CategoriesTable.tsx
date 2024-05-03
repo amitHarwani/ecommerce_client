@@ -8,24 +8,21 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   BREAKPOINTS,
-  ButtonTypes,
-  DATE_TIME_FORMATS,
+  ButtonTypes
 } from "../../../../constants";
 import useBreakpointCheck from "../../../../hooks/useBreakpointCheck";
 import { Category } from "../../../../services/category/CategoryTypes";
+import { useAppSelector } from "../../../../store";
 import {
-  convertUTCToLocalTime,
-  formatDateTime,
   gridDateFilterComparator,
-  gridDateSortComparator,
+  gridDateSortComparator
 } from "../../../../utils/dateTimeHelper";
 import Button from "../../../basic/Button";
 import ErrorMessage from "../../../basic/ErrorMessage";
 import Grid from "../../../basic/Grid";
 import AddEditCategoryModalContainer from "../../../modals/addeditcategorymodal/container/AddEditCategoryModalContainer";
-import CategoryOptionsCell from "./CategoryOptionsCell";
 import DeleteCategoryModalContainer from "../../../modals/deletecategorymodal/container/DeleteCategoryModalContainer";
-import { useAppSelector } from "../../../../store";
+import CategoryOptionsCell from "./CategoryOptionsCell";
 
 
 interface CategoriesTableProps {

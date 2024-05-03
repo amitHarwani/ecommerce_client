@@ -145,8 +145,7 @@ export enum ROUTE_PATHS {
   adminCategories = "/admin/categories",
   adminProducts = "/admin/products",
   adminOrders = "/admin/orders",
-  adminCoupons = "/admin/coupons",
-  adminUsers = "/admin/users"
+  adminCoupons = "/admin/coupons"
 }
 
 export enum USER_ROLES {
@@ -290,4 +289,38 @@ export interface AddCategoryFields {
 export interface EditCategoryFields {
   category: Category;
   newCategoryName: string;
+}
+
+export interface AddEditProductFields {
+  name: string,
+  description: string,
+  category: DropdownItem,
+  price: number,
+  stock: number,
+  mainImage: File,
+  subImage1: File,
+  subImage2: File,
+  subImage3: File,
+  subImage4: File
+}
+
+export interface AddEditProductFieldsForService {
+  name: string,
+  description: string,
+  category: DropdownItem,
+  price: number,
+  stock: number,
+  mainImage: File,
+  subImages: File[]
+}
+
+/* For api call */
+export interface EditProductFieldsForService {
+  name?: string,
+  description?: string,
+  category?: DropdownItem,
+  price?: number,
+  stock?: number,
+  mainImage?: File,
+  subImages?: File[]
 }

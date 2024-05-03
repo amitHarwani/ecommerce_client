@@ -56,12 +56,7 @@ export const ADMIN_NAVIGATION_ITEMS: Array<NavigationOption> = [
     id: 4,
     textKey: "coupons",
     navigateTo: ROUTE_PATHS.adminCoupons,
-  },
-  {
-    id: 5,
-    textKey: "users",
-    navigateTo: ROUTE_PATHS.adminUsers,
-  },
+  }
 ];
 
 export const getNavigationItemList = (
@@ -71,18 +66,18 @@ export const getNavigationItemList = (
   const tempDrawerItems = [...DRAWER_ITEMS];
   if (isLoggedIn) {
     tempDrawerItems.pop();
+    if (role === USER_ROLES.admin) {
+      tempDrawerItems.push({
+        id: 4,
+        textKey: "admin",
+        navigateTo: ROUTE_PATHS.adminCategories,
+      });
+    }
     tempDrawerItems.push({
-      id: 4,
+      id: 5,
       textKey: "myAccount",
       navigateTo: "my-account",
       customComponent: <MyAccountOptionContainer />,
-    });
-  }
-  if (role === USER_ROLES.admin) {
-    tempDrawerItems.push({
-      id: 5,
-      textKey: "admin",
-      navigateTo: ROUTE_PATHS.adminCategories,
     });
   }
   return tempDrawerItems;
@@ -142,6 +137,7 @@ export const COMPANY_GURANTEE_LIST: COMPANY_GURANTEE[] = [
 export const EXPLORE_PRODUCTS_COUNT = 8;
 export const FEATURED_PRODUCTS_COUNT = 4;
 export const RELATED_PRODUCTS_COUNT = 4;
+export const MAX_SUBIMAGES_PER_PRODUCT = 4;
 
 export enum PAYMENT_TYPES {
   PAYPAL = "PAYPAL",

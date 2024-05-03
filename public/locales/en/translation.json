@@ -170,5 +170,32 @@
   "categoryUpdatedSuccessfully": "category updated successfully",
   "categoryDeletedSuccessfully": "category deleted successfully",
   "deleteCategory": "delete category",
-  "areYouSureYouWantToDeleteTheCategory": "are you sure you want to delete the category"
+  "areYouSureYouWantToDeleteTheCategory": "are you sure you want to delete the category",
+  "addProduct": "add product",
+  "mainImage": "main image",
+  "subImages" : "sub images",
+  "productName": "product name",
+  "description": "description",
+  "price": "price",
+  "stock": "stock",
+  "category": "category",
+  "updateProduct": "update product",
+  "nameIsRequired": "name is required",
+  "descriptionIsRequired": "description is required",
+  "priceIsRequired": "price is required",
+  "stockIsRequired": "stock is required",
+  "categoryIsRequired": "category is required",
+  "mainImageIsRequired": "main image is required",
+  "productAddedSuccessfully": "product added successfully",
+  "productUpdatedSuccessfully": "product updated successfully",
+  "nothingToUpdate": "nothing to update",
+  "productDeletedSuccessfully": "product deleted successfully",
+  "deleteProduct": "delete product",
+  "areYouSureYouWantToDeleteTheProduct": "are you sure you want to delete the product",
+  "products": "products",
+  "orders": "orders",
+  "coupons": "coupons",
+  "name": "name"
+
+  
 }

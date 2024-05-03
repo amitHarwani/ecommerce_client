@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ROUTE_PATHS } from "./constants";
 import PageLayout from "./layouts/PageLayout";
 import AboutPageContainer from "./pages/about/container/AboutPageContainer";
-import AdminCategoriesPageContainer from "./pages/admin/categories/container/AdminCategoriesPageContainer";
+import AdminPageContainer from "./pages/admin/container/AdminPageContainer";
 import CartPageContainer from "./pages/cart/container/CartPageContainer";
 import CheckoutPageContainer from "./pages/checkout/container/CheckoutPageContainer";
 import HomePageContainer from "./pages/home/container/HomePageContainer";
@@ -43,7 +43,8 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.orderDetail} element={<OrderDetailPageContainer />} />
           </Route>
           <Route element={<ForAdminUsers />}>
-            <Route path={ROUTE_PATHS.adminCategories} element={<AdminCategoriesPageContainer />}  />
+            <Route path={ROUTE_PATHS.adminCategories} element={<AdminPageContainer />}  />
+            <Route path={ROUTE_PATHS.adminProducts} element={<AdminPageContainer />} />
           </Route>
           <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />
           <Route path="*" element={<PageNotFoundPageContainer />} />

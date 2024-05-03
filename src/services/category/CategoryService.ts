@@ -128,6 +128,19 @@ class CategoryService {
     }
     return response;
   }
+
+  async getCategoryById(categoryId: string): Promise<Category | ApiError> {
+    const apiRequest = new ApiRequest(`${this.BASE_URL}/${categoryId}`);
+
+    const response = await apiRequest.getRequest<Category>();
+
+    if (response instanceof ApiResponse && response.success) {
+      return response.data;
+    } else if (response instanceof ApiResponse) {
+      return new ApiError(response.message);
+    }
+    return response;
+  }
 }
 
 export default new CategoryService();
