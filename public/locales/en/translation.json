@@ -195,7 +195,8 @@
   "products": "products",
   "orders": "orders",
   "coupons": "coupons",
-  "name": "name"
+  "name": "name",
+  "addCoupon": "add coupon"
 
   
 }
