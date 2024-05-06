@@ -1,10 +1,10 @@
-import { useState, useTransition } from "react";
-import { CouponClass } from "../../../../services/coupon/CouponTypes";
-import ChangeCouponStatusModal from "../presentation/ChangeCouponStatusModal";
-import CouponService from "../../../../services/coupon/CouponService";
-import ApiError from "../../../../services/ApiError";
-import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import ApiError from "../../../../services/ApiError";
+import CouponService from "../../../../services/coupon/CouponService";
+import { CouponClass } from "../../../../services/coupon/CouponTypes";
+import FeedbackModal from "../../feedbackmodal/presentation/FeedbackModal";
+import ChangeCouponStatusModal from "../presentation/ChangeCouponStatusModal";
 
 interface ChangeCouponStatusModalContainerProps {
   hideModal(): void;

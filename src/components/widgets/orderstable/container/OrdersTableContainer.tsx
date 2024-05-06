@@ -67,7 +67,7 @@ const OrdersTableContainer = () => {
   /* Once a order status has been updated */
   const onOrderStatusUpdatedHandler = (
     orderId: string,
-    status: ORDER_STATUS
+    _: ORDER_STATUS
   ) => {
     /* Update order object at the orderId */
     setOrders((prev) => {
