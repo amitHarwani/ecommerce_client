@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
@@ -11,14 +11,15 @@ import {
 import { MAX_SUBIMAGES_PER_PRODUCT } from "../../../../data/applicationData";
 import UtilServices from "../../../../services/UtilServices";
 import { Product } from "../../../../services/product/ProductTypes";
+import { useAppSelector } from "../../../../store";
 import Button from "../../../basic/Button";
 import Dropdown from "../../../basic/Dropdown";
 import ErrorMessage from "../../../basic/ErrorMessage";
+import FullPageLoadingSpinner from "../../../basic/FullPageLoadingSpinner";
 import ImagePicker, { ImagePickerActions } from "../../../basic/ImagePicker";
 import Input from "../../../basic/Input";
 import Modal from "../../../basic/Modal";
 import Text from "../../../basic/Text";
-import { useAppSelector } from "../../../../store";
 
 interface AddEditProductModalProps {
   hideModal(): void;
@@ -51,6 +52,9 @@ const AddEditProductModal = (props: AddEditProductModalProps) => {
     () => new Array(MAX_SUBIMAGES_PER_PRODUCT).fill(true),
     []
   );
+
+  /* To show a loading spinner until the default values are set when the modal is in edit mode. */
+  const [isPreparingModalForEdit, setIsPreparingModalForEdit] = useState(false);
 
   /* Main Image Ref for setting the inital image in case of edit operation */
   const mainImageActionsRef = useRef<ImagePickerActions>({
@@ -108,6 +112,8 @@ const AddEditProductModal = (props: AddEditProductModalProps) => {
   useEffect(() => {
     const setDefaultProductValues = async () => {
       if (product) {
+        setIsPreparingModalForEdit(true);
+
         /* Setting name, description, price and stock */
         setValue("name", product?.name);
         setValue("description", product.description);
@@ -145,6 +151,8 @@ const AddEditProductModal = (props: AddEditProductModalProps) => {
             );
           }
         }
+
+        setIsPreparingModalForEdit(false);
       }
     };
     setDefaultProductValues();
@@ -159,6 +167,7 @@ const AddEditProductModal = (props: AddEditProductModalProps) => {
         className="flex flex-col gap-y-4 mt-4"
         onSubmit={handleSubmit(submitHandler)}
       >
+        {isPreparingModalForEdit && <FullPageLoadingSpinner message={t("pleaseWaitFetchingDetails")} />}
         {apiErrorMessage && (
           <ErrorMessage
             message={apiErrorMessage}
@@ -267,7 +276,10 @@ const AddEditProductModal = (props: AddEditProductModalProps) => {
         </div>
         <div className="flex flex-col gap-y-1">
           <Text className="capitalize">{t("subImages")}</Text>
-          <div className="grid grid-cols-2 gap-4 lg:flex lg:gap-x-4 lg:gap-y-0" dir={isRTL ?'rtl': 'ltr'}>
+          <div
+            className="grid grid-cols-2 gap-4 lg:flex lg:gap-x-4 lg:gap-y-0"
+            dir={isRTL ? "rtl" : "ltr"}
+          >
             {subImagesListForIteration.map((_, index) => (
               <Controller
                 key={index}

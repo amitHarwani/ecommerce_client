@@ -222,7 +222,8 @@
   "areYouSureYouWantToDeleteTheCoupon": "are you sure you want to delete the coupon: ",
   "couponCodeMustBeFourCharactersLong": "coupon code must be at least four characters long",
   "orderStatusUpdatedSuccessfully" : "order status updated successfully",
-  "updateOrderStatus": "update order status"
+  "updateOrderStatus": "update order status",
+  "pleaseWaitFetchingDetails": "please wait, fetching details"
 
   
 }

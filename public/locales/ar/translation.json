@@ -222,5 +222,7 @@
   "areYouSureYouWantToDeleteTheCoupon": "هل أنت متأكد أنك تريد حذف القسيمة: ",
   "couponCodeMustBeFourCharactersLong": "يجب أن يتكون رمز القسيمة من أربعة أحرف على الأقل",
   "orderStatusUpdatedSuccessfully": "تم تحديث حالة الطلب من المتجر بنجاح",
-  "updateOrderStatus": "تحديث حالة الطلب"
+  "updateOrderStatus": "تحديث حالة الطلب",
+  "pleaseWaitFetchingDetails": "يرجى الانتظار، جاري جلب التفاصيل"
+
 }
