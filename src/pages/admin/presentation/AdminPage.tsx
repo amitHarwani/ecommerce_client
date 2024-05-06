@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { ROUTE_PATHS } from "../../../constants";
 import ProductsTableContainer from "../../../components/widgets/productstable/container/ProductsTableContainer";
 import CouponsTableContainer from "../../../components/widgets/couponstable/container/CouponsTableContainer";
+import OrdersTableContainer from "../../../components/widgets/orderstable/container/OrdersTableContainer";
 
 const AdminPage = () => {
   const location = useLocation();
@@ -24,6 +25,8 @@ const AdminPage = () => {
         <ProductsTableContainer />
       ) : location.pathname === ROUTE_PATHS.adminCoupons ? (
         <CouponsTableContainer />
+      ) : location.pathname === ROUTE_PATHS.adminOrders ? (
+        <OrdersTableContainer />
       ) : (
         <></>
       )}

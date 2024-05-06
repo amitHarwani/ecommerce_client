@@ -46,6 +46,7 @@ const RoutePaths = () => {
             <Route path={ROUTE_PATHS.adminCategories} element={<AdminPageContainer />}  />
             <Route path={ROUTE_PATHS.adminProducts} element={<AdminPageContainer />} />
             <Route path={ROUTE_PATHS.adminCoupons} element={<AdminPageContainer />} />
+            <Route path={ROUTE_PATHS.adminOrders} element={<AdminPageContainer />} />
             
           </Route>
           <Route path={ROUTE_PATHS.pageNotFound} element={<PageNotFoundPageContainer />} />

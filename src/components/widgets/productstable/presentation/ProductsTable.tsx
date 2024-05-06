@@ -36,6 +36,10 @@ const ProductsTable = (props: ProductsTableProps) => {
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
+  
+  /* Is large screen */
+  const isLG = useBreakpointCheck(BREAKPOINTS.lg);
+
   /* Column Defination for the grid */
   const PRODUCTS_TABLE_COL_DEFS: ColDef[] = [
     {
@@ -77,11 +81,10 @@ const ProductsTable = (props: ProductsTableProps) => {
       cellRendererParams: {
         onEditOrDeleteClickHandler: toggleEditOrDeleteProductModal,
       },
+      pinned: !isLG ? (isRTL ? 'left' : 'right') : false
     },
   ];
 
-  /* Is large screen */
-  const isLG = useBreakpointCheck(BREAKPOINTS.lg);
 
   /* Visibility of AddEdit Product dialog */
   const [isAddEditProdutModalShown, setIsAddEditProductModalShown] =

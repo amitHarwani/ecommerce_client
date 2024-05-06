@@ -6,16 +6,13 @@ import {
 } from "ag-grid-community";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  BREAKPOINTS,
-  ButtonTypes
-} from "../../../../constants";
+import { BREAKPOINTS, ButtonTypes } from "../../../../constants";
 import useBreakpointCheck from "../../../../hooks/useBreakpointCheck";
 import { Category } from "../../../../services/category/CategoryTypes";
 import { useAppSelector } from "../../../../store";
 import {
   gridDateFilterComparator,
-  gridDateSortComparator
+  gridDateSortComparator,
 } from "../../../../utils/dateTimeHelper";
 import Button from "../../../basic/Button";
 import ErrorMessage from "../../../basic/ErrorMessage";
@@ -24,13 +21,10 @@ import AddEditCategoryModalContainer from "../../../modals/addeditcategorymodal/
 import DeleteCategoryModalContainer from "../../../modals/deletecategorymodal/container/DeleteCategoryModalContainer";
 import CategoryOptionsCell from "./CategoryOptionsCell";
 
-
 interface CategoriesTableProps {
   categories: Category[];
   isError: boolean;
-  onCategoryAddedOrUpdatedHandler(
-    newCategory: Category
-  ): void;
+  onCategoryAddedOrUpdatedHandler(newCategory: Category): void;
   onCategoryDeletedHandler(deletedCategory: Category): void;
 }
 const CategoriesTable = (props: CategoriesTableProps) => {
@@ -44,6 +38,9 @@ const CategoriesTable = (props: CategoriesTableProps) => {
   const { t } = useTranslation();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
+
+  /* Is large screen */
+  const isLG = useBreakpointCheck(BREAKPOINTS.lg);
 
   /* Column Defination for the grid */
   const CATEGORIES_TABLE_COL_DEFS: ColDef[] = [
@@ -86,11 +83,9 @@ const CategoriesTable = (props: CategoriesTableProps) => {
       cellRendererParams: {
         onEditOrDeleteClickHandler: toggleEditOrDeleteCategoryModal,
       },
+      pinned: !isLG ? (isRTL ? "left" : "right") : false,
     },
   ];
-
-  /* Is large screen */
-  const isLG = useBreakpointCheck(BREAKPOINTS.lg);
 
   /* Visibility of AddEdit Category dialog */
   const [isAddEditCategoryModalShown, setIsAddEditCategoryModalShown] =
@@ -102,7 +97,6 @@ const CategoriesTable = (props: CategoriesTableProps) => {
 
   /* Selected category for edit & delete options on a category */
   const [selectedCategory, setSelectedCategory] = useState<Category>();
-
 
   /* Toggle Add Category Dialog */
   const toggleAddCategoryModal = () => {
@@ -162,23 +156,16 @@ const CategoriesTable = (props: CategoriesTableProps) => {
           {isAddEditCategoryModalShown && (
             <AddEditCategoryModalContainer
               hideModal={toggleAddCategoryModal}
-              category={
-                selectedCategory ? selectedCategory : undefined
-              }
+              category={selectedCategory ? selectedCategory : undefined}
               onCategoryAddedOrUpdatedHandler={(category) =>
-                onCategoryAddedOrUpdatedHandler(
-                  category
-                )
+                onCategoryAddedOrUpdatedHandler(category)
               }
             />
           )}
           {isDeleteCategoryModalShown && selectedCategory && (
             <DeleteCategoryModalContainer
               hideModal={() =>
-                toggleEditOrDeleteCategoryModal(
-                  selectedCategory,
-                  "DELETE"
-                )
+                toggleEditOrDeleteCategoryModal(selectedCategory, "DELETE")
               }
               category={selectedCategory}
               onCategoryDeleted={(deletedCategory) => {
@@ -186,7 +173,10 @@ const CategoriesTable = (props: CategoriesTableProps) => {
               }}
             />
           )}
-          <div className="h-full flex flex-col gap-y-4" dir={isRTL ? 'rtl': 'ltr'}>
+          <div
+            className="h-full flex flex-col gap-y-4"
+            dir={isRTL ? "rtl" : "ltr"}
+          >
             <Button
               buttonType={ButtonTypes.primaryButton}
               onClickHandler={toggleAddCategoryModal}

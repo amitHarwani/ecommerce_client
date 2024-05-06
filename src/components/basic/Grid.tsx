@@ -1,6 +1,5 @@
 import {
   ColDef,
-  GetLocaleTextParams,
   SizeColumnsToContentStrategy,
   SizeColumnsToFitGridStrategy,
   SizeColumnsToFitProvidedWidthStrategy,
@@ -11,11 +10,13 @@ import { AgGridReact } from "ag-grid-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../store";
 import "../../styles/Grid.css";
-import { useTranslation } from "react-i18next";
 
 interface GridProps<RowType> {
   rowData: RowType[];
   columnDefination: ColDef[];
+  rowSelection?: "single" | "multiple" | undefined;
+  onRowSelectionChanged?(selectedRows: Array<RowType>): void;
+  autoSizeAllColumnsAfterDataUpdate?: boolean;
   autoSizeStrategy?:
     | SizeColumnsToFitGridStrategy
     | SizeColumnsToFitProvidedWidthStrategy
@@ -23,9 +24,14 @@ interface GridProps<RowType> {
 }
 
 const Grid = <RowType,>(props: GridProps<RowType>) => {
-  const { rowData, columnDefination, autoSizeStrategy } = props;
-
-  const {t} = useTranslation();
+  const {
+    rowData,
+    columnDefination,
+    autoSizeStrategy,
+    rowSelection,
+    onRowSelectionChanged,
+    autoSizeAllColumnsAfterDataUpdate = false,
+  } = props;
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
 
@@ -51,6 +57,29 @@ const Grid = <RowType,>(props: GridProps<RowType>) => {
     }
   }, [isGridReady, autoSizeStrategy]);
 
+  /* Once row selection has changed */
+  const onSelectionChanged = useCallback(() => {
+    if (onRowSelectionChanged) {
+      /* Pass the selected rows to the parent */
+      const selectedRows = gridRef.current!.api.getSelectedRows();
+      onRowSelectionChanged(selectedRows);
+    }
+  }, [onRowSelectionChanged]);
+
+  /* On row data updated */
+  const onRowDataUpdatedHandler = () => {
+    /* If autoSizeAllColumnsAfterDataUpdate is true*/
+    if (autoSizeAllColumnsAfterDataUpdate && isGridReady) {
+      /**
+       * Auto size all columns after .5 seconds, and this event doesn't coincide with
+       * data rendered by AG Grid.
+       */
+      setTimeout(() => {
+        gridRef.current?.api.autoSizeAllColumns();
+      }, 500);
+    }
+  };
+
   useEffect(() => {
     /* Resize grid according to the passed autoSizeStrategy, resize on window resize as well */
     windowResizeHandler();
@@ -62,10 +91,9 @@ const Grid = <RowType,>(props: GridProps<RowType>) => {
     };
   }, [windowResizeHandler]);
 
-
   return (
     <>
-      <div className="ag-theme-quartz h-full" dir={isRTL ?'rtl' : 'ltr'}>
+      <div className="ag-theme-quartz h-full" dir={isRTL ? "rtl" : "ltr"}>
         <AgGridReact
           ref={gridRef}
           rowData={rowData}
@@ -76,6 +104,9 @@ const Grid = <RowType,>(props: GridProps<RowType>) => {
           autoSizeStrategy={autoSizeStrategy}
           suppressCellFocus={true}
           suppressMenuHide={true}
+          rowSelection={rowSelection}
+          onSelectionChanged={onSelectionChanged}
+          onRowDataUpdated={onRowDataUpdatedHandler}
           enableRtl={isRTL}
         />
       </div>

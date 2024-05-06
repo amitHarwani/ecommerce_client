@@ -220,5 +220,7 @@
   "couponDeletedSuccessfully": "कूपन सफलतापूर्वक हटा दिया गया",
   "deleteCoupon": "कूपन हटाएं",
   "areYouSureYouWantToDeleteTheCoupon": "क्या आप सुनिश्चित हैं कि आप कूपन हटाना चाहते हैं: ",
-  "couponCodeMustBeFourCharactersLong": "कूपन कोड कम से कम चार अक्षरों का होना चाहिए"
+  "couponCodeMustBeFourCharactersLong": "कूपन कोड कम से कम चार अक्षरों का होना चाहिए",
+  "orderStatusUpdatedSuccessfully": "आदेश की स्थिति सफलतापूर्वक अपडेट की गई",
+  "updateOrderStatus": "आदेश की स्थिति अपडेट करें"
 }

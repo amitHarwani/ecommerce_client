@@ -1,13 +1,9 @@
 import {
-  ColDef,
-  SizeColumnsToContentStrategy,
-  SizeColumnsToFitGridStrategy,
-  SizeColumnsToFitProvidedWidthStrategy,
+  ColDef
 } from "ag-grid-community";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { BREAKPOINTS, ButtonTypes } from "../../../../constants";
-import useBreakpointCheck from "../../../../hooks/useBreakpointCheck";
+import { ButtonTypes } from "../../../../constants";
 import { CouponClass } from "../../../../services/coupon/CouponTypes";
 import { useAppSelector } from "../../../../store";
 import {
@@ -17,10 +13,10 @@ import {
 import Button from "../../../basic/Button";
 import ErrorMessage from "../../../basic/ErrorMessage";
 import Grid from "../../../basic/Grid";
-import CouponsOptionsCell from "./CouponsOptionsCell";
-import ChangeCouponStatusModalContainer from "../../../modals/changecouponstatusmodal/container/ChangeCouponStatusModalContainer";
 import AddEditCouponModalContainer from "../../../modals/addeditcouponmodal/container/AddEditCouponModalContainer";
+import ChangeCouponStatusModalContainer from "../../../modals/changecouponstatusmodal/container/ChangeCouponStatusModalContainer";
 import DeleteCouponModalContainer from "../../../modals/deletecouponmodal/container/DeleteCouponModalContainer";
+import CouponsOptionsCell from "./CouponsOptionsCell";
 
 interface CouponsTableProps {
   coupons: CouponClass[];
@@ -199,7 +195,6 @@ const CouponsTable = (props: CouponsTableProps) => {
               onCouponDeleted={onCouponDeletedHandler}
             />
           )}
-          {isDeleteCouponModalShown && selectedCoupon && <></>}
           {couponStatusPropertiesState.isModalShown &&
             couponStatusPropertiesState.coupon && (
               <ChangeCouponStatusModalContainer

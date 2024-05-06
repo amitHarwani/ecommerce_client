@@ -220,5 +220,7 @@
   "couponDeletedSuccessfully": "تم حذف القسيمة بنجاح",
   "deleteCoupon": "حذف القسيمة",
   "areYouSureYouWantToDeleteTheCoupon": "هل أنت متأكد أنك تريد حذف القسيمة: ",
-  "couponCodeMustBeFourCharactersLong": "يجب أن يتكون رمز القسيمة من أربعة أحرف على الأقل"
+  "couponCodeMustBeFourCharactersLong": "يجب أن يتكون رمز القسيمة من أربعة أحرف على الأقل",
+  "orderStatusUpdatedSuccessfully": "تم تحديث حالة الطلب من المتجر بنجاح",
+  "updateOrderStatus": "تحديث حالة الطلب"
 }
