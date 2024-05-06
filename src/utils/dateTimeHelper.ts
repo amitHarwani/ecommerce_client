@@ -104,3 +104,7 @@ export const gridDateSortComparator = (dateA: DATE_TIME_FORMATS.displayedDateWit
   }
   return 1;
 }
+
+export const getMomentObjectFromDateObject = (date: Date) => {
+  return moment(date);
+}

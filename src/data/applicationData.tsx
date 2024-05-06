@@ -109,6 +109,8 @@ export const DEFAULT_CURRENCY = "INR";
 
 export const DEFAULT_COUNTRY = "United Arab Emirates";
 
+export const COUPON_CODE_MINIMUM_LENGTH = 4;
+
 export const COUNTRIES_DROPDOWN_LIST: DropdownItem[] = [
   { id: 1, text: DEFAULT_COUNTRY },
   { id: 2, text: "India" },

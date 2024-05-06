@@ -11,7 +11,7 @@ interface CouponsOptionsCellProps extends CustomCellRendererProps {
 const CouponsOptionsCell = (props: CouponsOptionsCellProps) => {
   return (
     <>
-      <div className="flex h-full gap-x-2 justify-end">
+      <div className="flex h-full gap-x-2 justify-end w-fit">
         <Button
           onClickHandler={() => {
             props.onEditOrDeleteClickHandler(props.data, "EDIT");

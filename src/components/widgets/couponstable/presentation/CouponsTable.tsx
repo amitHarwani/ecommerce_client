@@ -18,24 +18,35 @@ import Button from "../../../basic/Button";
 import ErrorMessage from "../../../basic/ErrorMessage";
 import Grid from "../../../basic/Grid";
 import CouponsOptionsCell from "./CouponsOptionsCell";
+import ChangeCouponStatusModalContainer from "../../../modals/changecouponstatusmodal/container/ChangeCouponStatusModalContainer";
+import AddEditCouponModalContainer from "../../../modals/addeditcouponmodal/container/AddEditCouponModalContainer";
+import DeleteCouponModalContainer from "../../../modals/deletecouponmodal/container/DeleteCouponModalContainer";
 
 interface CouponsTableProps {
   coupons: CouponClass[];
   isError: boolean;
   onCouponAddedOrUpdatedHandler(newCoupon: CouponClass): void;
   onCouponDeletedHandler(deletedCoupon: CouponClass): void;
+  resetCouponStatusHandler(resetCoupon: CouponClass): void;
 }
 const CouponsTable = (props: CouponsTableProps) => {
   const {
     coupons,
     onCouponAddedOrUpdatedHandler,
     onCouponDeletedHandler,
+    resetCouponStatusHandler,
     isError,
   } = props;
 
   const { t } = useTranslation();
 
   const isRTL = useAppSelector((state) => state.language.isRTL);
+
+  const [couponStatusPropertiesState, setCouponStatusPropertiesState] =
+    useState<{ isModalShown: boolean; coupon?: CouponClass }>({
+      isModalShown: false,
+      coupon: undefined,
+    });
 
   /* Column Defination for the grid */
   const COUPONS_TABLE_COL_DEFS: ColDef[] = [
@@ -60,6 +71,13 @@ const CouponsTable = (props: CouponsTableProps) => {
     {
       field: "isActive",
       sortable: true,
+      editable: true,
+      onCellValueChanged: (event) => {
+        setCouponStatusPropertiesState({
+          isModalShown: true,
+          coupon: event.data,
+        });
+      },
     },
     {
       field: "expiryDate",
@@ -103,11 +121,9 @@ const CouponsTable = (props: CouponsTableProps) => {
       cellRendererParams: {
         onEditOrDeleteClickHandler: toggleEditOrDeleteCouponModal,
       },
+      pinned: isRTL ? 'left' : 'right'
     },
   ];
-
-  /* Is large screen */
-  const isLG = useBreakpointCheck(BREAKPOINTS.lg);
 
   /* Visibility of AddEdit Coupon dialog */
   const [isAddEditCouponModalShown, setIsAddEditCouponModalShown] =
@@ -119,6 +135,15 @@ const CouponsTable = (props: CouponsTableProps) => {
 
   /* Selected coupon for edit & delete options */
   const [selectedCoupon, setSelectedCoupon] = useState<CouponClass>();
+
+  const toggleCouponStatusChangeModal = () => {
+    setCouponStatusPropertiesState((prev) => {
+      if (prev.isModalShown) {
+        return { isModalShown: false, coupon: undefined };
+      }
+      return prev;
+    });
+  };
 
   /* Toggle Add Coupon Dialog */
   const toggleAddCouponModal = () => {
@@ -148,23 +173,6 @@ const CouponsTable = (props: CouponsTableProps) => {
     }
   }
 
-  /* 
-    On Large screens fit the entire width, on smaller screens fit the contents of a cell 
-    */
-  const autoSizeStrategy:
-    | SizeColumnsToFitGridStrategy
-    | SizeColumnsToFitProvidedWidthStrategy
-    | SizeColumnsToContentStrategy = useMemo(() => {
-    if (isLG) {
-      return {
-        type: "fitGridWidth",
-      };
-    }
-    return {
-      type: "fitCellContents",
-    };
-  }, [isLG]);
-
   return (
     <>
       {isError ? (
@@ -175,8 +183,31 @@ const CouponsTable = (props: CouponsTableProps) => {
         />
       ) : (
         <>
-          {isAddEditCouponModalShown && <></>}
+          {isAddEditCouponModalShown && (
+            <AddEditCouponModalContainer
+              hideModal={toggleAddCouponModal}
+              onCouponAddedOrEdited={onCouponAddedOrUpdatedHandler}
+              coupon={selectedCoupon}
+            />
+          )}
+          {isDeleteCouponModalShown && selectedCoupon && (
+            <DeleteCouponModalContainer
+              coupon={selectedCoupon}
+              hideModal={() =>
+                toggleEditOrDeleteCouponModal(selectedCoupon, "DELETE")
+              }
+              onCouponDeleted={onCouponDeletedHandler}
+            />
+          )}
           {isDeleteCouponModalShown && selectedCoupon && <></>}
+          {couponStatusPropertiesState.isModalShown &&
+            couponStatusPropertiesState.coupon && (
+              <ChangeCouponStatusModalContainer
+                coupon={couponStatusPropertiesState.coupon}
+                resetCouponData={resetCouponStatusHandler}
+                hideModal={toggleCouponStatusChangeModal}
+              />
+            )}
           <div
             className="h-full flex flex-col gap-y-4"
             dir={isRTL ? "rtl" : "ltr"}
@@ -191,7 +222,9 @@ const CouponsTable = (props: CouponsTableProps) => {
             <Grid
               rowData={coupons}
               columnDefination={COUPONS_TABLE_COL_DEFS}
-              autoSizeStrategy={autoSizeStrategy}
+              autoSizeStrategy={{
+                type: "fitCellContents",
+              }}
             />
           </div>
         </>

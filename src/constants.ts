@@ -2,6 +2,7 @@ import React from "react";
 import { AddressClass } from "./services/address/AddressTypes";
 import { DateRange } from "react-day-picker";
 import { Category } from "./services/category/CategoryTypes";
+import { COUPON_TYPES } from "./services/coupon/CouponTypes";
 
 /* DROPDOWN */
 export enum DropdownTypes {
@@ -323,4 +324,14 @@ export interface EditProductFieldsForService {
   stock?: number,
   mainImage?: File,
   subImages?: File[]
+}
+
+export interface AddEditCouponFields {
+  name: string,
+  couponCode: string,
+  type: COUPON_TYPES,
+  discountValue: number,
+  minimumCartValue: number,
+  startDate: Date,
+  expiryDate: Date
 }

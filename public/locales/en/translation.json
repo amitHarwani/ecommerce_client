@@ -196,7 +196,31 @@
   "orders": "orders",
   "coupons": "coupons",
   "name": "name",
-  "addCoupon": "add coupon"
+  "addCoupon": "add coupon",
+  "changeCouponStatus": "change coupon status",
+  "areYouSureYouWantToChangeCouponStatusTo": "are you sure you want to change the coupon status to",
+  "active": "active",
+  "inactive": "inactive",
+  "statusChangedSuccessfully": "status changed successfully",
+  "updateCoupon": "update coupon",
+  "couponCode": "coupon code",
+  "discountValue": "discount value",
+  "minimumCartValue": "minimum cart value",
+  "startDate": "start date",
+  "expiryDate": "expiry date",
+  "selectDateTime": "select date and time",
+  "couponCodeIsRequired": "coupon code is required",
+  "discountValueIsRequired": "discount value is required",
+  "minimumCartValueIsRequired": "minimum cart value is required",
+  "startDateIsRequired": "start date is required",
+  "expiryDateIsRequired": "expiry date is required",
+  "expiryDateCannotBeBeforeStartDate": "expiry date cannot be before start date",
+  "couponUpdatedSuccessfully": "coupon updated successfully",
+  "couponAddedSuccessfully": "coupon added successfully",
+  "couponDeletedSuccessfully": "coupon deleted successfully",
+  "deleteCoupon": "delete coupon",
+  "areYouSureYouWantToDeleteTheCoupon": "are you sure you want to delete the coupon: ",
+  "couponCodeMustBeFourCharactersLong": "coupon code must be at least four characters long"
 
   
 }

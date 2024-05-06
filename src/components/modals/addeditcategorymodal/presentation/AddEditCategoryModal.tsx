@@ -87,7 +87,7 @@ const AddEditCategoryModal = (props: AddEditCategoryModalProps) => {
           />
           <div className="flex flex-col gap-y-2">
             <Button
-              className="uppercase px-4 py-1 "
+              className="uppercase px-4 py-1 flex justify-center"
               type="submit"
               buttonType={ButtonTypes.primaryButton}
               onClickHandler={() => {}}

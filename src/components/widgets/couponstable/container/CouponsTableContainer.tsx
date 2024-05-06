@@ -3,8 +3,8 @@ import { DATE_TIME_FORMATS } from "../../../../constants";
 import CouponService from "../../../../services/coupon/CouponService";
 import { CouponClass } from "../../../../services/coupon/CouponTypes";
 import {
-    convertUTCToLocalTime,
-    formatDateTime,
+  convertUTCToLocalTime,
+  formatDateTime,
 } from "../../../../utils/dateTimeHelper";
 import CouponsTable from "../presentation/CouponsTable";
 
@@ -79,6 +79,13 @@ const CouponsTableContainer = () => {
     });
   };
 
+  const resetCouponStatusHandler = (coupon: CouponClass) => {
+    setCoupons((prev) => {
+      prev[coupon._id] = coupon;
+      return { ...prev };
+    });
+  };
+
   /* Initial Render */
   useEffect(() => {
     fetchAllCoupons();
@@ -91,6 +98,7 @@ const CouponsTableContainer = () => {
         isError={isError}
         onCouponAddedOrUpdatedHandler={onCouponAddedOrUpdatedHandler}
         onCouponDeletedHandler={onCouponDeletedHandler}
+        resetCouponStatusHandler={resetCouponStatusHandler}
       />
     </>
   );
