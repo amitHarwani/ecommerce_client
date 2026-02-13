@@ -1,6 +1,5 @@
 ## ecommerce frontend application
 
-Check out the application [here](https://ecommerce-client-tsy6.onrender.com/)
 
 This is an ecommerce client app which is made by consuming freeapi: https://github.com/hiteshchoudhary/apihub.
 
